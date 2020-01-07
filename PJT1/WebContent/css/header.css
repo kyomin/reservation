@@ -1,0 +1,25 @@
+.headerwrap {
+    padding: 0 4px 0 0;
+    text-align: right;
+    background-color: white;
+    height: 100px;
+    line-height: 100px;
+    padding-right: 10px;
+}
+
+a {
+	margin: 0 0 0 10px;
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: #20B2AA;
+	color: #BA55D3;
+	box-shadow: 3px 3px gray;
+	cursor: pointer;
+}
+
+a:first-child {
+	margin-left:0;
+}
