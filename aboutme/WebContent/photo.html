@@ -4,20 +4,20 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script>
-				// index.html로 리다이렉트 하는 함수
-				function goIndexPage() {
-					window.location.replace('/aboutme/index.html');
-				}
-				
-				// aboutme.html로 리다이렉트 하는 함수
-				function goAboutMePage() {
-					window.location.replace('/aboutme/aboutme.html');
-				}
-				
-				// photo.html로 리다이렉트 하는 함수
-				function goPhotoPage() {
-					window.location.replace('/aboutme/photo.html');
-				}
+			// index.html로 리다이렉트 하는 함수
+			function goIndexPage() {
+				window.location.href = '/aboutme/index.html';
+			}
+		
+			// aboutme.html로 리다이렉트 하는 함수
+			function goAboutMePage() {
+				window.location.href = '/aboutme/aboutme.html';
+			}
+			
+			// photo.html로 리다이렉트 하는 함수
+			function goPhotoPage() {
+				window.location.href = '/aboutme/photo.html';
+			}
 		</script>
 	</head>
 	
@@ -25,9 +25,101 @@
 		@import url("./css/header.css");
 		@import url("./css/template.css");
 		@import url("./css/footer.css");
+		
+		h5 {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		
+		.contents {
+			padding: 30px;
+			background-color: white;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+		
+		.contents_area {
+			width: 95%;
+    		display: inline-block;
+    		padding: 30px 0;
+    		border-bottom: 1px solid gray;
+		}
+		
+		.contents_area:last-child {
+			border: none;
+		}
+		
+		.left {
+			float: left;
+			width: 30%
+		}
+		
+		.right {
+			float: right;
+			width: 70%;
+			text-align: left;
+		}
+		
 	</style>
 	
 	<body>
 	
+	<!-- 페이지 전체 감싸는 컨테이너! -->
+	<div class="container">
+		<!-- 헤더 부분! -->
+		<header class="headerwrap">
+			<a onClick='goIndexPage()'>홈</a>
+			<a onClick='goAboutMePage()'>자기소개</a>
+			<a onClick='goPhotoPage()'>내사진</a>
+			<a>몇시에요</a>
+		</header>
+		
+		<!-- 콘텐츠 부분 -->
+		<section class="contents">
+			<!-- 다음은 각 콘텐츠 영역 -->
+			<div class="contents_area">
+				<div class="left">
+					<img 
+						src="./img/photo/crong.jpg" 
+						width= "50%" 
+						height="200px" 
+						alt="crong"
+						style="border: 10px solid gray"
+					>
+				</div>
+				<div class="right">
+					<h5>2019.03.02</h5>
+					<h5>제가 크롱일때 찍은 사진입니다.</h5>
+					<h5>이때는 뽀로로의 집에서 신나게 놀던 때입니다.</h5>
+				</div>
+			</div>
+			
+			<div class="contents_area">
+				<div class="left">
+					<img 
+						src="./img/photo/simpson.jpg" 
+						width= "50%" 
+						height="200px" 
+						alt="crong"
+						style="border: 10px solid gray"
+					>
+				</div>
+				<div class="right">
+					<h5>2019.12.22</h5>
+					<h5>결혼한 후에는 이런 모습이네요.</h5>
+					<h5>건강한 모습을 유지하고 있습니다.</h5>
+					<h5>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h5>
+					<h5>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</h5>
+					<h5>Contrary to popular belief, Lorem Ipsum is not simply random text.</h5>
+				</div>
+			</div>
+		</section>
+		
+		<!-- 풋터 부분! -->
+		<footer class="footerwrap">
+			<h5>kim031504@nts-corp.com</h5>
+			<h5>https://gitlab.edwith.org/nts-2020-first-internship/platform/kim_kyo_min</h5>
+		</footer>
+	</div>
 	</body>
 </html>
