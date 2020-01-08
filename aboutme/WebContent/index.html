@@ -18,6 +18,11 @@
 			function goPhotoPage() {
 				window.location.href = './photo.html';
 			}
+			
+			// 현재 시간 보기 서비스로 간다
+			function goTodayPage() {
+				window.location.href = 'http://localhost:8080/aboutme/today';
+			}
 		</script>
 	</head>
 	
@@ -75,7 +80,7 @@
 			<a onClick='goIndexPage()'>홈</a>
 			<a onClick='goAboutMePage()'>자기소개</a>
 			<a onClick='goPhotoPage()'>내사진</a>
-			<a>몇시에요</a>
+			<a onClick='goTodayPage()'>몇시에요</a>
 		</header>
 		
 		<!-- 콘텐츠 부분 -->
