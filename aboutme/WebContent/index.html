@@ -4,6 +4,11 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script>
+			// index.html로 리다이렉트 하는 함수
+			function goIndexPage() {
+				window.location.replace('/aboutme/index.html');
+			}
+		
 			// aboutme.html로 리다이렉트 하는 함수
 			function goAboutMePage() {
 				window.location.replace('/aboutme/aboutme.html');
@@ -25,14 +30,11 @@
 			margin: 0px;
 		}
 		
-		div {
-			text-align: center;
-		}
-		
 		.contents{
 			background-color: white;
 			margin-bottom: 10px;
 			padding-top: 20px;
+			text-align: center;
 		}
 		
 		.simple_introduce_area{
@@ -70,9 +72,9 @@
 	
 		<!-- 헤더 부분! -->
 		<header class="headerwrap">
-			<a>홈</a>
-			<a>자기소개</a>
-			<a>내사진</a>
+			<a onClick='goIndexPage()'>홈</a>
+			<a onClick='goAboutMePage()'>자기소개</a>
+			<a onClick='goPhotoPage()'>내사진</a>
 			<a>몇시에요</a>
 		</header>
 		
