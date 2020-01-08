@@ -5,9 +5,10 @@
     height: 100px;
     line-height: 100px;
     padding-right: 10px;
+    margin-bottom: 10px;
 }
 
-a {
+.headerwrap > a {
 	margin: 0 0 0 10px;
 	display: inline-block;
 	width: 100px;
