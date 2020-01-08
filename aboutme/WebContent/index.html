@@ -4,7 +4,15 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script>
+			// aboutme.html로 리다이렉트 하는 함수
+			function goAboutMePage() {
+				window.location.replace('/aboutme/aboutme.html');
+			}
 			
+			// photo.html로 리다이렉트 하는 함수
+			function goPhotoPage() {
+				window.location.replace('/aboutme/photo.html');
+			}
 		</script>
 	</head>
 	
@@ -79,8 +87,8 @@
 			
 			<!-- 다른 페이지 링크 부분 -->
 			<div class="page_link_area">
-				<a>자기소개</a>
-				<a>내사진</a>
+				<a onClick='goAboutMePage()'>자기소개</a>
+				<a onClick='goPhotoPage()'>내사진</a>
 			</div>
 			
 			<!-- 지도 이미지 부분 -->
