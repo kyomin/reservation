@@ -2,28 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
-		<script>
-			// index.html로 리다이렉트 하는 함수
-			function goIndexPage() {
-				window.location.href = './index.html';
-			}
-		
-			// aboutme.html로 리다이렉트 하는 함수
-			function goAboutMePage() {
-				window.location.href = './aboutme.html';
-			}
-			
-			// photo.html로 리다이렉트 하는 함수
-			function goPhotoPage() {
-				window.location.href = './photo.html';
-			}
-			
-			// 현재 시간 보기 서비스로 간다
-			function goTodayPage() {
-				window.location.href = 'http://localhost:8080/aboutme/today';
-			}
-		</script>
+		<title>메인 페이지</title>
 	</head>
 	
 	<style type="text/css">
@@ -72,44 +51,44 @@
 	
 	<body>
 	
-	<!-- 페이지 전체 감싸는 컨테이너! -->
-	<div class="container">
-	
-		<!-- 헤더 부분! -->
-		<header class="headerwrap">
-			<a onClick='goIndexPage()'>홈</a>
-			<a onClick='goAboutMePage()'>자기소개</a>
-			<a onClick='goPhotoPage()'>내사진</a>
-			<a onClick='goTodayPage()'>몇시에요</a>
-		</header>
+		<!-- 페이지 전체 감싸는 컨테이너! -->
+		<div class="container">
 		
-		<!-- 콘텐츠 부분 -->
-		<section class="contents">
-			<!-- 간단한 자기소개 부분 -->
-			<div class="simple_introduce_area">
-				<h1>웹 개발자 kyomin~!</h1>
-				<h5>함께 개발하고 같이 성장하고 싶어요</h5>
-				<h5>경기도 수원시 인계동에 살고 있어요~</h5>
-			</div>
+			<!-- 헤더 부분! -->
+			<header class="headerwrap">
+				<a href='index.html'>홈</a>
+				<a href='aboutme.html'>자기소개</a>
+				<a href='photo.html'>내사진</a>
+				<a href='/aboutme/today'>몇시에요</a>
+			</header>
 			
-			<!-- 다른 페이지 링크 부분 -->
-			<div class="page_link_area">
-				<a onClick='goAboutMePage()'>자기소개</a>
-				<a onClick='goPhotoPage()'>내사진</a>
-			</div>
+			<!-- 콘텐츠 부분 -->
+			<section class="contents">
+				<!-- 간단한 자기소개 부분 -->
+				<div class="simple_introduce_area">
+					<h1>웹 개발자 kyomin~!</h1>
+					<h5>함께 개발하고 같이 성장하고 싶어요</h5>
+					<h5>경기도 수원시 인계동에 살고 있어요~</h5>
+				</div>
+				
+				<!-- 다른 페이지 링크 부분 -->
+				<div class="page_link_area">
+					<a href='aboutme.html'>자기소개</a>
+					<a href='photo.html'>내사진</a>
+				</div>
+				
+				<!-- 지도 이미지 부분 -->
+				<div class="map_area">
+					<img src="./img/index/map.png" width="50%" alt="My map">
+				</div>
+			</section>
 			
-			<!-- 지도 이미지 부분 -->
-			<div class="map_area">
-				<img src="./img/index/map.png" width="50%" alt="My map">
-			</div>
-		</section>
-		
-		<!-- 풋터 부분! -->
-		<footer class="footerwrap">
-			<h5>kim031504@nts-corp.com</h5>
-			<h5>https://gitlab.edwith.org/nts-2020-first-internship/platform/kim_kyo_min</h5>
-		</footer>
-	</div>
+			<!-- 풋터 부분! -->
+			<footer class="footerwrap">
+				<h5>kim031504@nts-corp.com</h5>
+				<h5>https://gitlab.edwith.org/nts-2020-first-internship/platform/kim_kyo_min</h5>
+			</footer>
+		</div>
 		
 	</body>
 </html>

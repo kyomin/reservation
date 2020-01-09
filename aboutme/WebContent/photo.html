@@ -2,23 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>사진 페이지</title>
 		<script>
-			// index.html로 리다이렉트 하는 함수
-			function goIndexPage() {
-				window.location.href = './index.html';
-			}
-		
-			// aboutme.html로 리다이렉트 하는 함수
-			function goAboutMePage() {
-				window.location.href = './aboutme.html';
-			}
-			
-			// photo.html로 리다이렉트 하는 함수
-			function goPhotoPage() {
-				window.location.href = '/./photo.html';
-			}
-			
 			// 현재 시간 보기 서비스로 간다
 			function goTodayPage() {
 				window.location.href = 'http://localhost:8080/aboutme/today';
@@ -73,10 +58,10 @@
 	<div class="container">
 		<!-- 헤더 부분! -->
 		<header class="headerwrap">
-			<a onClick='goIndexPage()'>홈</a>
-			<a onClick='goAboutMePage()'>자기소개</a>
-			<a onClick='goPhotoPage()'>내사진</a>
-			<a onClick='goTodayPage()'>몇시에요</a>
+			<a href='index.html'>홈</a>
+			<a href='aboutme.html'>자기소개</a>
+			<a href='photo.html'>내사진</a>
+			<a href='/aboutme/today'>몇시에요</a>
 		</header>
 		
 		<!-- 콘텐츠 부분 -->
@@ -84,13 +69,7 @@
 			<!-- 다음은 각 콘텐츠 영역 -->
 			<div class="contents_area">
 				<div class="left">
-					<img 
-						src="./img/photo/crong.jpg" 
-						width= "50%" 
-						height="200px" 
-						alt="crong"
-						style="border: 10px solid gray"
-					>
+					<img src="./img/photo/crong.jpg" width= "50%" height="200px" alt="crong" style="border: 10px solid gray">
 				</div>
 				<div class="right">
 					<h5>2019.03.02</h5>
@@ -101,13 +80,7 @@
 			
 			<div class="contents_area">
 				<div class="left">
-					<img 
-						src="./img/photo/simpson.jpg" 
-						width= "50%" 
-						height="200px" 
-						alt="crong"
-						style="border: 10px solid gray"
-					>
+					<img src="./img/photo/simpson.jpg" width= "50%" height="200px" alt="crong" style="border: 10px solid gray">
 				</div>
 				<div class="right">
 					<h5>2019.12.22</h5>
