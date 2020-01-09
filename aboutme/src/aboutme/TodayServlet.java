@@ -14,16 +14,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
-/*
-  	http://localhost:8080/aboutme/today의 경로를 타고 들어오는 서비스를 처리하는 자바 서블릿 클래스이다.
-*/
+/**
+ * 	http://localhost:8080/aboutme/today의 경로를 타고 들어오는 서비스를 처리하는 자바 서블릿 클래스이다.
+ *  사용 방법: 
+ *  브라우저 상에 해당 uri를 타고 들어온다.
+ *  
+ *  @author	kim Kyomin
+ */
 @WebServlet("/today")
 public class TodayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /*
-  		http://localhost:8080/aboutme/today의 경로에 대해 GET Request를 처리하는 메소드이다.
-  		클라이언트에게 GET 요청을 한 시점의 시각을 제공한다.
+    /**
+  	 *	http://localhost:8080/aboutme/today의 경로에 대해 GET Request를 처리하는 메소드이다.
+  	 *	클라이언트에게 GET 요청을 한 시점의 시각을 제공한다.
+  	 *
+  	 *	@param	request	클라이언트가 요청하였을 때, 서버로 넘어오는 정보를 이 request 객체에 담는다.
+  	 *	@param	response	현재 서버에서 클라이언트로 응답할 때, 클라이언트로 넘기는 정보를 이 response 객체에 담는다.
     */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
