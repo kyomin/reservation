@@ -1,21 +1,15 @@
 ### Eclipse ###
-RemoteSystemsTempFiles/
-Servers/
-
-*.pydevproject
-.project
 .metadata
-bin/**
-tmp/**
-tmp/**/*
+bin/
+tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
-.classpath
+local.properties
 .settings/
 .loadpath
-/src/main/resources/rebel.xml
+.recommenders
 
 # External tool builders
 .externalToolBuilders/

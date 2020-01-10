@@ -1,0 +1,22 @@
+h1 {
+	margin: 0;
+}
+
+a {
+	display: block;
+}
+
+.contents{
+	background-color: white;
+	margin-bottom: 10px;
+	padding-top: 20px;
+	text-align: center;
+}
+
+.contents_area{
+	padding: 10px 0px;
+	width: 50%;
+	display: inline-block;
+	text-align: left;
+	margin-bottom: 20px;
+}
