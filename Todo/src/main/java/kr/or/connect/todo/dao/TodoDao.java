@@ -24,16 +24,15 @@ public class TodoDao {
 	
 	
 	/** 
-	 * 	드라이버 설정 메소드 
+	 * 	DB 연결을 위한 드라이버 설정하기!
+	 * 	서블릿에서 Dao 객체를 생성 후 DB 접근을 수시로 하기 때문에 생성자로 정의!
 	 */
-	private void settingDriver() {
-		
+	public TodoDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	
@@ -47,10 +46,6 @@ public class TodoDao {
 		 */
 		int insertCount = 0;
 		
-		/** 
-		 * 	MySQL 드라이버 설정!  
-		 */
-		settingDriver();
 		
 		/** 
 		 * 	쿼리문 작성!  
@@ -84,15 +79,11 @@ public class TodoDao {
 	public List<TodoDto> getTodos() {
 		List<TodoDto> list = new ArrayList<TodoDto>();
 		
-		/** 
-		 * 	MySQL 드라이버 설정!  
-		 */
-		settingDriver();
 		
 		/** 
 		 * 	쿼리문 작성  
 		 */
-		String sql = "SELECT title, name, sequence, type, regdate FROM todo ORDER BY sequence";
+		String sql = "SELECT * FROM todo ORDER BY sequence";
 		
 		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
 				PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -109,7 +100,7 @@ public class TodoDao {
 					/** 
 					 * 	DTO 객체를 생성해서 뽑아낸 column 값을 생성자를 통해 담은 후 리스트에 추가!
 					 */ 
-					TodoDto todo = new TodoDto(rs.getString("name"), rs.getString("regdate"), rs.getInt("sequence"), rs.getString("title"), rs.getString("type")); 
+					TodoDto todo = new TodoDto(rs.getLong("id"), rs.getString("name"), rs.getString("regdate"), rs.getInt("sequence"), rs.getString("title"), rs.getString("type")); 
 					list.add(todo);
 				}
 			} catch(Exception e) {

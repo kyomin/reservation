@@ -44,14 +44,14 @@
 					
 					<!-- sequence 입력! -->
 					<label class="input-label" for="input_sequence">우선순위를 선택하세요</label>
-					<input type="radio" name="sequence" value="1">1순위
+					<input type="radio" name="sequence" value="1" required>1순위
 					<input type="radio" name="sequence" value="2">2순위
 					<input type="radio" name="sequence" value="3">3순위
 				
 					<!-- 버튼 영역! -->
 					<div class="btn_area">
 						<!-- 제출 -->
-						<input type="submit" value="제출" class="submit_btn" required>
+						<input type="submit" value="제출" class="submit_btn">
 					
 						<!-- 내용지우기 -->
 						<input type="reset" value="내용지우기" class="erase_btn">

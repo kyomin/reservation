@@ -12,7 +12,8 @@ public class TodoDto {
 	private String title;
 	private String type;
 	
-	public TodoDto(String name, String regdate, int sequence, String title, String type) {
+	public TodoDto(long id, String name, String regdate, int sequence, String title, String type) {
+		this.id = id;
 		this.name = name;
 		this.regdate = regdate;
 		this.sequence = sequence;

@@ -73,6 +73,7 @@ public class MainServlet extends HttpServlet {
 		for(TodoDto todo : totalList) {
 			String type = todo.getType();
 			
+			// 추후 문자열이 아닌 열거형으로 수정한다. 
 			switch(type) {
 			case "TODO":
 				todoList.add(todo);
@@ -93,6 +94,11 @@ public class MainServlet extends HttpServlet {
 	 *	/todo의 URI를 타고 오면 처리되는 곳이다.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		/** 
+		 * 	멤버변수들을 GET 요청이 들어올 때마다 새롭게 초기화.
+		 *	이 부분에서 초기화하지 않으면 서블릿은 한 번 서비스를 시작하면 계속 상주하는 특성으로 인해 기존의 리스트 데이터에 추가되어 접속할 때마다 데이터가 불어난다.
+		 */
 		todoList = new ArrayList<TodoDto>();
 		doingList = new ArrayList<TodoDto>();
 		doneList = new ArrayList<TodoDto>();
@@ -115,24 +121,6 @@ public class MainServlet extends HttpServlet {
 		 */
 		classifyType();
 		
-		
-		/** 
-		 *	결과 데이터 콘솔 테스트!
-		 */
-		System.out.println("================TODO================");
-		for(TodoDto todo : todoList) {
-			System.out.println(todo);
-		}
-		
-		System.out.println("================DOING================");
-		for(TodoDto todo : doingList) {
-			System.out.println(todo);
-		}
-		
-		System.out.println("================DONE================");
-		for(TodoDto todo : doneList) {
-			System.out.println(todo);
-		}
 		
 		/** 
 		 *	main.jsp 페이지로 보낼 데이터 셋팅

@@ -15,6 +15,12 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 </head>
 
+<script type="text/javascript">
+	function handleRightBtnClick(idx, type) {
+		// 추후 오른쪽 버튼 클릭 시의 이벤트를 처리한다.
+	}
+</script>
+
 <!-- MainServlet으로부터 데이터를 받아온다. -->
 <%
 	List<TodoDto> todoList = (List<TodoDto>)request.getAttribute("todoList");
@@ -88,9 +94,6 @@
 						<div class="info">
 							등록날짜:${item.getRegdate() }, ${item.getName() }, 우선순위 ${item.getSequence() }
 						</div>
-						<button class="right_btn"> 
-							->
-						</button>
 					</div>
 				</c:forEach>
 			</div>
