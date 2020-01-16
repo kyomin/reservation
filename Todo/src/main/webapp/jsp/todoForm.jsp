@@ -17,7 +17,7 @@
 		<!-- form 작성 영역! -->
 		<div class = "todo_form">
 			<h1>할일 등록</h1>
-			<form action="/todo" method="post">
+			<form action="/Todo/todo/add" method="post">
 				<div class="form_box_line">
 					<!-- title 입력! -->
 					<label class="input-label" for="input_title">어떤일인가요?</label>
@@ -51,7 +51,7 @@
 					<!-- 버튼 영역! -->
 					<div class="btn_area">
 						<!-- 제출 -->
-						<input type="submit" value="제출" class="submit_btn">
+						<input type="submit" value="제출" class="submit_btn" required>
 					
 						<!-- 내용지우기 -->
 						<input type="reset" value="내용지우기" class="erase_btn">

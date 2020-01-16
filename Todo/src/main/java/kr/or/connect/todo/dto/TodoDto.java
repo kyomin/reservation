@@ -13,12 +13,17 @@ public class TodoDto {
 	private String type;
 	
 	public TodoDto(String name, String regdate, int sequence, String title, String type) {
-		super();
 		this.name = name;
 		this.regdate = regdate;
 		this.sequence = sequence;
 		this.title = title;
 		this.type = type;
+	}
+	
+	public TodoDto(String name, int sequence, String title) {
+		this.name = name;
+		this.sequence = sequence;
+		this.title = title;
 	}
 
 	public long getId() {

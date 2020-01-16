@@ -22,65 +22,23 @@ public class TodoDao {
 	private static String dbUser = "intern15";
 	private static String dbpasswd = "intern15";
 	
-	/** 
-	 * 	DB 조작 및 연결을 위한 객체
-	 */
-	private Connection conn;
-	private PreparedStatement ps;
-	private ResultSet rs;
 	
 	/** 
-	 * 	DB의 todo 테이블의 데이터를 전달하기 위한 객체
+	 * 	드라이버 설정 메소드 
 	 */
-	private TodoDto todoDto;
-	
-	
-	/** 
-	 * 	DB 연결 스트림을 null로 초기화 및 드라이버 설정 메소드 
-	 */
-	public void initConnection() {
-		conn = null;
-		ps = null;
-		rs = null;
-		todoDto = null;
+	private void settingDriver() {
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	
 	/** 
-	 * 	DB 연결 스트림을 닫는 메소드 
-	 */
-	public void closeConnection() {
-		if (rs != null) {
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if (ps != null) {
-			try {
-				ps.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		if (conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	
-	/** 
+	 * 	Insert Into todo Table!
 	 * 	브라우저로부터 할 일을 DB의 todo 테이블에 삽입
 	 */
 	public int addTodo(TodoDto todo) {
@@ -90,18 +48,21 @@ public class TodoDao {
 		int insertCount = 0;
 		
 		/** 
-		 * 	연결 스트림 null로 설정 및 드라이버 셋팅 
+		 * 	MySQL 드라이버 설정!  
 		 */
-		initConnection();
+		settingDriver();
 		
+		/** 
+		 * 	쿼리문 작성!  
+		 */
 		String sql = "INSERT INTO todo(title, name, sequence) VALUES (?, ?, ?)";
 		
-		try {
-			/** 
-			 * 	연결 스트림 설정 
-			 */
-			conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-			ps = conn.prepareStatement(sql);
+		/** 
+		 * 	try 소괄호 내부에 연결 스트림 설정!
+		 * 	이 문법을 사용하면 연결 스트림을 닫는 코드가 불필요해진다.
+		 */
+		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			ps.setString(1, todo.getTitle());
 			ps.setString(2, todo.getName());
@@ -110,65 +71,53 @@ public class TodoDao {
 			insertCount = ps.executeUpdate();
 		} catch(Exception ex) {
 			ex.printStackTrace();
-		} finally {
-			/** 
-			 * 	최종적으로 열었던 스트림을 닫아준다.
-			 */
-			closeConnection();
-		}
+		} 
 		
 		return insertCount;
 	}
 	
 	
 	/** 
+	 * 	Select * from todo Table!
 	 * 	DB의 todo 테이블로부터 저장된 할 일을 모두 불러오기
 	 */
 	public List<TodoDto> getTodos() {
 		List<TodoDto> list = new ArrayList<TodoDto>();
 		
-		initConnection();
+		/** 
+		 * 	MySQL 드라이버 설정!  
+		 */
+		settingDriver();
 		
-		String sql = "SELECT title, name, sequence, type, regdate FROM todo order by sequence";
+		/** 
+		 * 	쿼리문 작성  
+		 */
+		String sql = "SELECT title, name, sequence, type, regdate FROM todo ORDER BY sequence";
 		
-		try {
-			conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
-			ps = conn.prepareStatement(sql);
+		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			/** 
 			 * 	쿼리의 결과가 담긴다.
 			 */
-			rs = ps.executeQuery();
-			
+			try (ResultSet rs = ps.executeQuery()) { 
 			
 			/** 
 			 * 	불러온 결과의 각 row를 조회하면서
 			 */
-			while(rs.next()) {
-				
-				/** 
-				 * 	column 값을 추출한다.
-				 */
-				String title = rs.getString("title");
-				String name = rs.getString("name");
-				int sequence = rs.getInt("sequence");
-				String type = rs.getString("type");
-				String regdate = rs.getString("regdate");
-				
-				/** 
-				 * 	DTO 객체를 생성해서 뽑아낸 데이터를 담은 후 리스트에 추가!
-				 */ 
-				TodoDto todo = new TodoDto(name, regdate, sequence, title, type); 
-				list.add(todo);
-			} 
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			/** 
-			 * 	최종적으로 열었던 스트림을 닫아준다.
-			 */
-			closeConnection();
-		}
+				while(rs.next()) {
+					/** 
+					 * 	DTO 객체를 생성해서 뽑아낸 column 값을 생성자를 통해 담은 후 리스트에 추가!
+					 */ 
+					TodoDto todo = new TodoDto(rs.getString("name"), rs.getString("regdate"), rs.getInt("sequence"), rs.getString("title"), rs.getString("type")); 
+					list.add(todo);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} 
 		
 		return list;
 	}
@@ -176,6 +125,7 @@ public class TodoDao {
 	
 	/** 
 	 * 	DB의 todo 테이블의 row를 업데이트 한다.
+	 * 	추후 작업 요함!
 	 */
 	public int updateTodo(TodoDto todo) {
 		return 1;

@@ -39,10 +39,8 @@ public class MainServlet extends HttpServlet {
 	private List<TodoDto> doingList;
 	private List<TodoDto> doneList;
 	
-	/** 
-	 *	날짜 데이터를 출력 형식에 맞춰 셋팅하는 메소드이다.
-	 */
-	public void parseDate() {
+	
+	private void parseDate() {
 		for(TodoDto todo : totalList) {
 			
 			/** 
@@ -71,7 +69,7 @@ public class MainServlet extends HttpServlet {
 	/** 
 	 *	type 별로 분류하여 각각을 위한 리스트에 담아주는 메소드이다.
 	 */
-	public void classifyType() {
+	private void classifyType() {
 		for(TodoDto todo : totalList) {
 			String type = todo.getType();
 			
