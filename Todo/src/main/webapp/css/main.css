@@ -35,22 +35,22 @@
 	width: 100%;
 }
 
-.contents > .todo {
+.contents > #todo {
 	width: 30%;
 	margin-right: 5%;
 	float: left;
 	margin-bottom: 100px;
 }
 
-.contents > .doing {
+.contents > #doing {
 	width: 30%;
 	margin-right: 5%;
 	float: left;
 	margin-bottom: 100px;
 }
-.contents > .done {
+.contents > #done {
 	width: 30%;
-	display: flex;
+	float: left;
 	margin-bottom: 100px;
 }
 

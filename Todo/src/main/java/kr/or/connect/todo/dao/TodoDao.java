@@ -4,59 +4,40 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import kr.or.connect.todo.dto.TodoDto;
+import kr.or.connect.todo.utils.DatabaseUtil;
 
 
 /** 
  * 		이 클래스는 todo 테이블의 데이터를 조회 및 조작하기 위한 클래스이다. 
  */
-public class TodoDao {
-	/** 
-	 * 	DB 연결 정보를 위한 변수들.
-	 */
-	private static String dburl = "jdbc:mysql://10.113.116.52:13306/intern15";
-	private static String dbUser = "intern15";
-	private static String dbpasswd = "intern15";
+public class TodoDao {	
 	
+	private DatabaseUtil dbUtil;
 	
-	/** 
-	 * 	DB 연결을 위한 드라이버 설정하기!
-	 * 	서블릿에서 Dao 객체를 생성 후 DB 접근을 수시로 하기 때문에 생성자로 정의!
-	 */
 	public TodoDao() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		dbUtil = new DatabaseUtil();
 	}
 	
 	
 	/** 
 	 * 	Insert Into todo Table!
 	 * 	브라우저로부터 할 일을 DB의 todo 테이블에 삽입
+	 * 	@return		Insert에 성공한 행의 개수
 	 */
 	public int addTodo(TodoDto todo) {
-		/** 
-		 * 	Insert에 성공한 row의 개수를 담을 것이다.  
-		 */
+		
 		int insertCount = 0;
-		
-		
-		/** 
-		 * 	쿼리문 작성!  
-		 */
 		String sql = "INSERT INTO todo(title, name, sequence) VALUES (?, ?, ?)";
 		
 		/** 
 		 * 	try 소괄호 내부에 연결 스트림 설정!
 		 * 	이 문법을 사용하면 연결 스트림을 닫는 코드가 불필요해진다.
 		 */
-		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try (Connection conn = dbUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			ps.setString(1, todo.getTitle());
@@ -75,21 +56,20 @@ public class TodoDao {
 	/** 
 	 * 	Select * from todo Table!
 	 * 	DB의 todo 테이블로부터 저장된 할 일을 모두 불러오기
+	 * 	@return		모든 todo 리스트
 	 */
 	public List<TodoDto> getTodos() {
 		List<TodoDto> list = new ArrayList<TodoDto>();
 		
+		// type으로 오름차순 정렬 후에 각 타입 내부에서 sequence로 오름차순 정렬한다.
+		String sql = "SELECT id, title, name, sequence, type, regdate "
+				+ "FROM todo ORDER BY type, sequence";
 		
-		/** 
-		 * 	쿼리문 작성  
-		 */
-		String sql = "SELECT * FROM todo ORDER BY sequence";
-		
-		try (Connection conn = DriverManager.getConnection(dburl, dbUser, dbpasswd);
+		try (Connection conn = dbUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			/** 
-			 * 	쿼리의 결과가 담긴다.
+			 * 	rs 객체에는 쿼리의 결과가 담긴다.
 			 */
 			try (ResultSet rs = ps.executeQuery()) { 
 			
@@ -100,7 +80,8 @@ public class TodoDao {
 					/** 
 					 * 	DTO 객체를 생성해서 뽑아낸 column 값을 생성자를 통해 담은 후 리스트에 추가!
 					 */ 
-					TodoDto todo = new TodoDto(rs.getLong("id"), rs.getString("name"), rs.getString("regdate"), rs.getInt("sequence"), rs.getString("title"), rs.getString("type")); 
+					TodoDto todo = new TodoDto(rs.getLong("id"), rs.getString("name"), rs.getString("regdate"), 
+							rs.getInt("sequence"), rs.getString("title"), rs.getString("type")); 
 					list.add(todo);
 				}
 			} catch(Exception e) {
@@ -119,6 +100,34 @@ public class TodoDao {
 	 * 	추후 작업 요함!
 	 */
 	public int updateTodo(TodoDto todo) {
-		return 1;
+		int updateCount = 0;
+		
+		String sql = "UPDATE todo SET type = ? WHERE id = ?";
+		
+		try (Connection conn = dbUtil.getConnection();
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+			
+			String type = todo.getType();
+			long id = todo.getId();
+			
+			switch(type) {
+			case "TODO":
+				ps.setString(1, "DOING");
+				ps.setLong(2, id);
+				break;
+				
+			case "DOING":
+				ps.setString(1, "DONE");
+				ps.setLong(2, id);
+				break;
+			}
+	
+			updateCount = ps.executeUpdate();
+			
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		} 
+		
+		return updateCount;
 	}
 }

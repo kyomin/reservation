@@ -1,63 +1,63 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>TODO FORM</title>
 	
 	<!-- CSS import -->
-	<link rel="stylesheet" type="text/css" href="../css/todoForm.css">
+	<link rel="stylesheet" type="text/css" href="./css/todoForm.css">
 </head>
 
 <body>
-	<!-- ¼­¹ö Á¦Ãâ form ÆäÀÌÁö ÀüÃ¼¸¦ °¨½Î´Â ÄÁÅ×ÀÌ³Ê -->
+	<!-- ì„œë²„ ì œì¶œ form íŽ˜ì´ì§€ ì „ì²´ë¥¼ ê°ì‹¸ëŠ” ì»¨í…Œì´ë„ˆ -->
 	<div class="todo_form_wrap">
-		<!-- form ÀÛ¼º ¿µ¿ª! -->
+		<!-- form ìž‘ì„± ì˜ì—­! -->
 		<div class = "todo_form">
-			<h1>ÇÒÀÏ µî·Ï</h1>
-			<form action="/Todo/todo/add" method="post">
+			<h1>í• ì¼ ë“±ë¡</h1> 
+			<form action="/Todo/add" method="post">
 				<div class="form_box_line">
-					<!-- title ÀÔ·Â! -->
-					<label class="input-label" for="input_title">¾î¶²ÀÏÀÎ°¡¿ä?</label>
+					<!-- title ìž…ë ¥! -->
+					<label class="input-label" for="input_title">ì–´ë–¤ì¼ì¸ê°€ìš”?</label>
 					<input
 						type="text"
 						id="input_title"
 						class="text_input"
-						placeholder="swift °øºÎÇÏ±â(24ÀÚ±îÁö)"
+						placeholder="swift ê³µë¶€í•˜ê¸°(24ìžê¹Œì§€)"
 						maxlength="24"
 						required
 						name="title"
 					/>
 					
-					<!-- name ÀÔ·Â! -->
-					<label class="input-label" for="input_name">´©°¡ ÇÒÀÏÀÎ°¡¿ä?</label>
+					<!-- name ìž…ë ¥! -->
+					<label class="input-label" for="input_name">ëˆ„ê°€ í• ì¼ì¸ê°€ìš”?</label>
 					<input
 						type="text"
 						id="input_name"
 						class="text_input"
-						placeholder="È«±æµ¿"
+						placeholder="í™ê¸¸ë™"
 						required
 						name="name"
 					/>
 					
-					<!-- sequence ÀÔ·Â! -->
-					<label class="input-label" for="input_sequence">¿ì¼±¼øÀ§¸¦ ¼±ÅÃÇÏ¼¼¿ä</label>
-					<input type="radio" name="sequence" value="1" required>1¼øÀ§
-					<input type="radio" name="sequence" value="2">2¼øÀ§
-					<input type="radio" name="sequence" value="3">3¼øÀ§
+					<!-- sequence ìž…ë ¥! -->
+					<label class="input-label" for="input_sequence">ìš°ì„ ìˆœìœ„ë¥¼ ì„ íƒí•˜ì„¸ìš”</label>
+					<input type="radio" name="sequence" value="1" required>1ìˆœìœ„
+					<input type="radio" name="sequence" value="2">2ìˆœìœ„
+					<input type="radio" name="sequence" value="3">3ìˆœìœ„
 				
-					<!-- ¹öÆ° ¿µ¿ª! -->
+					<!-- ë²„íŠ¼ ì˜ì—­! -->
 					<div class="btn_area">
-						<!-- Á¦Ãâ -->
-						<input type="submit" value="Á¦Ãâ" class="submit_btn">
+						<!-- ì œì¶œ -->
+						<input type="submit" value="ì œì¶œ" class="submit_btn">
 					
-						<!-- ³»¿ëÁö¿ì±â -->
-						<input type="reset" value="³»¿ëÁö¿ì±â" class="erase_btn">
+						<!-- ë‚´ìš©ì§€ìš°ê¸° -->
+						<input type="reset" value="ë‚´ìš©ì§€ìš°ê¸°" class="erase_btn">
 					
-						<!-- ÀÌÀü ¹öÆ° -->
-						<a href="/Todo/todo" class="prev_btn"> < ÀÌÀü </a>
+						<!-- ì´ì „ ë²„íŠ¼ -->
+						<a href="/Todo/main" class="prev_btn"> < ì´ì „ </a>
 					</div>
 				</div>
 			</form>

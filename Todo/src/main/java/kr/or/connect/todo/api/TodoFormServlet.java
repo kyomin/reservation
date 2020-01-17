@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 /** 
  * 		todoForm.jsp로 포워딩하는 서블릿 클래스이다.
  * 		
- * 		GET /todo/form
+ * 		GET 	/todo/form
  */
-@WebServlet("/todo/form")
+@WebServlet("/form")
 public class TodoFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

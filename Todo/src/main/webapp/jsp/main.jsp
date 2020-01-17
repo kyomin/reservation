@@ -1,98 +1,101 @@
 <%@page import="kr.or.connect.todo.dto.TodoDto"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>TODO LIST</title>
 	
 	<!-- CSS import -->
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
+
+	<!-- js íŒŒì¼ include -->
+	<script type="text/javascript" src="/Todo/js/main.js"></script>
 </head>
 
-<script type="text/javascript">
-	function handleRightBtnClick(idx, type) {
-		// ÃßÈÄ ¿À¸¥ÂÊ ¹öÆ° Å¬¸¯ ½ÃÀÇ ÀÌº¥Æ®¸¦ Ã³¸®ÇÑ´Ù.
-	}
-</script>
 
-<!-- MainServletÀ¸·ÎºÎÅÍ µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¿Â´Ù. -->
-<%
-	List<TodoDto> todoList = (List<TodoDto>)request.getAttribute("todoList");
-	List<TodoDto> doingList = (List<TodoDto>)request.getAttribute("doingList");
-	List<TodoDto> doneList = (List<TodoDto>)request.getAttribute("doneList");
-%>
+
 
 <body>
-	<!-- ¸ŞÀÎ ÆäÀÌÁö ÀüÃ¼¸¦ °¨½Î´Â ÄÁÅ×ÀÌ³Ê -->
+	<!-- ë©”ì¸ í˜ì´ì§€ ì „ì²´ë¥¼ ê°ì‹¸ëŠ” ì»¨í…Œì´ë„ˆ -->
 	<div class="container">
-		<!-- ±â¿ï¾îÁø ±ÛÀÚ ºÎºĞ -->
-		<div class="rotate_text">³ªÀÇ ÇØ¾ßÇÒ ÀÏµé</div>
+		<!-- ê¸°ìš¸ì–´ì§„ ê¸€ì ë¶€ë¶„ -->
+		<div class="rotate_text">ë‚˜ì˜ í•´ì•¼í•  ì¼ë“¤</div>
 		
-		<!-- Çì´õ ºÎºĞ -->
+		<!-- í—¤ë” ë¶€ë¶„ -->
 		<div class="header">
-			<a href="/Todo/todo/form">»õ·Î¿î TODO µî·Ï</a>
+			<a href="/Todo/form">ìƒˆë¡œìš´ TODO ë“±ë¡</a>
 		</div>
 		
-		<!-- ¸ñ·Ï ÄÜÅÙÃ÷ ºÎºĞ -->
+		<!-- ëª©ë¡ ì½˜í…ì¸  ë¶€ë¶„ -->
 		<div class="contents">
-			<!-- TODO ¿µ¿ª ºÎºĞ -->
-			<div class="todo">
+			<!-- TODO ì˜ì—­ ë¶€ë¶„ -->
+			<div id="todo">
 				<div class="title">
 					TODO
 				</div>
-				<c:forEach items="${todoList}" var="item">
-					<div class="content">
+				<c:forEach items="${requestScope.todoList}" var="item">
+					<div class="content" id="${item.getId() }">
 						<div class="plan">
 							${item.getTitle()}
 						</div>
 						<div class="info">
-							µî·Ï³¯Â¥:${item.getRegdate() }, ${item.getName() }, ¿ì¼±¼øÀ§ ${item.getSequence() }
+							ë“±ë¡ë‚ ì§œ:
+							<fmt:parseDate var="dateString" value="${item.getRegdate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+							<fmt:formatDate pattern="yyyy.MM.dd" value="${dateString}"/>, 
+							${item.getName() }, ìš°ì„ ìˆœìœ„ ${item.getSequence() }
 						</div>
-						<button class="right_btn"> 
+						<button id="btn${item.getId() }" class="right_btn" onClick="ajax('${item.getId() }', '${item.getType()}');"> 
 							->
 						</button>
 					</div>
 				</c:forEach>
 			</div>
 			
-			<!-- DOING ¿µ¿ª ºÎºĞ -->
-			<div class="doing">
+			<!-- DOING ì˜ì—­ ë¶€ë¶„ -->
+			<div id="doing">
 				<div class="title">
 					DOING
 				</div>
-				<c:forEach items="${doingList}" var="item">
-					<div class="content">
+				<c:forEach items="${requestScope.doingList}" var="item">
+					<div class="content" id="${item.getId() }">
 						<div class="plan">
 							${item.getTitle()}
 						</div>
 						<div class="info">
-							µî·Ï³¯Â¥:${item.getRegdate() }, ${item.getName() }, ¿ì¼±¼øÀ§ ${item.getSequence() }
+							ë“±ë¡ë‚ ì§œ:
+							<fmt:parseDate var="dateString" value="${item.getRegdate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+							<fmt:formatDate pattern="yyyy.MM.dd" value="${dateString}"/>, 
+							${item.getName() }, ìš°ì„ ìˆœìœ„ ${item.getSequence() }
 						</div>
-						<button class="right_btn"> 
+						<button id="btn${item.getId() }" class="right_btn" onClick="ajax('${item.getId() }', '${item.getType()}');"> 
 							->
 						</button>
 					</div>
 				</c:forEach>
 			</div>
 			
-			<!-- DONE ¿µ¿ª ºÎºĞ -->
-			<div class="done">
+			<!-- DONE ì˜ì—­ ë¶€ë¶„ -->
+			<div id="done">
 				<div class="title">
 					DONE
 				</div>
-				<c:forEach items="${doneList}" var="item">
-					<div class="content">
+				<c:forEach items="${requestScope.doneList}" var="item">
+					<div class="content" id="${item.getId() }">
 						<div class="plan">
 							${item.getTitle()}
 						</div>
 						<div class="info">
-							µî·Ï³¯Â¥:${item.getRegdate() }, ${item.getName() }, ¿ì¼±¼øÀ§ ${item.getSequence() }
+							ë“±ë¡ë‚ ì§œ:
+							<fmt:parseDate var="dateString" value="${item.getRegdate()}" pattern="yyyy-MM-dd HH:mm:ss.S" />
+							<fmt:formatDate pattern="yyyy.MM.dd" value="${dateString}"/>, 
+							${item.getName() }, ìš°ì„ ìˆœìœ„ ${item.getSequence() }
 						</div>
 					</div>
 				</c:forEach>
