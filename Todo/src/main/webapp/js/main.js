@@ -5,9 +5,12 @@
 */
 function ajax(id, type) {
     var oReq = new XMLHttpRequest();
+    var data = [id, type];
     
     oReq.addEventListener("load", function(){
-        if(this.responseText == 1) {
+    	console.log(this.responseText);
+    	
+        if(this.responseText === "success") {
         	moveRight(id, type.toLowerCase());
         } else {
         	alert("변경 실패");
@@ -17,13 +20,11 @@ function ajax(id, type) {
         console.log("type: ", type);
     });
     
-    // TodoTypeServlet으로 GET REQUEST!
-    oReq.open("GET", "/Todo/type?id=" + id + "&type=" + type);
+    // TodoTypeServlet으로 PUT REQUEST!
+    oReq.open("PUT", "/Todo/type");
     
-    // 컨텐츠 타입을 헤더에 설정하여 서버에 알린다.
-    oReq.setRequestHeader("Content-Type", "application/x-www-from-urlencoded");
-    
-    oReq.send();
+    oReq.setRequestHeader("Content-Type", "application/x-www-from-urlencoded");    
+    oReq.send(data);
 };
 
 /*
@@ -42,10 +43,10 @@ function moveRight(id, type) {
 	var leftParent = document.getElementById(type);
 	var rightParent = document.getElementById(rightType);
 	
-	console.log("btn"+id);
-	console.log(rightType);
-	
-	// 옮겨지는 아이템 내의 버튼의 속성을 바꾼다. 
+	/*
+	 * 	옮겨지는 아이템 내의 버튼 속성을 바꾼다. 
+	 * 	BACK에서는 수정 작업이 이뤄졌지만, FRONT에서는 바뀌지 않기 때문이다.
+	 */
 	var leftChildBtn = document.getElementById("btn"+id);
 	leftChildBtn.setAttribute("onClick", `ajax('${id}', '${rightType.toUpperCase()}');`);
 	
@@ -53,12 +54,11 @@ function moveRight(id, type) {
 	leftParent.removeChild(leftChild);
 	rightParent.appendChild(leftChild);
 	
-	
 	// 해당 태그 내부에 원소가 하나라도 배열로 가져오기 때문에!
 	var rightBtn = leftChild.getElementsByTagName("button")[0];
 
 	// 오른쪽으로 이동할 영역이 마지막 DONE이라면 버튼 없애주기
 	if(rightType === "done") {
 		rightBtn.remove();
-	} 
+	}
 }

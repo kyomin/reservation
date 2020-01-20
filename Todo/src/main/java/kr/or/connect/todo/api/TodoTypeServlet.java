@@ -1,6 +1,9 @@
 package kr.or.connect.todo.api;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
@@ -21,43 +24,67 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @WebServlet("/type")
 public class TodoTypeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json");
+		response.setContentType("text");
 		request.setCharacterEncoding("utf-8");
 
+		//	id : params[0], type : params[1]
+		String[] params = getBody(request).split(",");
 		
-		System.out.println(request.toString());
-		System.out.println("id : " + request.getParameter("id"));
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json");
-		request.setCharacterEncoding("utf-8");
-		
-		// 데이터 전달 객체 DTO 생성
-		TodoDto todoDto = new TodoDto(Long.parseLong(request.getParameter("id")), request.getParameter("type"));
-		
-		// Update 작업을 처리하기 위한 DAO 생성
+		//	데이터 전달 객체 DTO 생성
+		TodoDto todoDto = new TodoDto(Long.parseLong(params[0]), params[1]);
+				
+		//	Update 작업을 처리하기 위한 DAO 생성
 		TodoDao todoDao = new TodoDao();
 		int updateCount = todoDao.updateTodo(todoDto);
 		
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		// 클라이언트로 응답할 스트림 생성
+		//	클라이언트로 응답할 스트림 생성
 		PrintWriter out = response.getWriter();
-		out.println(objectMapper.writeValueAsString(updateCount));
+		
+		if(updateCount == 1) {
+			out.write("success");
+		} else {
+			out.write("fail");
+		}
+			
 		out.close();
 		
 		System.out.println("업데이트된 대상 개수 : " + updateCount);
 	}
-       
-    
-	
 
+	//	request body를 문자열로 추출하는 함수
+	private String getBody(HttpServletRequest request) throws IOException {
+		String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+        
+        body = stringBuilder.toString();
+        return body;
+	}
 }

@@ -19,9 +19,6 @@
 	<script type="text/javascript" src="/Todo/js/main.js"></script>
 </head>
 
-
-
-
 <body>
 	<!-- 메인 페이지 전체를 감싸는 컨테이너 -->
 	<div class="container">

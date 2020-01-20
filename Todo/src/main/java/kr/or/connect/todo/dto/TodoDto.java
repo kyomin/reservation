@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 
 /** 
- * 이 클래스는 todo 테이블의 데이터를 전달하기 위한 목적의 클래스이다. 
+ * 		이 클래스는 todo 테이블의 데이터를 전달하기 위한 목적의 클래스이다. 
  */
 public class TodoDto {
 	private long id;
