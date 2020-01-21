@@ -31,7 +31,6 @@ public class MainServlet extends HttpServlet {
 	 *		/main의 URI를 타고 오면 처리되는 곳이다.
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 
 		//	DB의 todo 테이블의 데이터를 모두 totalList로 불러오기 
 		TodoDao todoDao = new TodoDao();
 		List<TodoDto> totalList = todoDao.getTodos();

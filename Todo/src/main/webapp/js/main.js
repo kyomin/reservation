@@ -1,9 +1,9 @@
 /*
-    특정 엘리먼트를 클릭했을 때,
-    해당 id와 type을 받아서
-    이를 변경 처리하는 서블릿으로 보내는 ajax 함수이다. 
+		    특정 엘리먼트를 클릭했을 때,
+		    해당 id와 type을 받아서
+		    이를 변경 처리하는 서블릿으로 보내는 ajax 함수이다. 
 */
-function ajax(id, type) {
+function moveRight(id, type) {
     var oReq = new XMLHttpRequest();
     var data = [id, type];
     
@@ -11,26 +11,23 @@ function ajax(id, type) {
     	console.log(this.responseText);
     	
         if(this.responseText === "success") {
-        	moveRight(id, type.toLowerCase());
+        	moveCard(id, type.toLowerCase());
         } else {
         	alert("변경 실패");
         }
-        
-        console.log("id: ", id);
-        console.log("type: ", type);
     });
     
     // TodoTypeServlet으로 PUT REQUEST!
-    oReq.open("PUT", "/Todo/type");
+    oReq.open("PUT", "/type");
     
     oReq.setRequestHeader("Content-Type", "application/x-www-from-urlencoded");    
     oReq.send(data);
 };
 
 /*
-	오른쪽 버튼 클릭 시 해당 엘리먼트를 오른쪽으로 이동시키는 함수이다.
+		오른쪽 버튼 클릭 시 해당 엘리먼트를 오른쪽으로 이동시키는 함수이다.
 */
-function moveRight(id, type) {
+function moveCard(id, type) {
 	var leftChild = document.getElementById(id);
 	var rightType;
 	
@@ -48,7 +45,7 @@ function moveRight(id, type) {
 	 * 	BACK에서는 수정 작업이 이뤄졌지만, FRONT에서는 바뀌지 않기 때문이다.
 	 */
 	var leftChildBtn = document.getElementById("btn"+id);
-	leftChildBtn.setAttribute("onClick", `ajax('${id}', '${rightType.toUpperCase()}');`);
+	leftChildBtn.setAttribute("onClick", `moveRight('${id}', '${rightType.toUpperCase()}');`);
 	
 	// 왼쪽에서 제거 및 오른쪽에 추가 작업!
 	leftParent.removeChild(leftChild);

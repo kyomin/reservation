@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.or.connect.todo.dao.TodoDao;
 import kr.or.connect.todo.dto.TodoDto;
+import kr.or.connect.todo.dto.TodoDtoBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,37 +34,43 @@ public class TodoTypeServlet extends HttpServlet {
 		//	id : params[0], type : params[1]
 		String[] params = getBody(request).split(",");
 		
-		//	데이터 전달 객체 DTO 생성
-		TodoDto todoDto = new TodoDto(Long.parseLong(params[0]), params[1]);
+		long id = Long.parseLong(params[0]);
+		String type = params[1];
+		
+		//	TodoDto를 위한 빌더 객체 생성
+		TodoDtoBuilder todoDtoBuilder = new TodoDtoBuilder();
+		
+		//	빌더 객체를 이용한 데이터 전달 객체 DTO 생성
+		TodoDto todoDto = todoDtoBuilder
+				.setId(id)
+				.setType(type)
+				.build();
 				
 		//	Update 작업을 처리하기 위한 DAO 생성
 		TodoDao todoDao = new TodoDao();
-		int updateCount = todoDao.updateTodo(todoDto);
+		boolean isUpdateComplete = todoDao.updateTodo(todoDto) != 0;
 		
 		//	클라이언트로 응답할 스트림 생성
 		PrintWriter out = response.getWriter();
 		
-		if(updateCount == 1) {
+		if(isUpdateComplete) {
 			out.write("success");
 		} else {
 			out.write("fail");
 		}
 			
 		out.close();
-		
-		System.out.println("업데이트된 대상 개수 : " + updateCount);
 	}
 
 	//	request body를 문자열로 추출하는 함수
 	private String getBody(HttpServletRequest request) throws IOException {
 		String body = null;
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader bufferedReader = null;
         
-        try {
-            InputStream inputStream = request.getInputStream();
+        try (InputStream inputStream = request.getInputStream();
+        		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));) {
+            
             if (inputStream != null) {
-                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                 char[] charBuffer = new char[128];
                 int bytesRead = -1;
                 while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
@@ -74,14 +81,6 @@ public class TodoTypeServlet extends HttpServlet {
             }
         } catch (IOException ex) {
             throw ex;
-        } finally {
-            if (bufferedReader != null) {
-                try {
-                    bufferedReader.close();
-                } catch (IOException ex) {
-                    throw ex;
-                }
-            }
         }
         
         body = stringBuilder.toString();

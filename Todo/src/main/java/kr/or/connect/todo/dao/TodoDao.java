@@ -15,26 +15,20 @@ import kr.or.connect.todo.utils.DatabaseUtil;
  * 		이 클래스는 todo 테이블의 데이터를 조회 및 조작하기 위한 클래스이다. 
  */
 public class TodoDao {	
-	private DatabaseUtil dbUtil;
-	
-	public TodoDao() {
-		dbUtil = new DatabaseUtil();
-	}
-	
 	/** 
 	 * 		브라우저로부터 할 일을 입력받아 DB의 todo 테이블에 삽입
 	 * 		@return		Insert에 성공한 행의 개수
 	 */
 	public int addTodo(TodoDto todo) {
-		
 		int insertCount = 0;
+		
 		String sql = "INSERT INTO todo(title, name, sequence) VALUES (?, ?, ?)";
 		
 		/** 
 		 * 		try 소괄호 내부에 연결 스트림 설정!
 		 * 		이 문법을 사용하면 연결 스트림을 닫는 코드가 불필요해진다.
 		 */
-		try (Connection conn = dbUtil.getConnection();
+		try (Connection conn = DatabaseUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			ps.setString(1, todo.getTitle());
@@ -49,7 +43,6 @@ public class TodoDao {
 		return insertCount;
 	}
 	
-	
 	/** 
 	 * 		Select * from todo Table!
 	 * 		DB의 todo 테이블로부터 저장된 할 일을 모두 불러오기
@@ -62,7 +55,7 @@ public class TodoDao {
 		String sql = "SELECT id, title, name, sequence, type, regdate "
 				+ "FROM todo ORDER BY type, regdate";
 		
-		try (Connection conn = dbUtil.getConnection();
+		try (Connection conn = DatabaseUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			 
 			//	rs 객체에는 쿼리의 결과가 담긴다.	 
@@ -95,7 +88,7 @@ public class TodoDao {
 		
 		String sql = "UPDATE todo SET type = ? WHERE id = ?";
 		
-		try (Connection conn = dbUtil.getConnection();
+		try (Connection conn = DatabaseUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {
 			
 			String type = todo.getType();

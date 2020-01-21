@@ -27,7 +27,7 @@ public class DatabaseUtil {
 		}
 	}
 	
-	public Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(dburl, dbUser, dbpasswd);
 	}
 }

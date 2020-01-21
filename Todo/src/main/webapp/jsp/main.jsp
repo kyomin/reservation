@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 
 	<!-- js 파일 include -->
-	<script type="text/javascript" src="/Todo/js/main.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
 		
 		<!-- 헤더 부분 -->
 		<div class="header">
-			<a href="/Todo/form">새로운 TODO 등록</a>
+			<a href="/form">새로운 TODO 등록</a>
 		</div>
 		
 		<!-- 목록 콘텐츠 부분 -->
@@ -48,7 +48,7 @@
 							<fmt:formatDate pattern="yyyy.MM.dd" value="${dateString}"/>, 
 							${item.getName() }, 우선순위 ${item.getSequence() }
 						</div>
-						<button id="btn${item.getId() }" class="right_btn" onClick="ajax('${item.getId() }', '${item.getType()}');"> 
+						<button id="btn${item.getId() }" class="right_btn" onClick="moveRight('${item.getId() }', '${item.getType()}');"> 
 							->
 						</button>
 					</div>
@@ -71,7 +71,7 @@
 							<fmt:formatDate pattern="yyyy.MM.dd" value="${dateString}"/>, 
 							${item.getName() }, 우선순위 ${item.getSequence() }
 						</div>
-						<button id="btn${item.getId() }" class="right_btn" onClick="ajax('${item.getId() }', '${item.getType()}');"> 
+						<button id="btn${item.getId() }" class="right_btn" onClick="moveRight('${item.getId() }', '${item.getType()}');"> 
 							->
 						</button>
 					</div>

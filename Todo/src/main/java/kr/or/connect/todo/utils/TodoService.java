@@ -52,4 +52,16 @@ public class TodoService {
 		
 		return resultMap;
 	}
+	
+	/** 
+	 *		할일 제목이 최대 24자를 넘어가는지 서버에서 체크하기 위한 함수
+	 *
+	 *		@param		title
+	 *				클라이언트 폼으로부터 전달 받은 title
+	 *
+	 *		@return		true : 24자 이하의 적절한 길이일 경우
+	 */
+	public static boolean isProperTitleLength(String title) {
+		return title.length()<=24 ? true : false;
+	}
 }

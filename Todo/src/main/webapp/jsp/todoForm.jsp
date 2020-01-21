@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>TODO FORM</title>
@@ -17,7 +16,7 @@
 		<!-- form 작성 영역! -->
 		<div class = "todo_form">
 			<h1>할일 등록</h1> 
-			<form action="/Todo/add" method="post">
+			<form action="/add" method="post">
 				<div class="form_box_line">
 					<!-- title 입력! -->
 					<label class="input-label" for="input_title">어떤일인가요?</label>
@@ -57,7 +56,7 @@
 						<input type="reset" value="내용지우기" class="erase_btn">
 					
 						<!-- 이전 버튼 -->
-						<a href="/Todo/main" class="prev_btn"> < 이전 </a>
+						<a href="/main" class="prev_btn"> < 이전 </a>
 					</div>
 				</div>
 			</form>
