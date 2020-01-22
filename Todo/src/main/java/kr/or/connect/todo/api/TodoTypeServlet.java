@@ -25,13 +25,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @WebServlet("/type")
 public class TodoTypeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	@Override
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text");
 		request.setCharacterEncoding("utf-8");
 
-		//	id : params[0], type : params[1]
 		String[] params = getBody(request).split(",");
 		
 		long id = Long.parseLong(params[0]);

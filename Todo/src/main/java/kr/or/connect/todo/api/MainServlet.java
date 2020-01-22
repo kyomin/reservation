@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.connect.todo.dao.TodoDao;
 import kr.or.connect.todo.dto.TodoDto;
 import kr.or.connect.todo.utils.TodoService;
+import kr.or.connect.todo.utils.TodoType;
 
 /** 
  * 		main.jsp 화면에 보여질 데이터를 컨트롤하는 서블릿 클래스이다.
@@ -24,8 +25,8 @@ import kr.or.connect.todo.utils.TodoService;
  */
 @WebServlet("/main")
 public class MainServlet extends HttpServlet {
-	private static String[] types = {"TODO", "DOING", "DONE"};
-	
+	private static final long serialVersionUID = 1L;
+			
 	/** 
 	 * 		GET REQUEST !!!
 	 *		/main의 URI를 타고 오면 처리되는 곳이다.
@@ -39,9 +40,10 @@ public class MainServlet extends HttpServlet {
 		if(totalList.size() != 0) {
 			//	type별 분류 작업 시작!
 			HashMap<String, List<TodoDto>> typeMap = TodoService.makeTypeList(totalList);
-			for(String type : types) {
+			for(TodoType type : TodoType.values()) {
+				System.out.println(type.toString().toLowerCase());
 				//	request scope를 이용해 데이터 저장
-				request.setAttribute(type.toLowerCase()+"List", typeMap.get(type));
+				request.setAttribute(type.toString().toLowerCase()+"List", typeMap.get(type.toString()));
 			}
 		}
 		 

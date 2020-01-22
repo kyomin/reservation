@@ -22,6 +22,8 @@ import kr.or.connect.todo.utils.TodoService;
  */
 @WebServlet("/add")
 public class TodoAddServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");  
 		

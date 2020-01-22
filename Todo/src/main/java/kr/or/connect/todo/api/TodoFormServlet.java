@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/form")
 public class TodoFormServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
 	/** 
 	 * 		GET REQUEST !!!
 	 *		/todo/form의 URI를 타고 오면 처리되는 곳이다.
