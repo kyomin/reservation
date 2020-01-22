@@ -1,0 +1,94 @@
+body {
+	background-color: #D3D3D3;
+}
+
+.todo_form_wrap {
+	width: 1046px;
+	margin: 0 auto;
+}
+
+.todo_form_wrap > .todo_form {
+	padding: 50px 60px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.todo_form > h1 {
+	text-align: center;
+}
+
+.todo_form > .form_box_line {
+    display: inline-block;
+    width: 100%;
+}
+
+.form_box_line > .input-label {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    letter-spacing: -0.03em;
+    color: #000000;
+    font-family: "NanumSquare";
+    font-weight: 300;
+    margin-bottom: 12px;
+}
+
+.form_box_line > .text_input {
+    display: inline-block;
+    width: 100%;
+    height: 60px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #e1e1e1;
+    font-family: "NanumSquare";
+    color: #000000 !important;
+    font-size: 22px;
+    padding: 0 50px 0 25px;
+    margin-bottom: 20px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.btn_area {
+	width: 100%;
+	padding: 20px;
+	text-align: right;
+	position: relative;
+}
+
+.btn_area > .erase_btn {
+	display: inline-block;
+    width: 20%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #007EEA;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn_area > .submit_btn {
+	display: inline-block;
+    width: 20%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #007EEA;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 5%;
+}
+
+.btn_area > .prev_btn {
+	position: absolute;
+	left: 0;
+	width: 20%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid gray;
+    text-decoration: none;
+}
