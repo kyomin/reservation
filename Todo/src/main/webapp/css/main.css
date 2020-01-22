@@ -1,0 +1,91 @@
+.container {
+	padding-right: 30px;
+	padding-left: 100px;
+	position: relative;
+}
+
+.header {
+	padding: 5% 0;
+	text-align: right;
+}
+
+.header > a {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #007EEA;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.rotate_text {
+	text-align: center;
+	font-size: 30px;
+	position: absolute;
+    -webkit-transform: rotate(-45deg);
+	 ��transform: rotate(-45deg);
+	 top: 30%;
+    left: 0;
+}
+
+.contents {
+	width: 100%;
+}
+
+.contents > #todo {
+	width: 30%;
+	margin-right: 5%;
+	float: left;
+	margin-bottom: 100px;
+}
+
+.contents > #doing {
+	width: 30%;
+	margin-right: 5%;
+	float: left;
+	margin-bottom: 100px;
+}
+.contents > #done {
+	width: 30%;
+	float: left;
+	margin-bottom: 100px;
+}
+
+.title {
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	color: white;
+	background-color: #2F4F4F;
+	padding-left: 5%;
+	font-size: 50px;
+	font-weight: 600;
+}
+
+.content {
+	width: 100%;
+	margin-top: 20px;
+	position: relative;
+	padding: 20px 0px 20px 5%;
+	background-color: #87CEFA;
+}
+
+.content > .plan {
+	font-weight: 600;
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+
+.content > .info {
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.content > .right_btn {
+	position: absolute;
+	right: 20px;
+    bottom: 20px;	
+}
