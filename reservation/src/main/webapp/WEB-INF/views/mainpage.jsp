@@ -38,9 +38,9 @@
                             </div>
                         </div>
                         <div>
-                            <div class="container_visual">
-                                <!-- 슬라이딩기능: 이미지 (type = 'th')를 순차적으로 노출 -->
+                            <div class="container_visual">                             
                                 <ul class="visual_img">
+                                <!-- 프로모션 슬라이딩 영역: 이미지 (type = 'th')를 순차적으로 노출 -->
                                 </ul>
                             </div>
                             <span class="nxt_fix" style="display:none;"></span>
@@ -82,8 +82,9 @@
     </footer>
 
 
+	<!-- 프로모션 리스트 슬라이드를 위한 템플릿  -->
     <script type="rv-template" id="promotionItem">
-    <li class="item" style="background-image: url(http://211.249.62.123/productImages/${productId}/${productImageId});">
+    <li class="item promotion_img" style="background-image: url(static/img/{productImageUrl});">
         <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
             <div class="event_txt">
                 <h4 class="event_txt_tit"></h4>

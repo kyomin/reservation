@@ -5,6 +5,7 @@
 //	for API URL
 const apiProductsUrl = "http://localhost:8080/reservation/api/products";
 const apiCategoryUrl = "http://localhost:8080/reservation/api/categories";
+const apiPromotionsUrl = "http://localhost:8080/reservation/api/promotions";
 
 //	for Event Element
 var tabMenu = document.querySelector(".section_event_tab");
@@ -27,6 +28,7 @@ var currentCategoryId = "0";
 
 /* 클라이언트 첫 로드 시의 발생 이벤트! */
 document.addEventListener("DOMContentLoaded", function() {	
+	sendAjaxForPromotionList(apiPromotionsUrl);
 	sendAjaxForCategoryList(apiCategoryUrl);
 	sendAjaxForProductsList(apiProductsUrl);
 })
@@ -83,6 +85,20 @@ moreBtn.addEventListener("click", function() {
  * 		Ajax
  */	
 
+function sendAjaxForPromotionList(url) {
+	var oReq = new XMLHttpRequest();
+	
+	oReq.addEventListener("load", function() {
+		// JSON 형식으로 받아온다.
+		var data = JSON.parse(oReq.responseText);
+	
+		makePromotionList(data);
+	});
+	
+	oReq.open("GET", url);
+	oReq.send();
+}
+
 function sendAjaxForProductsList(url) {
 	var oReq = new XMLHttpRequest();
 	
@@ -113,7 +129,7 @@ function sendAjaxForCategoryList(url) {
 	oReq.addEventListener("load", function() {
 		// JSON 형식으로 받아온다.
 		var data = JSON.parse(oReq.responseText);
-	
+		
 		makeCategoryList(data);
 	});
 	
@@ -136,6 +152,38 @@ function init() {
 		
 		resolve();
 	});
+}
+
+function makePromotionList(data) {
+	var html = document.getElementById("promotionItem").innerHTML;
+	var promotions = data.promotions;
+	var promotionTemplateList = [];
+	
+	// 프로모션 템플릿을 잘 매핑하여 리스트에 담는다.
+	promotions.map( (promotion, idx) => {
+		promotionTemplateList.push(html.replace("{productImageUrl}", promotion.productImageUrl));
+	});
+	
+	// 프로모션 영역에 해당 템플릿 리스트를 넣어주는 작업이다.
+	promotionTemplateList.forEach(promotionTemplate => document.querySelector('.visual_img').insertAdjacentHTML('beforeend', promotionTemplate));
+
+	// 프로모션 영역에 프로모션들이 다 들어갔으면 슬라이드 시작!
+	startPromotionImageSlide(promotionTemplateList.length);
+}
+
+function startPromotionImageSlide(slideListCount) {
+	var slideContainer = document.querySelector(".visual_img");
+	
+	slideContainer.style.width = `calc(100% * ${slideListCount})`;
+	slideContainer.style.display = "flex";
+	slideContainer.style.transition = "1s";
+	
+	let pos = 0;
+	
+	setInterval(() => {
+		pos = (pos + 1) % slideListCount // 장면 선택
+		slideContainer.style.marginLeft = `${-pos * 100}%` // 장면 전환
+	}, 1500); // 1500 = 1500ms = 1.5sec. 즉, 1.5초 마다 실행
 }
 
 function makeProductList(data) {
