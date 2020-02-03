@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import kr.or.connect.reservation.dto.Product;
@@ -20,14 +19,13 @@ import kr.or.connect.reservation.dto.Product;
 @Repository
 public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
-	private SimpleJdbcInsert insertAction;
 	private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 	
 	public ProductDao(DataSource dataSource) {
 		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public List<Product> selectAllProductsList(Integer start, Integer limit) {
+	public List<Product> selectAllProducts(Integer start, Integer limit) {
 		Map<String, Integer> params = new HashMap<>();
 		
 		params.put("start", start);
@@ -36,7 +34,17 @@ public class ProductDao {
 		return jdbc.query(SELECT_ALL_PRODUCTS_WITH_LIMIT, params, rowMapper);
 	}
 	
-	public int selectCount() {
-		return jdbc.queryForObject(SELECT_COUNT_ALL, Collections.emptyMap(), Integer.class);
+	public List<Product> selectProductsByCategory(Integer start, Integer limit, Integer categoryId) {
+		Map<String, Integer> params = new HashMap<>();
+		
+		params.put("start", start);
+		params.put("limit", limit);
+		params.put("categoryId", categoryId);
+		
+		return jdbc.query(SELECT_PRODUCTS_BY_CATEGORY_WITH_LIMIT, params, rowMapper);
+	}
+	
+	public int selectAllProductsCount() {
+		return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
 	}
 }

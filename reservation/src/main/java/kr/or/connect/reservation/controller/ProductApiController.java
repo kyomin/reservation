@@ -22,20 +22,22 @@ public class ProductApiController {
 	}
 	
 	@GetMapping
-	public Map<String, Object> list(@RequestParam(name = "start", required = false, defaultValue = "0")int start) {
-		System.out.println("/api/products로 GET 요청 왔는지 확인!");
-		System.out.println("start : " + start);
-		
-		List<Product> products = productService.getProducts(start);
-		int totalCount = productService.getProductsTotalCount();
-
-		System.out.println("totalCount : " + totalCount);
-		
+	public Map<String, Object> list(@RequestParam(name = "start", required = false, defaultValue = "0")int start,
+			@RequestParam(name = "category_id", required = false, defaultValue = "-1")int categoryId) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("products", products);
-		map.put("totalCount", totalCount);
-
+		List<Product> products;
+		int totalCount = productService.getProductsTotalCount();
+		
+		if(categoryId != -1) {	// 전체 리스트가 아닐 경우
+			products = productService.getProductsByCategory(start, categoryId);
+			map.put("products", products);
+			map.put("totalCount", -1);	// 클라이언트에서 이 값으로 판단한다.
+		} else {	// 전체 리스트일 경우!
+			products = productService.getProducts(start);
+			map.put("products", products);
+			map.put("totalCount", totalCount);
+		}
+	
 		return map;
 	}
-
 }

@@ -49,34 +49,8 @@
                 </div>
             </div>
             <div class="section_event_tab">
-                <ul class="event_tab_lst tab_lst_min">
-                    <li class="item" data-category="0">
-                        <a class="anchor active"> <span>전체리스트</span> </a>
-                    </li>
-                    <li class="item" data-category="1">
-                        <a class="anchor"> <span>전시</span> </a>
-                    </li>
-                    <li class="item" data-category="2">
-                        <a class="anchor"> <span>뮤지컬</span> </a>
-                    </li>
-                    <li class="item" data-category="3">
-                        <a class="anchor"> <span>콘서트</span> </a>
-                    </li>
-                    <li class="item" data-category="4">
-                        <a class="anchor"> <span>클래식</span> </a>
-                    </li>
-                    <li class="item" data-category="5">
-                        <a class="anchor"> <span>연극</span> </a>
-                    </li>
-                    <!-- li class="item" data-category="7">
-                        <a class="anchor"> <span>클래스</span> </a>
-                    </li>
-                    <li class="item" data-category="8">
-                        <a class="anchor"> <span>체험</span> </a>
-                    </li>
-                    <li class="item" data-category="9">
-                        <a class="anchor last"> <span>키즈</span> </a>
-                    </li -->
+                <ul class="event_tab_lst tab_lst_min" id="category_tab">
+                 	<!-- 카테고리 탭 영역! -->
                 </ul>
             </div>
             <div class="section_event_lst">
@@ -90,7 +64,7 @@
                         <!-- 상품 오른쪽 영역! -->
                     </ul>
                     <!-- 더보기 -->
-                    <div class="more" onClick="clickMoreBtn()" id="more_btn">
+                    <div class="more" id="more_btn">
                         <button class="btn"><span>더보기</span></button>
                     </div>
                 </div>
@@ -119,7 +93,8 @@
         </a>
     </li>
     </script>
-
+	
+	<!-- 상품 리스트를 위한 템플릿  -->
     <script type="rv-template" id="itemList">
         <li class="item">
             <a href="detail.html?id={id}" class="item_book">
@@ -134,6 +109,13 @@
             </a>
         </li>
     </script>
+    
+    <!-- 카테고리 탭을 위한 템플릿  -->
+    <script type="rv-template" id="categories">
+		<li class="item" data-category="{id}" data-count="{count}">
+        	<a class="anchor" id="category{id}"> <span>{name}</span> </a>
+        </li>
+	</script>
     
     <!-- js 파일 include -->
 	<script type="text/javascript" src="static/script/mainpage.js"></script>
