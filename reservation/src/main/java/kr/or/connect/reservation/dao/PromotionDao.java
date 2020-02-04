@@ -18,8 +18,8 @@ public class PromotionDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Promotion> rowMapper = BeanPropertyRowMapper.newInstance(Promotion.class);
 	
-	public PromotionDao(DataSource dataSource) {
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	public PromotionDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+		this.jdbc = namedParameterJdbcTemplate;
 	}
 	
 	public List<Promotion> selectAllPromotions() {

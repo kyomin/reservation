@@ -3,6 +3,7 @@ package kr.or.connect.reservation.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,22 +23,19 @@ public class ProductApiController {
 	}
 	
 	@GetMapping
-	public Map<String, Object> list(@RequestParam(name = "start", required = false, defaultValue = "0")int start,
-			@RequestParam(name = "category_id", required = false, defaultValue = "-1")int categoryId) {
+	public Map<String, Object> list(@RequestParam(name = "start", required=false, defaultValue="0")Integer start,
+			@RequestParam(name = "category_id", required=false)Integer categoryId) {
 		Map<String, Object> map = new HashMap<>();
 		List<Product> products;
-		int totalCount = productService.getProductsTotalCount();
+		Integer totalCount;
+		Optional<Integer> isCategoryIdNull = Optional.ofNullable(categoryId);		
 		
-		if(categoryId != -1) {	// 전체 리스트가 아닐 경우
-			products = productService.getProductsByCategory(start, categoryId);
-			map.put("products", products);
-			map.put("totalCount", -1);	// 클라이언트에서 이 값으로 판단한다.
-		} else {	// 전체 리스트일 경우!
-			products = productService.getProducts(start);
-			map.put("products", products);
-			map.put("totalCount", totalCount);
-		}
-	
+		products = productService.getProducts(start, isCategoryIdNull);
+		totalCount = isCategoryIdNull.isPresent() ? null : productService.getProductsTotalCount();
+		
+		map.put("products", products);
+		map.put("totalCount", totalCount);
+		
 		return map;
 	}
 }

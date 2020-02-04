@@ -105,11 +105,11 @@ function sendAjaxForProductsList(url) {
 	oReq.addEventListener("load", function() {
 		// JSON 형식으로 데이터를 받아온다.
 		var data = JSON.parse(oReq.responseText);
-	
+		
 		startIndex += data.products.length;
 		
 		// 전체 리스트일 경우에만 총 테이블 카운트를 할당한다.
-		if(data.totalCount != -1) {
+		if(data.totalCount !== null) {
 			totalCount = data.totalCount;
 		}
 		

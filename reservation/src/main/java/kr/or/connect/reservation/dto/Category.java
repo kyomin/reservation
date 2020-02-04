@@ -1,9 +1,9 @@
 package kr.or.connect.reservation.dto;
 
 public class Category {
-	int count;
-	int id;
-	String name;
+	private int count;
+	private int id;
+	private String name;
 	
 	public int getCount() {
 		return count;

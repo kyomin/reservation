@@ -21,8 +21,8 @@ public class ProductDao {
 	private NamedParameterJdbcTemplate jdbc;
 	private RowMapper<Product> rowMapper = BeanPropertyRowMapper.newInstance(Product.class);
 	
-	public ProductDao(DataSource dataSource) {
-		this.jdbc = new NamedParameterJdbcTemplate(dataSource);
+	public ProductDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+		this.jdbc = namedParameterJdbcTemplate;
 	}
 	
 	public List<Product> selectAllProducts(Integer start, Integer limit) {

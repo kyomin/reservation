@@ -14,4 +14,5 @@ public class ProductDaoSqls {
 	public static final String SELECT_PRODUCTS_BY_CATEGORY_WITH_LIMIT = "SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName FROM " + JOIN_FOR_PRODUCT3 + " AS product LEFT JOIN display_info ON product.productId = display_info.product_id LIMIT :start, :limit";
 	
 	public static final String SELECT_COUNT_ALL_PRODUCTS = "SELECT count(*) FROM (" + SELECT_ALL_PRODUCTS + ") AS ALL_PRODUCTS";
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATEGORY = ""; 
 }

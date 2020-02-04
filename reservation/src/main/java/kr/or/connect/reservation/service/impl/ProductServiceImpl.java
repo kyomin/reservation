@@ -1,6 +1,7 @@
 package kr.or.connect.reservation.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,17 +19,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	@Transactional
-	public List<Product> getProducts(Integer start) {
-		return productDao.selectAllProducts(start, ProductService.LIMIT);
+	@Transactional(readOnly = true)
+	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
+		
+		return categoryId.isPresent() ? productDao.selectProductsByCategory(start, ProductService.LIMIT, categoryId.get()) : 
+					productDao.selectAllProducts(start, ProductService.LIMIT);
 	}
 
-	@Override
-	@Transactional
-	public List<Product> getProductsByCategory(Integer start, Integer categoryId) {
-		return productDao.selectProductsByCategory(start, ProductService.LIMIT, categoryId);
-	}
-	
 	@Override
 	public int getProductsTotalCount() {
 		return productDao.selectAllProductsCount();
