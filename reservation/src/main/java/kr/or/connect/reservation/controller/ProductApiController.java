@@ -23,8 +23,7 @@ public class ProductApiController {
 	}
 	
 	@GetMapping
-	public Map<String, Object> list(@RequestParam(name = "start", required=false, defaultValue="0")Integer start,
-			@RequestParam(name = "category_id", required=false)Integer categoryId) {
+	public Map<String, Object> list(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) {
 		Map<String, Object> map = new HashMap<>();
 		List<Product> products;
 		Integer totalCount;
