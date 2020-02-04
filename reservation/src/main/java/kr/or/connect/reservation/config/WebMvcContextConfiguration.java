@@ -30,7 +30,6 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     // 해당 컨텍스트의 가장 기본 uri인 '/'를 타고 올 경우를 처리한다.
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
-    	System.out.println("addViewControllers가 호출됩니다. ");
         registry.addViewController("/").setViewName("mainpage");
     }
     
