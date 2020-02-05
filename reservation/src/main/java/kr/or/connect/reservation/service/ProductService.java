@@ -9,4 +9,5 @@ public interface ProductService {
 	public static final Integer LIMIT = 4;
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId);
 	public int getProductsTotalCount();
+	public int getProductsByCategoryCount(Integer categoryId);
 }

@@ -39,7 +39,7 @@
                         </div>
                         <div>
                             <div class="container_visual">                             
-                                <ul class="visual_img">
+                                <ul class="visual_img" id="promotions">
                                 <!-- 프로모션 슬라이딩 영역: 이미지 (type = 'th')를 순차적으로 노출 -->
                                 </ul>
                             </div>
@@ -81,10 +81,9 @@
         </div>
     </footer>
 
-
 	<!-- 프로모션 리스트 슬라이드를 위한 템플릿  -->
     <script type="rv-template" id="promotionItem">
-    <li class="item promotion_img" style="background-image: url(static/img/{productImageUrl});">
+    <li id = "{{id}}" class="item promotion" style="background-image: url(static/img/{{productImageUrl}});">
         <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
             <div class="event_txt">
                 <h4 class="event_txt_tit"></h4>
@@ -96,29 +95,33 @@
     </script>
 	
 	<!-- 상품 리스트를 위한 템플릿  -->
-    <script type="rv-template" id="itemList">
+    <script type="rv-template" id="productItem">
         <li class="item">
-            <a href="detail.html?id={id}" class="item_book">
+            <a href="detail.html?id={{productId}}" class="item_book">
                 <div class="item_preview">
-                    <img alt="{description}" class="img_thumb" src="static/img/{fileName}">
+                    <img alt="{{productDescription}}" class="img_thumb" src="static/img/{{productImageUrl}}">
                     <span class="img_border"></span>
                 </div>
                 <div class="event_txt">
-                    <h4 class="event_txt_tit"> <span>{description}</span> <small class="sm">{placeName}</small> </h4>
-                    <p class="event_txt_dsc">{content}</p>
+                    <h4 class="event_txt_tit"> <span>{{productDescription}}</span> <small class="sm">{{placeName}}</small> </h4>
+                    <p class="event_txt_dsc">{{productContent}}</p>
                 </div>
             </a>
         </li>
     </script>
     
     <!-- 카테고리 탭을 위한 템플릿  -->
-    <script type="rv-template" id="categories">
-		<li class="item" data-category="{id}" data-count="{count}">
-        	<a class="anchor" id="category{id}"> <span>{name}</span> </a>
+    <script type="rv-template" id="categoryItem">
+		<li class="item" data-category="{{id}}">
+        	<a class="anchor" id="category{{id}}"> <span>{{name}}</span> </a>
         </li>
 	</script>
+	
+	<!-- 템플릿 처리를 위한 자바스크립트 Handlebar Library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     
     <!-- js 파일 include -->
+	<script type="text/javascript" src="static/script/common.js"></script>
 	<script type="text/javascript" src="static/script/mainpage.js"></script>
 </body>
 </html>

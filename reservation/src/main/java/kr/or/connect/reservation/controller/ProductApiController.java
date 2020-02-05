@@ -30,7 +30,7 @@ public class ProductApiController {
 		Optional<Integer> isCategoryIdNull = Optional.ofNullable(categoryId);		
 		
 		products = productService.getProducts(start, isCategoryIdNull);
-		totalCount = isCategoryIdNull.isPresent() ? null : productService.getProductsTotalCount();
+		totalCount = isCategoryIdNull.isPresent() ? productService.getProductsByCategoryCount(isCategoryIdNull.get()) : productService.getProductsTotalCount();
 		
 		map.put("products", products);
 		map.put("totalCount", totalCount);
