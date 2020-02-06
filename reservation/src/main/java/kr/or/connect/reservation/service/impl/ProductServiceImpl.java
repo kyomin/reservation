@@ -21,18 +21,13 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
-		
 		return categoryId.isPresent() ? productDao.selectProductsByCategory(start, ProductService.LIMIT, categoryId.get()) : 
 					productDao.selectAllProducts(start, ProductService.LIMIT);
 	}
-
-	@Override
-	public int getProductsTotalCount() {
-		return productDao.selectAllProductsCount();
-	}
 	
 	@Override
-	public int getProductsByCategoryCount(Integer categoryId) {
-		return productDao.selectProductsByCategoryCount(categoryId);
+	@Transactional(readOnly = true)
+	public int getProductsCount(Optional<Integer> categoryId) {
+		return categoryId.isPresent() ? productDao.selectProductsByCategoryCount(categoryId.get()) : productDao.selectAllProductsCount();
 	}
 }

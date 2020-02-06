@@ -1,9 +1,14 @@
 package kr.or.connect.reservation.dto;
 
+import lombok.Data;
+
+/*
+ * 	Category 모델
+ */
 public class Category {
-	private int count;
-	private int id;
-	private String name;
+	private int count;		// Category에 속한 전시상품 수
+	private int id;			// Category id
+	private String name;	// Category Name
 	
 	public int getCount() {
 		return count;
@@ -27,10 +32,5 @@ public class Category {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	@Override
-	public String toString() {
-		return "Category [count=" + count + ", id=" + id + ", name=" + name + "]";
 	}
 }

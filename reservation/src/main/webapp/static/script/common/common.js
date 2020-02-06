@@ -34,3 +34,20 @@ function ajax() {
 	oReq.open(this.method, this.url);
 	oReq.send();
 };
+
+// 현재 페이지의 url로부터 key : value를 얻는다.
+function getParams(str) {
+	  var params = {};
+	  var keyValPairs = str.split("?")[1] && str.split("?")[1].split("&");
+
+	  if (keyValPairs !== undefined) {
+	    for (var i = 0; i < keyValPairs.length; i++) {
+	      params[keyValPairs[i].split("=")[0]] = decodeURI(
+	        keyValPairs[i].split("=")[1],
+	        "UTF-8"
+	      );
+	    }
+	  }
+
+	  return params;
+};

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="description" content="네이버 예약, 네이버 예약이 연동된 곳 어디서나 바로 예약하고, 네이버 예약 홈(나의예약)에서 모두 관리할 수 있습니다.">
@@ -11,8 +12,9 @@
 	<!-- CSS import -->
     <link href="./static/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-<div id="container">
+	<div id="container">
         <div class="header">
             <header class="header_tit">
                 <h1 class="logo">
@@ -93,11 +95,18 @@
         </a>
     </li>
     </script>
+    
+    <!-- 카테고리 탭을 위한 템플릿  -->
+    <script type="rv-template" id="categoryItem">
+		<li class="item" data-category="{{id}}">
+        	<a class="anchor" id="category{{id}}"> <span>{{name}}</span> </a>
+        </li>
+	</script>
 	
 	<!-- 상품 리스트를 위한 템플릿  -->
     <script type="rv-template" id="productItem">
         <li class="item">
-            <a href="detail.html?id={{productId}}" class="item_book">
+            <a href="detail?display_info_id={{displayInfoId}}" class="item_book">
                 <div class="item_preview">
                     <img alt="{{productDescription}}" class="img_thumb" src="static/img/{{productImageUrl}}">
                     <span class="img_border"></span>
@@ -110,18 +119,15 @@
         </li>
     </script>
     
-    <!-- 카테고리 탭을 위한 템플릿  -->
-    <script type="rv-template" id="categoryItem">
-		<li class="item" data-category="{{id}}">
-        	<a class="anchor" id="category{{id}}"> <span>{{name}}</span> </a>
-        </li>
-	</script>
-	
 	<!-- 템플릿 처리를 위한 자바스크립트 Handlebar Library -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
     
     <!-- js 파일 include -->
-	<script type="text/javascript" src="static/script/common.js"></script>
-	<script type="text/javascript" src="static/script/mainpage.js"></script>
+	<script type="text/javascript" src="static/script/common/common.js"></script>
+	<script type="text/javascript" src="static/script/mainpage/promotion.js"></script>
+	<script type="text/javascript" src="static/script/mainpage/category.js"></script>
+	<script type="text/javascript" src="static/script/mainpage/product.js"></script>
+	<script type="text/javascript" src="static/script/mainpage/mainpage.js"></script>
 </body>
+
 </html>

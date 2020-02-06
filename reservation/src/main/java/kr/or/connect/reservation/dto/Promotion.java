@@ -1,9 +1,12 @@
 package kr.or.connect.reservation.dto;
 
+/*
+ * 	프로모션 모델 
+ */
 public class Promotion {
-	private int id;
-	private int productId;
-	private String productImageUrl;
+	private int id;					// 프로모션 id
+	private int productId;			// 상품 id
+	private String productImageUrl;	// 상품 썸네일 이미지 URL
 	
 	public int getId() {
 		return id;
