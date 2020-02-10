@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
 		// displayInfoId로부터 해당하는 productId 추출!
 		int productId = commonDao.selectProductIdWithDisplayInfoId(displayInfoId);
 		
-		List<Comment> comments = commentDao.selectAllCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
+		List<Comment> comments = commentDao.selectThreeCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
 		comments.forEach( (comment) -> {
 			comment.setCommentImages(commentDao.selectAllCommentImagesByReservationUserCommentId(comment.getCommentId()));
 		});

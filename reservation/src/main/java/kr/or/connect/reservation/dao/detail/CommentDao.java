@@ -32,6 +32,15 @@ public class CommentDao {
 		return jdbc.query(SELECT_ALL_COMMENTS_BY_PRODUCT_ID_WITHOUT_COMMENT_IMAGE, params, BeanPropertyRowMapper.newInstance(Comment.class));
 	}
 	
+	public List<Comment> selectThreeCommentsByProductIdWithoutCommentImage(int displayInfoId, int productId) {
+		Map<String, Integer> params = new HashMap<>();
+		
+		params.put("displayInfoId", displayInfoId);
+		params.put("productId", productId);
+		
+		return jdbc.query(SELECT_ALL_COMMENTS_BY_PRODUCT_ID_WITHOUT_COMMENT_IMAGE, params, BeanPropertyRowMapper.newInstance(Comment.class));
+	}
+	
 	public List<CommentImage> selectAllCommentImagesByReservationUserCommentId(Integer reservationUserCommentId) {
 		Map<String, Integer> params = new HashMap<>();
 		

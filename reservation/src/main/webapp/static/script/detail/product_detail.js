@@ -17,6 +17,8 @@ let product_detail = {
 			// 셋팅된 데이터를 각각 객체가 처리하도록 위임!
 			product_images.handleData();
 			display_info.handleData();
+			comments.handleData();
+			average_score.handleData();
 		},
 		
 		handleSpecificProduct : function(displayInfoId) {

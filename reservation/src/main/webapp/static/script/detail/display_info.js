@@ -1,24 +1,30 @@
 let display_info = {
 		/* 		Variables	 */
-		display_info : {},
+		displayInfo : {},
 		descriptionContainer : [],
 		topContentContainer : document.querySelector(".dsc"),
 		topContentMoreOpenBtn : document.querySelector("._open"),	// '펼쳐보기' 버튼
 		topContentMoreCloseBtn : document.querySelector("._close"),	// '접기' 버튼
+		bottomContentContainer : document.getElementById("bottom_dsc"),
 		
 		/* 		Functions	 */
-		setDisplayInfo : function(display_info) {
-			this.display_info = display_info;
+		setDisplayInfo : function(displayInfo) {
+			this.displayInfo = displayInfo;
 		},
 		
 		handleData : function() {
 			// 상단 부분에 상품 content 삽입!
-			this.topContentContainer.innerText = this.display_info.productContent;
+			this.topContentContainer.innerText = this.displayInfo.productContent;
+			
+			// 프로모션 슬라이드 부분에 타이틀 넣기
 			this.descriptionContainer = document.querySelectorAll(".visual_txt_dsc");
 			
 			this.descriptionContainer.forEach( description => {
-				description.innerText = this.display_info.productDescription;
+				description.innerText = this.displayInfo.productDescription;
 			});
+			
+			// 하단 부분에 상품 content 삽입!
+			this.bottomContentContainer.innerText = this.displayInfo.productContent;
 		}
 };
 

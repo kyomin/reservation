@@ -1,9 +1,9 @@
 let product_prices = {
 		/* 		Variables	 */
-		product_prices : [],
+		productPrices : [],
 		
 		/* 		Functions	 */
-		setProductPrices : function(product_prices) {
-			this.product_prices = product_prices;
+		setProductPrices : function(productPrices) {
+			this.productPrices = productPrices;
 		}
 }

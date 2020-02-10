@@ -1,9 +1,20 @@
 let average_score = {
 		/* 		Variables	 */
-		average_score : 0,
+		averageScore : 0,
+		fiveStarRating : document.querySelector(".graph_value"),	// 별점 element
 		
 		/* 		Functions	 */
-		setAverageScore : function(average_score) {
-			this.average_score = average_score;
+		setAverageScore : function(averageScore) {
+			// 평점 소수 첫째 자리에서 반올림 해서 담기!
+			this.averageScore = Math.round(averageScore*10)/10;
+		},
+		
+		handleData : function() {
+			// 별점 셋팅!
+			var ratio = (this.averageScore / 5) * 100;
+			this.fiveStarRating.style.width = `${ratio}%`;
+			
+			// 평점 기입!
+			document.getElementById("average_score").innerText = this.averageScore;
 		}
 }
