@@ -42,14 +42,14 @@
                     <div class="pagination">
                         <div class="bg_pagination"></div>
                         <div class="figure_pagination">
-                            <span class="num">1</span>
-                            <span class="num off">/ <span>2</span></span>
+                            <span class="num" id="current_slide">1</span>
+                            <span class="num off">/ <span id="product_images_count">2</span></span>
                         </div>
                     </div>
                     <div class="group_visual">
                         <div>
                             <div class="container_visual" style="width: 414px;">
-                                <ul class="visual_img detail_swipe">
+                                <ul class="visual_img detail_swipe" id="product_image_slide">
                                     <!-- 배경화면 슬라이드가 들어간다! -->
                                 </ul>
                             </div>
@@ -85,8 +85,8 @@
                         </p>
                     </div>
                     <!-- [D] 토글 상황에 따라 bk_more에 display:none 추가 -->
-                    <a href="#" class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
-                    <a href="#" class="bk_more _close" style="display: none;"> <span class="bk_more_txt">접기</span> <i class="fn fn-up2"></i> </a>
+                    <a class="bk_more _open"> <span class="bk_more_txt">펼쳐보기</span> <i class="fn fn-down2"></i> </a>
+                    <a class="bk_more _close hide"> <span class="bk_more_txt">접기</span> <i class="fn fn-up2"></i> </a>
                 </div>
                 <div class="section_event">
                     <div class="event_info_box">
@@ -235,7 +235,7 @@
     
     <!-- 배경화면 리스트 슬라이드를 위한 템플릿  -->
     <script type="rv-template" id="promotionItem">
-    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
+    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src="static/img/{{fileName}}"> <span class="img_bg"></span>
         <div class="visual_txt">
             <div class="visual_txt_inn">
                 <h2 class="visual_txt_tit"> <span></span> </h2>
@@ -250,6 +250,14 @@
 	
 	<!-- js 파일 include -->
 	<script type="text/javascript" src="static/script/common/common.js"></script>
+	
+	<script type="text/javascript" src="static/script/detail/average_score.js"></script>
+	<script type="text/javascript" src="static/script/detail/comments.js"></script>
+	<script type="text/javascript" src="static/script/detail/display_info.js"></script>
+	<script type="text/javascript" src="static/script/detail/display_info_image.js"></script>
+	<script type="text/javascript" src="static/script/detail/product_images.js"></script>
+	<script type="text/javascript" src="static/script/detail/product_prices.js"></script>
+	
 	<script type="text/javascript" src="static/script/detail/product_detail.js"></script>
 	<script type="text/javascript" src="static/script/detail/detail.js"></script>
 </body>

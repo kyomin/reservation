@@ -42,7 +42,11 @@ public class ProductDao {
 	}
 	
 	public int selectAllProductsCount() {
-		return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
+		try {
+			return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
+		} catch(NullPointerException e) {
+			return 0;
+		}
 	}
 	
 	public int selectProductsByCategoryCount(Integer categoryId) {
@@ -50,6 +54,10 @@ public class ProductDao {
 		
 		params.put("categoryId", categoryId);
 		
-		return jdbc.queryForObject(SELECT_COUNT_PRODUCTS_BY_CATEGORY, params, Integer.class);
+		try {
+			return jdbc.queryForObject(SELECT_COUNT_PRODUCTS_BY_CATEGORY, params, Integer.class);
+		} catch(NullPointerException e) {
+			return 0;
+		}
 	}
 }

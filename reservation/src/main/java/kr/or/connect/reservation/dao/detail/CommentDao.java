@@ -1,6 +1,8 @@
 package kr.or.connect.reservation.dao.detail;
 
-import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.*;
+import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_ALL_COMMENTS_BY_PRODUCT_ID_WITHOUT_COMMENT_IMAGE;
+import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_ALL_COMMENT_IMAGES_BY_RESERVATION_USER_COMMENT_ID;
+import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_AVERAGE_SCORE_OF_COMMENT_BY_PRODUCT_ID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,10 @@ public class CommentDao {
 		
 		params.put("productId", productId);
 		
-		return jdbc.queryForObject(SELECT_AVERAGE_SCORE_OF_COMMENT_BY_PRODUCT_ID, params, Double.class);
+		try {
+			return jdbc.queryForObject(SELECT_AVERAGE_SCORE_OF_COMMENT_BY_PRODUCT_ID, params, Double.class);
+		} catch(NullPointerException e) {
+			return 0;
+		}
 	}
 }
