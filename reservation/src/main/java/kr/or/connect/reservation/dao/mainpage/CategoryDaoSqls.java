@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dao;
+package kr.or.connect.reservation.dao.mainpage;
 
 public class CategoryDaoSqls {
 	public static final String JOIN_FOR_CATEGORY = "(SELECT category_id, count(*) AS count FROM product LEFT JOIN display_info ON product.id = display_info.product_id GROUP BY category_id)";

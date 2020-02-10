@@ -1,8 +1,5 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.detail;
 
-/*
- * 	상품평 이미지
- */
 public class CommentImage {
 	private String contentType;				// 파일 확장자
 	private String createDate;				// 생성일
@@ -11,9 +8,9 @@ public class CommentImage {
 	private String fileName;				// 파일 이름
 	private int imageId;					// 이미지 id
 	private String modifyDate;				// 수정일
+	private String saveFileName;			// 파일 저장 위치 이름
 	private int reservationInfoId;			// 예약 id
 	private int reservationUserCommentId;	// 예약자 상품평 id
-	private String saveFileName;			// 파일 저장 위치 이름
 	
 	public String getContentType() {
 		return contentType;
@@ -93,5 +90,5 @@ public class CommentImage {
 	
 	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
-	}	
+	}
 }

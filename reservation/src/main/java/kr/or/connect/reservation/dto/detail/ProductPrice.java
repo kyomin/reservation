@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.detail;
 
 /*
  * 	상품 가격 모델
@@ -8,7 +8,7 @@ public class ProductPrice {
 	private double discountRate;	// 할인율
 	private String modifyDate;		// 수정일
 	private int price;				// 가격
-	private String pricateTypeName;	// 가격 타입명
+	private String priceTypeName;	// 가격 타입명
 	private int productId;			// 상품 id
 	private int productPriceId;		// 상품 가격 id
 	
@@ -44,12 +44,12 @@ public class ProductPrice {
 		this.price = price;
 	}
 	
-	public String getPricateTypeName() {
-		return pricateTypeName;
+	public String getpriceTypeName() {
+		return priceTypeName;
 	}
 	
-	public void setPricateTypeName(String pricateTypeName) {
-		this.pricateTypeName = pricateTypeName;
+	public void setpriceTypeName(String priceTypeName) {
+		this.priceTypeName = priceTypeName;
 	}
 	
 	public int getProductId() {

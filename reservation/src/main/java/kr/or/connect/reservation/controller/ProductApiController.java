@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.connect.reservation.dto.Product;
+import kr.or.connect.reservation.dto.detail.ProductDetail;
+import kr.or.connect.reservation.dto.mainpage.Product;
 import kr.or.connect.reservation.service.ProductService;
 
 @RestController
@@ -38,9 +41,7 @@ public class ProductApiController {
 	}
 	
 	@GetMapping("/api/products/{displayInfoId}")
-	public Map<String, Object> detail(@PathVariable("displayInfoId") int displayInfoId) {
-		Map<String, Object> map = new HashMap<>();
-		
-		return map;
+	public ResponseEntity<ProductDetail> detail(@PathVariable("displayInfoId") int displayInfoId) {
+		return new ResponseEntity<>(productService.getProductDetail(displayInfoId), HttpStatus.OK);
 	}
 }

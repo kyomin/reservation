@@ -1,6 +1,5 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.mainpage;
 
-import lombok.Data;
 
 /*
  * 	Category 모델

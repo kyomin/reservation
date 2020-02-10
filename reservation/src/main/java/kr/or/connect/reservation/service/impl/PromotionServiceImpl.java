@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.connect.reservation.dao.PromotionDao;
-import kr.or.connect.reservation.dto.Promotion;
+import kr.or.connect.reservation.dao.mainpage.PromotionDao;
+import kr.or.connect.reservation.dto.mainpage.Promotion;
 import kr.or.connect.reservation.service.PromotionService;
 
 @Service

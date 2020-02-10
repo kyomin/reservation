@@ -102,14 +102,6 @@
 		<artifactId>jackson-datatype-jdk8</artifactId>
 		<version>${jackson2.version}</version>
 	</dependency>
-	
-	<!-- lombok Module -->
-	<dependency>
-	    <groupId>org.projectlombok</groupId>
-	    <artifactId>lombok</artifactId>
-	    <version>1.16.20</version>
-	    <scope>provided</scope>
-	</dependency>
   </dependencies>
   
   <build>

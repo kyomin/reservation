@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dao;
+package kr.or.connect.reservation.dao.mainpage;
 
 public class ProductDaoSqls {
 	// J1 : 'product_image' LEFT JOIN 'file_info'

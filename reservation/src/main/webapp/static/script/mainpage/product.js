@@ -16,7 +16,7 @@ let product = {
 			drawTemplateToHtml.bind(this)(jsonResponse.products, "");
 			this.startIndex += jsonResponse.products.length;
 			this.totalCount = jsonResponse.totalCount;
-			this.url = this.currentCategoryId===0 ? ("api/products?start=" + this.startIndex) : ("api/products?category_id=" + this.currentCategoryId + "&start=" + this.startIndex);
+			this.url = this.currentCategoryId===0 ? (`api/products?start=${this.startIndex}`) : (`api/products?category_id=${this.currentCategoryId}&start=${this.startIndex}`);
 			
 			// 해당 탭의 총 상품 개수 처리
 			document.querySelector("#products_count").innerHTML = this.totalCount + '개';
@@ -28,10 +28,15 @@ let product = {
 		handleChangedCategory : function(currentCategoryId) {
 			this.startIndex = 0;
 			this.currentCategoryId = currentCategoryId;
-			this.url = currentCategoryId===0 ? ("api/products") : ("api/products?category_id=" + currentCategoryId);
+			this.url = currentCategoryId===0 ? ("api/products") : (`api/products?category_id=${currentCategoryId}`);
 			removeInnerHtml.bind(this)();
 		}
 };
 
 //	make ajax function for this data
 const sendAjaxForProduct = ajax.bind(product);
+
+//	상품 목록의 '더보기' 버튼 클릭 이벤트 등록
+product.moreBtn.addEventListener("click", function(e) {
+	sendAjaxForProduct();
+});

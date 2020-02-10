@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.detail;
 
 /*
  * 	전시 이미지

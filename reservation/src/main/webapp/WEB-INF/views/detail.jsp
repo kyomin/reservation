@@ -250,6 +250,7 @@
 	
 	<!-- js 파일 include -->
 	<script type="text/javascript" src="static/script/common/common.js"></script>
+	<script type="text/javascript" src="static/script/detail/product_detail.js"></script>
 	<script type="text/javascript" src="static/script/detail/detail.js"></script>
 </body>
 

@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.mainpage;
 
 /*
  * 	프로모션 모델 

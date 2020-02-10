@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dto;
+package kr.or.connect.reservation.dto.detail;
 
 /*
  * 	상품 이미지 모델
