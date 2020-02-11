@@ -34,7 +34,7 @@ category.tabMenu.addEventListener("click", function(e) {
 		currentCategory.setAttribute("class", "anchor active");
 		
 		// 이전 카테고리의 focus를 해제한 후, 다음 작업을 위해 현재 카테고리를 이전 카테고리로 지정한다.
-		document.getElementById("category" + category.prevCategoryId).setAttribute("class", "anchor")
+		document.getElementById("category" + category.prevCategoryId).setAttribute("class", "anchor");
 		category.prevCategoryId = category.currentCategoryId;
 		
 		product.handleChangedCategory(parseInt(category.currentCategoryId));
