@@ -22,7 +22,7 @@ let product_images = {
 			document.getElementById("product_images_count").innerText = this.promotionCount;
 			
 			// type = 'ma' 이외에 더 볼 이미지가 없다면 화살표 버튼 제거!
-			if(this.promotionCount === 1) {
+			if(this.promotionCount < 2) {
 				this.rightBtn.setAttribute("class", "hide");
 				this.leftBtn.setAttribute("class", "hide")
 			}
@@ -32,6 +32,7 @@ let product_images = {
 			this.slideContainer.style.display = "flex";
 			this.slideContainer.style.transition = "1s";
 			
+			// 가져온 데이터 해당 영역에 그리기!
 			drawTemplateToHtml.bind(this)(this.productImages, "");
 		},
 		

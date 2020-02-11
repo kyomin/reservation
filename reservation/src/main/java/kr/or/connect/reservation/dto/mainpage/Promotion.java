@@ -31,9 +31,4 @@ public class Promotion {
 	public void setProductImageUrl(String productImageUrl) {
 		this.productImageUrl = productImageUrl;
 	}
-
-	@Override
-	public String toString() {
-		return "Promotion [id=" + id + ", productId=" + productId + ", productImageUrl=" + productImageUrl + "]";
-	}
 }

@@ -4,8 +4,6 @@ package kr.or.connect.reservation.dto.mainpage;
  * 	상품 모델 
  */
 public class Product {
-	// 쿼리문에서 AS를 통해 테이블의 컬럼명을 이렇게 바꿔줘서 서로 바인딩 시켜준다.
-	// 그렇지 않으면 JDBC가 테이블의 컬럼과 DTO의 필드를 매핑하지 못한다.
 	private int displayInfoId;			// 전시 id
 	private int productId;				// 상품 id
 	private String productDescription;	// 상품 설명

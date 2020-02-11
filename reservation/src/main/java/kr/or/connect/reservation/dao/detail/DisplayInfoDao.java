@@ -1,6 +1,6 @@
 package kr.or.connect.reservation.dao.detail;
 
-import static kr.or.connect.reservation.dao.detail.DisplayInfoDaoSqls.SELECT_DISPLAY_INFO;
+import static kr.or.connect.reservation.dao.detail.DisplayInfoDaoSqls.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,5 +26,17 @@ public class DisplayInfoDao {
 		params.put("productId", productId);
 		
 		return jdbc.queryForObject(SELECT_DISPLAY_INFO, params, BeanPropertyRowMapper.newInstance(DisplayInfo.class));
+	}
+	
+	public int selectProductIdWithDisplayInfoId(Integer displayInfoId) {
+		Map<String, Integer> params = new HashMap<>();
+		
+		params.put("displayInfoId", displayInfoId);
+		
+		try {
+			return jdbc.queryForObject(SELECT_PRODUCT_ID_WITH_DISPLAY_INFO_ID, params, Integer.class);
+		} catch(NullPointerException e) {
+			return 0;
+		}
 	}
 }

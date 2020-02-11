@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.detail.CommentDao;
-import kr.or.connect.reservation.dao.detail.CommonDao;
 import kr.or.connect.reservation.dao.detail.DisplayInfoDao;
 import kr.or.connect.reservation.dao.detail.DisplayInfoImageDao;
 import kr.or.connect.reservation.dao.detail.ProductImageDao;
@@ -24,16 +23,14 @@ public class ProductServiceImpl implements ProductService {
 	private final ProductDao productDao;
 	
 	// for detail
-	private final CommonDao	commonDao;
 	private final CommentDao commentDao;
 	private final DisplayInfoDao displayInfoDao;
 	private final DisplayInfoImageDao displayInfoImageDao;
 	private final ProductImageDao productImageDao;
 	private final ProductPriceDao productPriceDao;
 	
-	public ProductServiceImpl(ProductDao productDao, CommonDao	commonDao, CommentDao commentDao, DisplayInfoDao displayInfoDao, DisplayInfoImageDao displayInfoImageDao, ProductImageDao productImageDao, ProductPriceDao productPriceDao) {
+	public ProductServiceImpl(ProductDao productDao, CommentDao commentDao, DisplayInfoDao displayInfoDao, DisplayInfoImageDao displayInfoImageDao, ProductImageDao productImageDao, ProductPriceDao productPriceDao) {
 		this.productDao = productDao;
-		this.commonDao = commonDao;
 		this.commentDao = commentDao;
 		this.displayInfoDao = displayInfoDao;
 		this.displayInfoImageDao = displayInfoImageDao;
@@ -44,7 +41,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
-		return categoryId.isPresent() ? productDao.selectProductsByCategory(start, ProductService.LIMIT, categoryId.get()) : productDao.selectAllProducts(start, ProductService.LIMIT);
+		return categoryId.map( id -> {
+			return productDao.selectProductsByCategory(start, ProductService.LIMIT, id);
+		}).orElseGet( () -> {
+			return productDao.selectAllProducts(start, ProductService.LIMIT);
+		});
 	}
 	
 	@Override
@@ -53,9 +54,9 @@ public class ProductServiceImpl implements ProductService {
 		ProductDetail productDetail = new ProductDetail();
 		
 		// displayInfoId로부터 해당하는 productId 추출!
-		int productId = commonDao.selectProductIdWithDisplayInfoId(displayInfoId);
+		int productId = displayInfoDao.selectProductIdWithDisplayInfoId(displayInfoId);
 		
-		List<Comment> comments = commentDao.selectThreeCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
+		List<Comment> comments = commentDao.selectAllCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
 		comments.forEach( (comment) -> {
 			comment.setCommentImages(commentDao.selectAllCommentImagesByReservationUserCommentId(comment.getCommentId()));
 		});

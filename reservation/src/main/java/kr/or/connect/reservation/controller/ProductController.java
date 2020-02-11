@@ -12,4 +12,9 @@ public class ProductController {
 	public String detail() {
 		return "detail";
 	}
+	
+	@GetMapping(path="/review")
+	public String review() {
+		return "review";
+	}
 }

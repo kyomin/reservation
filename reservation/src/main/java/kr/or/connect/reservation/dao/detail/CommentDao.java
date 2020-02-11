@@ -1,8 +1,6 @@
 package kr.or.connect.reservation.dao.detail;
 
-import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_ALL_COMMENTS_BY_PRODUCT_ID_WITHOUT_COMMENT_IMAGE;
-import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_ALL_COMMENT_IMAGES_BY_RESERVATION_USER_COMMENT_ID;
-import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.SELECT_AVERAGE_SCORE_OF_COMMENT_BY_PRODUCT_ID;
+import static kr.or.connect.reservation.dao.detail.CommentDaoSqls.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,15 +22,6 @@ public class CommentDao {
 	}
 	
 	public List<Comment> selectAllCommentsByProductIdWithoutCommentImage(int displayInfoId, int productId) {
-		Map<String, Integer> params = new HashMap<>();
-		
-		params.put("displayInfoId", displayInfoId);
-		params.put("productId", productId);
-		
-		return jdbc.query(SELECT_ALL_COMMENTS_BY_PRODUCT_ID_WITHOUT_COMMENT_IMAGE, params, BeanPropertyRowMapper.newInstance(Comment.class));
-	}
-	
-	public List<Comment> selectThreeCommentsByProductIdWithoutCommentImage(int displayInfoId, int productId) {
 		Map<String, Integer> params = new HashMap<>();
 		
 		params.put("displayInfoId", displayInfoId);

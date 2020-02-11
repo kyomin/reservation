@@ -15,7 +15,7 @@ let comments = {
 			this.commentsCount = this.comments.length;
 			document.getElementById("contents_count").innerText = this.commentsCount + "건";
 			
-			// 가져온 데이터 해당 영역에 그리기! (comment는 3개 까지만 노출)
-			drawTemplateToHtml.bind(this)(this.comments.slice(0, 3), "");
+			// 가져온 데이터 해당 영역에 그리기!
+			drawTemplateToHtml.bind(this)(this.comments, "");
 		}
 }

@@ -27,12 +27,9 @@ public class ProductApiController {
 	@GetMapping("/api/products")
 	public Map<String, Object> mapinpage(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) {
 		Map<String, Object> map = new HashMap<>();
-		List<Product> products;
-		Integer totalCount;
 		Optional<Integer> judgeCategoryIdNullable = Optional.ofNullable(categoryId);		
-		
-		products = productService.getProducts(start, judgeCategoryIdNullable);
-		totalCount = productService.getProductsCount(judgeCategoryIdNullable);
+		List<Product> products = productService.getProducts(start, judgeCategoryIdNullable);
+		Integer totalCount = productService.getProductsCount(judgeCategoryIdNullable);
 		
 		map.put("products", products);
 		map.put("totalCount", totalCount);

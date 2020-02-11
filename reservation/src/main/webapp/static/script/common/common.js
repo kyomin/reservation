@@ -1,7 +1,6 @@
 function drawTemplateToHtml(datas, defaultTemplate) {
 	var template = document.getElementById(this.templateId).innerHTML;
 	var bindTemplate = Handlebars.compile(template);
-
 	var parentNodeCount = this.parentNodeIds.length;
 	this.parentNodeIds.forEach( (parentNodeId, parentNodeIndex) => {
 		var parentNode = document.getElementById(parentNodeId);

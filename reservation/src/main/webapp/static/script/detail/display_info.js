@@ -1,10 +1,11 @@
 let display_info = {
 		/* 		Variables	 */
 		displayInfo : {},
-		descriptionContainer : [],
+		descriptionContainerInPromotionList : [],
 		topContentContainer : document.querySelector(".dsc"),
 		topContentMoreOpenBtn : document.querySelector("._open"),	// '펼쳐보기' 버튼
 		topContentMoreCloseBtn : document.querySelector("._close"),	// '접기' 버튼
+		descriptionContainerInCommentList : [],
 		bottomContentContainer : document.getElementById("bottom_dsc"),
 		
 		/* 		Functions	 */
@@ -17,9 +18,14 @@ let display_info = {
 			this.topContentContainer.innerText = this.displayInfo.productContent;
 			
 			// 프로모션 슬라이드 부분에 타이틀 넣기
-			this.descriptionContainer = document.querySelectorAll(".visual_txt_dsc");
+			this.descriptionContainerInPromotionList = document.querySelectorAll(".visual_txt_dsc");
+			this.descriptionContainerInPromotionList.forEach( description => {
+				description.innerText = this.displayInfo.productDescription;
+			});
 			
-			this.descriptionContainer.forEach( description => {
+			// comment 리스트 부분에 타이틀 넣기
+			this.descriptionContainerInCommentList = document.querySelectorAll(".resoc_name");
+			this.descriptionContainerInCommentList.forEach( description => {
 				description.innerText = this.displayInfo.productDescription;
 			});
 			
