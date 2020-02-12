@@ -5,7 +5,7 @@ let promotion = {
 		templateId : "promotionItem",
 		parentNodeIds : ["promotions"],
 		promotionCount : 0,
-		slideContainer : document.querySelector(".visual_img"),
+		slideContainer : document.getElementById("promotions"),
 		currentSlide : 0,
 		
 		/* 		Functions	 */

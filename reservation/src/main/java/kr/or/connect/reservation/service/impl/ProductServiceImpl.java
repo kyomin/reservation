@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		productDetail.setComments(comments);
 		productDetail.setDisplayInfo(displayInfoDao.selectDisplayInfo(displayInfoId, productId));
-		productDetail.setAverageScore(commentDao.selectAverageScoreOfCommentByProductId(productId));
+		productDetail.setAverageScore(Optional.ofNullable(commentDao.selectAverageScoreOfCommentByProductId(productId)).orElseGet(() -> 0.0));
 		productDetail.setDisplayInfoImage(displayInfoImageDao.selectDisplayInfoImage(displayInfoId));
 		productDetail.setProductImages(productImageDao.selectAllProductImages(productId));
 		productDetail.setProductPrices(productPriceDao.selectAllProductPrices(productId));
@@ -73,7 +73,11 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int getProductsCount(Optional<Integer> categoryId) {
-		return categoryId.isPresent() ? productDao.selectProductsByCategoryCount(categoryId.get()) : productDao.selectAllProductsCount();
+	public Integer getProductsCount(Optional<Integer> categoryId) {
+		return categoryId.map( id -> {
+			return productDao.selectProductsByCategoryCount(id);
+		}).orElseGet( () -> {
+			return productDao.selectAllProductsCount();
+		});
 	}
 }

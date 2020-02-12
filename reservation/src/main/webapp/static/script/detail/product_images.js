@@ -8,8 +8,8 @@ let product_images = {
 		currentSlide : 0,
 		
 		/* 		Event Elements	 */
-		rightBtn : document.querySelector(".nxt"),
-		leftBtn : document.querySelector(".prev"),
+		rightBtn : document.getElementById("_nxt"),
+		leftBtn : document.getElementById("_prev"),
 		
 		/* 		Functions	 */
 		setProductImages : function(productImages) {
@@ -23,8 +23,8 @@ let product_images = {
 			
 			// type = 'ma' 이외에 더 볼 이미지가 없다면 화살표 버튼 제거!
 			if(this.promotionCount < 2) {
-				this.rightBtn.setAttribute("class", "hide");
-				this.leftBtn.setAttribute("class", "hide")
+				this.rightBtn.classList.add("hide");
+				this.leftBtn.classList.add("hide");
 			}
 			
 			// 슬라이드 컨테이너 셋팅!

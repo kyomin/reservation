@@ -1,7 +1,7 @@
 let average_score = {
 		/* 		Variables	 */
 		averageScore : 0,
-		fiveStarRating : document.querySelector(".graph_value"),	// 별점 element
+		fiveStarRating : document.getElementById("five_star_rating"),	// 별점 element
 		
 		/* 		Functions	 */
 		setAverageScore : function(averageScore) {

@@ -10,5 +10,5 @@ public interface ProductService {
 	public static final Integer LIMIT = 4;
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId);
 	public ProductDetail getProductDetail(Integer displayInfoId);
-	public int getProductsCount(Optional<Integer> categoryId);
+	public Integer getProductsCount(Optional<Integer> categoryId);
 }

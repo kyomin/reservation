@@ -41,23 +41,15 @@ public class ProductDao {
 		return jdbc.query(SELECT_PRODUCTS_BY_CATEGORY_WITH_LIMIT, params, BeanPropertyRowMapper.newInstance(Product.class));
 	}
 	
-	public int selectAllProductsCount() {
-		try {
-			return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
-		} catch(NullPointerException e) {
-			return 0;
-		}
+	public Integer selectAllProductsCount() {
+		return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
 	}
 	
-	public int selectProductsByCategoryCount(Integer categoryId) {
+	public Integer selectProductsByCategoryCount(Integer categoryId) {
 		Map<String, Integer> params = new HashMap<>();
 		
 		params.put("categoryId", categoryId);
 		
-		try {
-			return jdbc.queryForObject(SELECT_COUNT_PRODUCTS_BY_CATEGORY, params, Integer.class);
-		} catch(NullPointerException e) {
-			return 0;
-		}
+		return jdbc.queryForObject(SELECT_COUNT_PRODUCTS_BY_CATEGORY, params, Integer.class);
 	}
 }

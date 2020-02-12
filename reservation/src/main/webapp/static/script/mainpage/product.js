@@ -9,7 +9,7 @@ let product = {
 		totalCount : 0,
 		
 		/* 		Event Elements	 */
-		moreBtn : document.querySelector("#more_btn"),
+		moreBtn : document.getElementById("more_btn"),
 		
 		/* 		Functions	 */
 		handleResponse : function(jsonResponse) {
@@ -19,10 +19,10 @@ let product = {
 			this.url = this.currentCategoryId===0 ? (`api/products?start=${this.startIndex}`) : (`api/products?category_id=${this.currentCategoryId}&start=${this.startIndex}`);
 			
 			// 해당 탭의 총 상품 개수 처리
-			document.querySelector("#products_count").innerHTML = this.totalCount + '개';
+			document.getElementById("products_count").innerHTML = this.totalCount + '개';
 			
 			// 더 불러올 상품 데이터가 없으면 '더보기' 버튼 제거!
-			this.startIndex >= this.totalCount && this.moreBtn.setAttribute("class", "hide");
+			this.startIndex >= this.totalCount && this.moreBtn.classList.add("hide");
 		},
 		
 		handleChangedCategory : function(currentCategoryId) {
