@@ -1,8 +1,10 @@
 package kr.or.connect.reservation.dto.mainpage;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Promotion {
 	private int id;					// 프로모션 id
 	private int productId;			// 상품 id

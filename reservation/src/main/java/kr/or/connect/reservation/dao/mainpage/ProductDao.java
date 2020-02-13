@@ -41,11 +41,11 @@ public class ProductDao {
 		return jdbc.query(SELECT_PRODUCTS_BY_CATEGORY_WITH_LIMIT, params, BeanPropertyRowMapper.newInstance(Product.class));
 	}
 	
-	public Integer selectAllProductsCount() {
+	public int selectAllProductsCount() {
 		return jdbc.queryForObject(SELECT_COUNT_ALL_PRODUCTS, Collections.emptyMap(), Integer.class);
 	}
 	
-	public Integer selectProductsByCategoryCount(Integer categoryId) {
+	public int selectProductsByCategoryCount(Integer categoryId) {
 		Map<String, Integer> params = new HashMap<>();
 		
 		params.put("categoryId", categoryId);

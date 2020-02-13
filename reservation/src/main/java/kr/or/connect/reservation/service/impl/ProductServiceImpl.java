@@ -41,11 +41,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
-		return categoryId.map( id -> {
-			return productDao.selectProductsByCategory(start, ProductService.LIMIT, id);
-		}).orElseGet( () -> {
-			return productDao.selectAllProducts(start, ProductService.LIMIT);
-		});
+		return categoryId.map( id -> 
+			productDao.selectProductsByCategory(start, ProductService.LIMIT, id)
+		).orElse( 
+			productDao.selectAllProducts(start, ProductService.LIMIT)
+		);
 	}
 	
 	@Override
@@ -53,9 +53,10 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDetail getProductDetail(Integer displayInfoId) {
 		ProductDetail productDetail = new ProductDetail();
 		
-		// displayInfoId로부터 해당하는 productId 추출!
+		//	displayInfoId로부터 해당하는 productId 추출!
 		int productId = displayInfoDao.selectProductIdWithDisplayInfoId(displayInfoId);
 		
+		//	한줄평 이미지가 있는 것들만 필터링해 이미지 삽입!
 		List<Comment> comments = commentDao.selectAllCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
 		comments.forEach( (comment) -> {
 			comment.setCommentImages(commentDao.selectAllCommentImagesByReservationUserCommentId(comment.getCommentId()));
@@ -63,7 +64,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		productDetail.setComments(comments);
 		productDetail.setDisplayInfo(displayInfoDao.selectDisplayInfo(displayInfoId, productId));
-		productDetail.setAverageScore(Optional.ofNullable(commentDao.selectAverageScoreOfCommentByProductId(productId)).orElseGet(() -> 0.0));
+		productDetail.setAverageScore(commentDao.selectAverageScoreOfCommentByProductId(productId));
 		productDetail.setDisplayInfoImage(displayInfoImageDao.selectDisplayInfoImage(displayInfoId));
 		productDetail.setProductImages(productImageDao.selectAllProductImages(productId));
 		productDetail.setProductPrices(productPriceDao.selectAllProductPrices(productId));
@@ -73,11 +74,10 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Integer getProductsCount(Optional<Integer> categoryId) {
-		return categoryId.map( id -> {
-			return productDao.selectProductsByCategoryCount(id);
-		}).orElseGet( () -> {
-			return productDao.selectAllProductsCount();
-		});
+	public int getProductsCount(Optional<Integer> categoryId) {
+		return categoryId.map( id -> productDao.selectProductsByCategoryCount(id)
+		).orElse( 
+			productDao.selectAllProductsCount()
+		);
 	}
 }

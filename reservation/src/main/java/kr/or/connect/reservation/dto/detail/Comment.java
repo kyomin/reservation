@@ -2,9 +2,11 @@ package kr.or.connect.reservation.dto.detail;
 
 import java.util.List;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Comment {
 	private String comment;							// 상품평
 	private int commentId;							// 상품평 id

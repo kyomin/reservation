@@ -1,8 +1,10 @@
 package kr.or.connect.reservation.dto.detail;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ProductPrice {
 	private String createDate;		// 생성일
 	private double discountRate;	// 할인율
