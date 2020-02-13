@@ -1,4 +1,4 @@
-package kr.or.connect.reservation.dao;
+package kr.or.connect.reservation.dao.mainpage;
 
 public class ProductDaoSqls {
 	// J1 : 'product_image' LEFT JOIN 'file_info'
@@ -11,8 +11,9 @@ public class ProductDaoSqls {
 	// 위의 조인 테이블을 이용하여 상품 목록 불러오기를 수행하는 쿼리문
 	public static final String SELECT_ALL_PRODUCTS = "SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName FROM " + JOIN_FOR_PRODUCT2 + " AS product LEFT JOIN display_info ON product.productId = display_info.product_id";
 	public static final String SELECT_ALL_PRODUCTS_WITH_LIMIT = "SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName FROM " + JOIN_FOR_PRODUCT2 + " AS product LEFT JOIN display_info ON product.productId = display_info.product_id LIMIT :start, :limit";
+	public static final String SELECT_PRODUCTS_BY_CATEGORY = "SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName FROM " + JOIN_FOR_PRODUCT3 + " AS product LEFT JOIN display_info ON product.productId = display_info.product_id";
 	public static final String SELECT_PRODUCTS_BY_CATEGORY_WITH_LIMIT = "SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName FROM " + JOIN_FOR_PRODUCT3 + " AS product LEFT JOIN display_info ON product.productId = display_info.product_id LIMIT :start, :limit";
 	
 	public static final String SELECT_COUNT_ALL_PRODUCTS = "SELECT count(*) FROM (" + SELECT_ALL_PRODUCTS + ") AS ALL_PRODUCTS";
-	public static final String SELECT_COUNT_PRODUCTS_BY_CATEGORY = ""; 
+	public static final String SELECT_COUNT_PRODUCTS_BY_CATEGORY = "SELECT count(*) FROM (" + SELECT_PRODUCTS_BY_CATEGORY + ") AS ALL_PRODUCTS_BY_CATEGORY"; 
 }
