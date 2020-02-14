@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.or.connect.reservation.dao.detail.DisplayInfoImageDao"> 
+    <select id="selectDisplayInfoImage" resultType="DisplayInfoImage">
+        SELECT content_type AS contentType, create_date AS createDate, delete_flag AS deleteFlag, 
+        display_info_image.display_info_id AS displayInfoId, display_info_image.id AS displayInfoImageId, 
+        file_id AS fileId, file_name AS fileName, modify_date AS modifyDate, 
+        save_file_name AS saveFileName	
+        FROM display_info_image LEFT JOIN file_info 
+        ON display_info_image.file_id = file_info.id 
+        WHERE display_info_image.display_info_id = #{displayInfoId}
+    </select>
+</mapper>

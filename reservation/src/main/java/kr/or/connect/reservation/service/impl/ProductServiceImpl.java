@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 		int productId = displayInfoDao.selectProductIdWithDisplayInfoId(displayInfoId);
 		
 		//	한줄평 이미지가 있는 것들만 필터링해 이미지 삽입!
-		List<Comment> comments = commentDao.selectAllCommentsByProductIdWithoutCommentImage(displayInfoId, productId);
+		List<Comment> comments = commentDao.selectAllCommentsByProductIdWithoutCommentImage(productId);
 		comments.forEach( (comment) -> {
 			comment.setCommentImages(commentDao.selectAllCommentImagesByReservationUserCommentId(comment.getCommentId()));
 		});

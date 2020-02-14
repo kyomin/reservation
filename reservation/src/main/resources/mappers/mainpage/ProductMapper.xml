@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.or.connect.reservation.dao.mainpage.ProductDao"> 
+    <select id="selectAllProducts" resultType="Product">
+        SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName 
+        FROM (SELECT id AS productId, file_name AS productImageUrl, description AS productDescription, content AS productContent 
+        FROM product LEFT JOIN (SELECT product_id, file_name 
+        FROM product_image LEFT JOIN file_info 
+        ON product_image.file_id = file_info.id 
+        WHERE product_image.type = 'th') 
+        AS J1 ON product.id = J1.product_id) AS product LEFT JOIN display_info 
+        ON product.productId = display_info.product_id 
+        LIMIT #{start}, #{limit};
+    </select>
+    
+    <select id="selectProductsByCategory" resultType="Product">
+    	SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName 
+    	FROM (SELECT id AS productId, file_name AS productImageUrl, description AS productDescription, content AS productContent 
+    	FROM product LEFT JOIN (SELECT product_id, file_name 
+    	FROM product_image LEFT JOIN file_info 
+    	ON product_image.file_id = file_info.id 
+    	WHERE product_image.type = 'th') AS J1 
+    	ON product.id = J1.product_id WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
+    	ON product.productId = display_info.product_id 
+    	LIMIT #{start}, #{limit}
+    </select>
+    
+    <select id="selectAllProductsCount" resultType="int">
+    	SELECT count(*)  
+    	FROM (SELECT id AS productId 
+    	FROM product LEFT JOIN (SELECT product_id FROM product_image LEFT JOIN file_info 
+    	ON product_image.file_id = file_info.id 
+    	WHERE product_image.type = 'th') AS J1 
+    	ON product.id = J1.product_id) AS product LEFT JOIN display_info 
+    	ON product.productId = display_info.product_id
+    </select>
+    
+    <select id="selectProductsByCategoryCount" resultType="int">
+    	SELECT count(*) 
+    	FROM (SELECT id AS productId 
+    	FROM product LEFT JOIN (SELECT product_id FROM product_image LEFT JOIN file_info 
+    	ON product_image.file_id = file_info.id 
+    	WHERE product_image.type = 'th') AS J1 
+    	ON product.id = J1.product_id 
+    	WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
+    	ON product.productId = display_info.product_id
+    </select>
+</mapper>
