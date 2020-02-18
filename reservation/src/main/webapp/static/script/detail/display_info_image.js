@@ -3,7 +3,7 @@ let display_info_image = {
 		displayInfoImage : {},
 		
 		/* 		Functions	 */
-		setDisplayInfoImage : function(displayInfoImage) {
+		setData : function(displayInfoImage) {
 			this.displayInfoImage = displayInfoImage;
 		}
 }

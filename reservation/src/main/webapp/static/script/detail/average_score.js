@@ -4,7 +4,7 @@ let average_score = {
 		fiveStarRating : document.getElementById("five_star_rating"),	// 별점 element
 		
 		/* 		Functions	 */
-		setAverageScore : function(averageScore) {
+		setData : function(averageScore) {
 			// 평점 소수 첫째 자리에서 반올림 해서 담기!
 			this.averageScore = (Math.round(averageScore*10)/10);
 		},

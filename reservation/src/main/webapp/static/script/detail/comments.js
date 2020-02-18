@@ -6,7 +6,7 @@ let comments = {
 		commentsCount : 0,
 		
 		/* 		Functions	 */
-		setComments : function(comments) {
+		setData : function(comments) {
 			this.comments = comments.slice(0, 3);
 			
 			this.comments.map( (comment) => {

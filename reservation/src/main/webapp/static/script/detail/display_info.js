@@ -21,7 +21,7 @@ let display_info = {
 		bottomContentContainer : document.getElementById("bottom_dsc"),
 		
 		/* 		Functions	 */
-		setDisplayInfo : function(displayInfo) {
+		setData : function(displayInfo) {
 			this.displayInfo = displayInfo;
 		},
 		

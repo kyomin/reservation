@@ -3,7 +3,7 @@ let product_prices = {
 		productPrices : [],
 		
 		/* 		Functions	 */
-		setProductPrices : function(productPrices) {
+		setData : function(productPrices) {
 			this.productPrices = productPrices;
 		}
 }

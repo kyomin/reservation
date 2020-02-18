@@ -1,5 +1,3 @@
-var params = getParams(document.location.href);
-
 let reviews = {
 		/* 		Variables	 */
 		method : "GET",
@@ -8,9 +6,9 @@ let reviews = {
 		/* 		Functions	 */
 		handleResponse : function(jsonResponse) {
 			//	리뷰 상세 페이지를 이루는 각 데이터 셋팅!
-			average_score.setAverageScore(jsonResponse.averageScore);
-			comments.setComments(jsonResponse.comments);
-			display_info.setDisplayInfo(jsonResponse.displayInfo);
+			average_score.setData(jsonResponse.averageScore);
+			comments.setData(jsonResponse.comments);
+			display_info.setData(jsonResponse.displayInfo);
 			
 			//	셋팅된 데이터를 각각 객체가 처리하도록 위임!
 			comments.handleData();
@@ -27,6 +25,6 @@ let reviews = {
 const sendAjaxForReviewDetail = ajax.bind(reviews);
 
 document.addEventListener("DOMContentLoaded", function() {	
-	reviews.setUrlByDisplayInfoId(params.display_info_id);
+	reviews.setUrlByDisplayInfoId(getParams(document.location.href).display_info_id);
 	sendAjaxForReviewDetail();
 });

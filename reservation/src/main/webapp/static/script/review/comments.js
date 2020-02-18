@@ -6,7 +6,7 @@ let comments = {
 		commentsCount : 0,
 		
 		/* 		Functions	 */
-		setComments : function(comments) {
+		setData : function(comments) {
 			this.comments = comments;
 			
 			this.comments.map( (comment) => {

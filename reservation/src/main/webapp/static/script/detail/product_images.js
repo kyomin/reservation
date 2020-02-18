@@ -12,7 +12,7 @@ let product_images = {
 		leftBtn : document.getElementById("_prev"),
 		
 		/* 		Functions	 */
-		setProductImages : function(productImages) {
+		setData : function(productImages) {
 			this.productImages = productImages;
 		},
 		
