@@ -10,7 +10,7 @@ let reserve = {
 		  "reservationEmail": "",
 		  "reservationName": "",
 		  "reservationTelephone": "",
-		  "reservationYearMonthDay": null
+		  "reservationYearMonthDay": ""
 		},
 		totalCount : 0,				// 예매 갯수
 		isTermsAgreed : false,		// 약관 동의 여부
@@ -63,7 +63,7 @@ function handleTicketPlus(id) {
 	
 	// 화면 상에 보여지는 수량 조절
 	document.getElementById(`count_control_input_${id}`).setAttribute("value", product_prices.requestPrices[id].count);
-}
+};
 
 function handleTicketMinus(id) {
 	// 감소시키려는 해당 가격 타입의 카운트가 이미 0개 라면 감소하는 행위를 하지 않고 함수 종료!
@@ -87,7 +87,7 @@ function handleTicketMinus(id) {
 	
 	// 화면 상에 보여지는 수량 조절
 	document.getElementById(`count_control_input_${id}`).setAttribute("value", product_prices.requestPrices[id].count);
-}
+};
 
 function handleAgreement(id) {
 	if(!document.getElementById(`agreement_${id}`).classList.contains("open")) {
@@ -101,7 +101,7 @@ function handleAgreement(id) {
 		document.getElementById(`fn_${id}`).classList.remove("fn-up2");
 		document.getElementById(`fn_${id}`).classList.add("fn-down2");
 	}
-}
+};
 
 //예매 갯수가 1개이상, 예매자 입력, 연락처 입력, 이메일 입력, 약관 동의 된 상태라면 모든 값이 유효한상태이다.
 function checkValidation() {
@@ -136,7 +136,7 @@ function checkValidation() {
 	}
 	
 	return true;
-}
+};
 
 function handleSubmit() {
 	// form 입력 항목이 유효하지 않다면 submit 처리 철회!
@@ -144,7 +144,13 @@ function handleSubmit() {
 		return;
 	}
 	
+	// display_info 객체로부터 productId 얻기
 	reserve.requestData.productId = display_info.displayInfo.productId;
+	
+	// 예매일 얻기 (오늘 포함해서 1 ~ 5일 랜덤값으로 설정) 및 JAVASCRIPT Date 형식 MySQL 형식으로 변환
+	reserve.requestData.reservationYearMonthDay = new Date();
+	reserve.requestData.reservationYearMonthDay.setDate(reserve.requestData.reservationYearMonthDay.getDate() + (Math.floor(Math.random() * 5) + 1));
+	reserve.requestData.reservationYearMonthDay = reserve.requestData.reservationYearMonthDay.toMySQLDateFormat();
 	
 	// request 데이터의 prices 리스트를 JSON object로부터 만든다.
 	Object.keys(product_prices.requestPrices).forEach(key => {
@@ -163,17 +169,17 @@ function handleSubmit() {
 		  location.href = "/reservation";
 	  } else if(xhr.status === 500){	
 		  location.reload(true);
-		  alert("서버 내부 오류!");
+		  alert("예약 실패! \n서버 내부 오류!");
 	  } else if(xhr.status === 400) {
 		  location.reload(true);
-		  alert("form 형식 오류!");
+		  alert("예약 실패! \nform 형식 오류!");
 	  }
 	};
 	
 	xhr.open('POST', 'api/reservations');
 	xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
 	xhr.send(JSON.stringify(reserve.requestData)); // 데이터를 stringify해서 보냄
-}
+};
 
 
 /* 		reserve.jsp 페이지 내에서 발생하는 이벤트 정의! 	 */

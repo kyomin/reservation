@@ -34,4 +34,6 @@ public class Reservation {
 	
 	@Pattern(regexp="01[016789]-[0-9]{3,4}-[0-9]{4}")
 	private String reservationTelephone;				// 예약자 핸드폰 번호
+	
+	private String reservationYearMonthDay;
 }

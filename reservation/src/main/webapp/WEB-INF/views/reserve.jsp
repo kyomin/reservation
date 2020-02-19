@@ -88,7 +88,7 @@
                                     		name="reservationName"
                                     		id="reservationName"
                                     		class="text" 
-                                    		placeholder="김교민"
+                                    		placeholder="truth yoon"
                                     		minlength="2" 
                                     		maxlength="17" 
                                     		required
@@ -126,13 +126,13 @@
                                     		name="reservationEmail"
                                     		id="reservationEmail"
                                     		class="email"                                     
-                                    		placeholder="kim031504@naver.com" 
+                                    		placeholder="yjs1466@naver.com" 
                                     		maxlength="50" 
                                     		required
                                     	> 
                                     </div>
                                 </div>
-                                <p style="color:red; padding-left:95px; font-size:10px" class="hide" id="email_validation">* kim031504@naver.com 형식을 지켜주세요!</p>
+                                <p style="color:red; padding-left:95px; font-size:10px" class="hide" id="email_validation">* yjs1466@naver.com 형식을 지켜주세요!</p>
                                 <div class="inline_form last"> 
                                 	<label class="label" for="message">예매내용</label>
                                     <div class="inline_control">

@@ -17,4 +17,4 @@ let average_score = {
 			// 평점 기입!
 			document.getElementById("average_score").innerText = this.averageScore;
 		}
-}
+};

@@ -50,3 +50,39 @@ function getParams(str) {
 
 	  return params;
 };
+
+// Convert JavaScript Date Type Into MySQL Date Type
+(function() {
+    Date.prototype.toMySQLDateFormat = Date_toYMD;
+    function Date_toYMD() {
+        var year, month, day, hours, minutes, seconds;        
+        year = String(this.getFullYear());
+        
+        month = String(this.getMonth() + 1);
+        if(month.length === 1) {
+            month = "0" + month;
+        }
+        
+        day = String(this.getDate());
+        if(day.length === 1) {
+            day = "0" + day;
+        }
+        
+        hours = String(this.getHours());
+        if(hours.length === 1) {
+        	hours = "0" + hours;
+        }
+        
+        minutes = String(this.getMinutes());
+        if(minutes.length === 1) {
+        	minutes = "0" + minutes;
+        }
+        
+        seconds = String(this.getSeconds());
+        if(seconds.length === 1) {
+        	seconds = "0" + seconds;
+        }
+        
+        return year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+    }
+})();

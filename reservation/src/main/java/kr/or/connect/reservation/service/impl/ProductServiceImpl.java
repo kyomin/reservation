@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional(readOnly = true)
 	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
 		return categoryId.map( id -> 
-			productDao.selectProductsByCategory(start, ProductService.LIMIT, id)
+			productDao.selectProductsByCategoryId(start, ProductService.LIMIT, id)
 		).orElse( 
 			productDao.selectAllProducts(start, ProductService.LIMIT)
 		);
@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional(readOnly = true)
 	public int getProductsCount(Optional<Integer> categoryId) {
-		return categoryId.map( id -> productDao.selectProductsByCategoryCount(id)
+		return categoryId.map( id -> productDao.selectProductsCountByCategoryId(id)
 		).orElse( 
 			productDao.selectAllProductsCount()
 		);

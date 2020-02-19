@@ -597,5 +597,10 @@
 			</div>
 		</div>
 		<!--// 취소 팝업 -->
+		
+	<!-- js 파일 include -->
+	<script type="text/javascript" src="static/script/common/common.js"></script>
+	
+	<script type="text/javascript" src="static/script/myreservation/myreservation.js"></script>
 </body>
 </html>

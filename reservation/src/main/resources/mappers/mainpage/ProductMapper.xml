@@ -16,7 +16,7 @@
         LIMIT #{start}, #{limit};
     </select>
     
-    <select id="selectProductsByCategory" resultType="Product">
+    <select id="selectProductsByCategoryId" resultType="Product">
     	SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName 
     	FROM (SELECT id AS productId, file_name AS productImageUrl, description AS productDescription, content AS productContent 
     	FROM product LEFT JOIN (SELECT product_id, file_name 
@@ -38,7 +38,7 @@
     	ON product.productId = display_info.product_id
     </select>
     
-    <select id="selectProductsByCategoryCount" resultType="int">
+    <select id="selectProductsCountByCategoryId" resultType="int">
     	SELECT count(*) 
     	FROM (SELECT id AS productId 
     	FROM product LEFT JOIN (SELECT product_id FROM product_image LEFT JOIN file_info 
