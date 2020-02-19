@@ -19,10 +19,10 @@ import kr.or.connect.reservation.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-	// for mainpage
+	// for mainpage.jsp
 	private final ProductDao productDao;
 	
-	// for detail
+	// for detail.jsp
 	private final CommentDao commentDao;
 	private final DisplayInfoDao displayInfoDao;
 	private final DisplayInfoImageDao displayInfoImageDao;

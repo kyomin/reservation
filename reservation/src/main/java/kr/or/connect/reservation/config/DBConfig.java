@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @MapperScan(basePackages = {"kr.or.connect.reservation.dao"})
 public class DBConfig implements TransactionManagementConfigurer {
 	private String driverClassName = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost:3306/intern15?useUnicode=true&characterEncoding=utf8";
+	private String url = "jdbc:mysql://10.113.116.52:13306/intern15?useUnicode=true&characterEncoding=utf8";
 	private String username = "intern15";
 	private String password = "intern15";
 	
@@ -40,7 +40,8 @@ public class DBConfig implements TransactionManagementConfigurer {
 		dataSource.setPassword(password);
 		return dataSource;
 	}
-
+	
+	/*		트랜잭션 설정		*/
 	@Bean
 	public PlatformTransactionManager transactionManger() {
 		return new DataSourceTransactionManager(dataSource());
@@ -57,7 +58,7 @@ public class DBConfig implements TransactionManagementConfigurer {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		
 		factoryBean.setDataSource(dataSource);
-        factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis-config.xml"));
+        factoryBean.setConfigLocation(applicationContext.getResource("classpath:/mybatis/mybatis-config.xml"));
         factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/*/*.xml"));
         
         return factoryBean;

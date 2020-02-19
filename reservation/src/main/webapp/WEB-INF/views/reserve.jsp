@@ -88,7 +88,8 @@
                                     		name="reservationName"
                                     		id="reservationName"
                                     		class="text" 
-                                    		placeholder="김교민" 
+                                    		placeholder="김교민"
+                                    		minlength="2" 
                                     		maxlength="17" 
                                     		required
                                     	> 

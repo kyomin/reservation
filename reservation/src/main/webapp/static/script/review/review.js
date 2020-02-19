@@ -19,7 +19,7 @@ let reviews = {
 		setUrlByDisplayInfoId : function(displayInfoId) {
 			this.url = `api/products/${displayInfoId}`;
 		}
-}
+};
 
 //	make ajax function for this data
 const sendAjaxForReviewDetail = ajax.bind(reviews);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.connect.reservation.dao.reserve.ReservationDao"> 
+    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="id" parameterType="Reservation">
+		INSERT INTO reservation_info
+		(
+			product_id,
+			display_info_id,
+			reservation_name,
+			reservation_tel,
+			reservation_email,
+			reservation_date,
+			create_date,
+			modify_date
+		) VALUES
+		(
+			#{reservation.productId},
+			#{reservation.displayInfoId},
+			#{reservation.reservationName},
+			#{reservation.reservationTelephone},
+			#{reservation.reservationEmail},
+			NOW(),
+			NOW(),
+			NOW()
+		)  
+	</insert>
+</mapper>

@@ -23,7 +23,7 @@ let product_detail = {
 		setUrlByDisplayInfoId : function(displayInfoId) {
 			this.url = `api/products/${displayInfoId}`;
 		}
-}
+};
 
 //	make ajax function for this data
 const sendAjaxForProductDetail = ajax.bind(product_detail);

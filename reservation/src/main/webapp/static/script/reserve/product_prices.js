@@ -35,7 +35,9 @@ let product_prices = {
 				// 서버에 request를 위한 각 가격에 대한 객체를 만들어 리스트로 관리!
 				var requestPrice = {
 					"count": 0,
-					"productPriceId": productPrice.productPriceId
+					"productPriceId": productPrice.productPriceId,
+					"reservationInfoId": null,
+				    "reservationInfoPriceId": null
 				};
 				
 				this.requestPrices[productPrice.productPriceId] = requestPrice;
@@ -56,4 +58,4 @@ let product_prices = {
 				document.getElementById(`price_type_name_${productPrice.priceTypeName}`).innerText = this.pairOfTypeAndName[productPrice.priceTypeName];
 			});
 		}
-}
+};

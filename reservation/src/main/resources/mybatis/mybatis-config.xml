@@ -12,5 +12,8 @@
             <typeAlias type="kr.or.connect.reservation.dto.detail.DisplayInfoImage" alias="DisplayInfoImage"/>
             <typeAlias type="kr.or.connect.reservation.dto.detail.ProductImage" alias="ProductImage"/>
             <typeAlias type="kr.or.connect.reservation.dto.detail.ProductPrice" alias="ProductPrice"/>
+            
+            <typeAlias type="kr.or.connect.reservation.dto.reserve.Reservation" alias="Reservation"/>
+            <typeAlias type="kr.or.connect.reservation.dto.reserve.Price" alias="Price"/>
     </typeAliases>
 </configuration>

@@ -6,4 +6,4 @@ let product_prices = {
 		setData : function(productPrices) {
 			this.productPrices = productPrices;
 		}
-}
+};

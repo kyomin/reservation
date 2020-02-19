@@ -6,4 +6,4 @@ let display_info_image = {
 		setData : function(displayInfoImage) {
 			this.displayInfoImage = displayInfoImage;
 		}
-}
+};

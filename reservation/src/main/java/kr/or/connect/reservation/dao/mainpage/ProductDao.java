@@ -9,8 +9,8 @@ import kr.or.connect.reservation.dto.mainpage.Product;
 
 @Mapper
 public interface ProductDao {
-	public List<Product> selectAllProducts(@Param("start")int start, @Param("limit")int limit);
-	public List<Product> selectProductsByCategory(@Param("start")int start, @Param("limit")int limit, @Param("categoryId")int categoryId);
-	public int selectAllProductsCount();
-	public int selectProductsByCategoryCount(@Param("categoryId")int categoryId);	
+	List<Product> selectAllProducts(@Param("start")int start, @Param("limit")int limit);
+	List<Product> selectProductsByCategory(@Param("start")int start, @Param("limit")int limit, @Param("categoryId")int categoryId);
+	int selectAllProductsCount();
+	int selectProductsByCategoryCount(@Param("categoryId")int categoryId);	
 }

@@ -1,8 +1,5 @@
 package kr.or.connect.reservation.dao.detail;
 
-
-
-
 import java.util.List;
 
 
@@ -13,5 +10,5 @@ import kr.or.connect.reservation.dto.detail.ProductImage;
 
 @Mapper
 public interface ProductImageDao {
-	public List<ProductImage> selectAllProductImages(@Param("productId")int productId);
+	List<ProductImage> selectAllProductImages(@Param("productId")int productId);
 }

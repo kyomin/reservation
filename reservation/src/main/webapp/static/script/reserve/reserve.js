@@ -3,12 +3,14 @@ let reserve = {
 		method : "GET",
 		url : '',
 		requestData : {
-		  "displayInfoId": getParams(document.location.href).id,
+		  "id" : null,
+		  "displayInfoId": parseInt(getParams(document.location.href).id),
 		  "prices": [],
 		  "productId": "",
 		  "reservationEmail": "",
 		  "reservationName": "",
-		  "reservationTelephone": ""
+		  "reservationTelephone": "",
+		  "reservationYearMonthDay": null
 		},
 		totalCount : 0,				// 예매 갯수
 		isTermsAgreed : false,		// 약관 동의 여부
@@ -38,7 +40,7 @@ let reserve = {
 			
 			document.getElementById("reservationDate").innerText = year + "." + month + "." + date;
 		}
-}
+};
 
 //	make ajax function for this data
 const sendAjaxForReserve = ajax.bind(reserve);
@@ -110,8 +112,8 @@ function checkValidation() {
 	}
 	
 	// 예매자 입력 검증
-	if(reserve.requestData["reservationName"].length === 0) {
-		alert("예매자 이름을 입력해 주세요!");
+	if(reserve.requestData["reservationName"].length <= 1) {
+		alert("예매자 이름을 2자 이상 입력해 주세요!");
 		return false;
 	}
 	
@@ -137,37 +139,40 @@ function checkValidation() {
 }
 
 function handleSubmit() {
+	// form 입력 항목이 유효하지 않다면 submit 처리 철회!
 	if(!checkValidation()) {
 		return;
 	}
-	
-	var form = document.createElement("form");
-
-	form.setAttribute("method", "post");	
-	form.setAttribute("action", "api/reservations");
 	
 	reserve.requestData.productId = display_info.displayInfo.productId;
 	
 	// request 데이터의 prices 리스트를 JSON object로부터 만든다.
 	Object.keys(product_prices.requestPrices).forEach(key => {
-		reserve.requestData.prices.push(product_prices.requestPrices[key]);
+		// 티켓이 선택된 것만 DB에 저장할 것이다.
+		if(product_prices.requestPrices[key].count > 0) {
+			reserve.requestData.prices.push(product_prices.requestPrices[key]);
+		}
 	});
 	
-	//히든으로 값을 주입시킨다.
-	for(var key in reserve.requestData) {
-      var hiddenField = document.createElement("input");
+	// POST AJAX Request!
+	var xhr = new XMLHttpRequest();
 
-      hiddenField.setAttribute("type", "hidden");
-      hiddenField.setAttribute("name", key);
-      hiddenField.setAttribute("value", reserve.requestData[key]);
-
-      form.appendChild(hiddenField);
-	}
+	xhr.onload = function() {
+	  if (xhr.status === 200 || xhr.status === 201) {	
+		  alert("예약 성공!");
+		  location.href = "/reservation";
+	  } else if(xhr.status === 500){	
+		  location.reload(true);
+		  alert("서버 내부 오류!");
+	  } else if(xhr.status === 400) {
+		  location.reload(true);
+		  alert("form 형식 오류!");
+	  }
+	};
 	
-	document.body.appendChild(form);
-	form.submit();
-	
-	console.log("reserve.requestData : ", reserve.requestData);
+	xhr.open('POST', 'api/reservations');
+	xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
+	xhr.send(JSON.stringify(reserve.requestData)); // 데이터를 stringify해서 보냄
 }
 
 
