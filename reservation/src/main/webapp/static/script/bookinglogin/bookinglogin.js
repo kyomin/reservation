@@ -23,11 +23,12 @@ function handleSubmit() {
 	var xhr = new XMLHttpRequest();
 
 	xhr.onload = function() {
-	  if (xhr.status === 200 || xhr.status === 201) {	
-		  // 응답 객체 받고 세션에 셋팅
+	  if (xhr.status === 200 || xhr.status === 201) {	// 로그인 성공!
+		  // 응답 객체 받고 세션에 셋팅 후
 		  sessionStorage.setItem("reservationsResponse", xhr.responseText);
 		  sessionStorage.setItem("reservationEmail", reservationEmail);
-		  		  
+		  
+		  // 로그인 한 사람의 예약 정보 페이지로 이동 
 		  location.href = "myreservation";
 	  } else if(xhr.status === 400){	
 		  location.reload(true);

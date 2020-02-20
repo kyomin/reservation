@@ -29,7 +29,7 @@ let myreservation = {
 		
 		/* 		Functions	 */
 		setData : function() {
-			// 서버로부터 받아온 데이터 셋팅 후
+			// 서버로부터 받아온 데이터 셋팅
 			this.reservations = JSON.parse(sessionStorage.getItem("reservationsResponse")).reservations;
 			this.size = JSON.parse(sessionStorage.getItem("reservationsResponse")).size;
 			
@@ -38,8 +38,14 @@ let myreservation = {
 				reservation.totalPrice = reservation.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			})
 			
-			// 데이터 분류
+			// 데이터 셋팅 완료 후에 해당 데이터를 가공해 화면에 뿌려주는 작업 수행
+			this.handleData();
+		},
+		
+		handleData : function() {
 			this.classifyData();
+			this.makeCategoryTab();
+			this.makeAllReservationsList();
 		},
 		
 		classifyData : function() {
@@ -88,13 +94,6 @@ let myreservation = {
 				
 				this.countByCategoryList.push(obj);
 			});
-			
-			this.handleData();
-		},
-		
-		handleData : function() {
-			this.makeCategoryTab();
-			this.makeReservationsList();
 		},
 		
 		makeCategoryTab : function() {
@@ -103,23 +102,32 @@ let myreservation = {
 			document.getElementById("reserve_category_0").classList.add("on");
 		},
 		
-		makeReservationsList : function() {
-			// 예약 확정 리스트 그리기
+		makeAllReservationsList : function() {		// 전체 예약 리스트 그리기
+			this.makeConfirmedReservationsList();
+			this.makeUsedReservationsList();
+			this.makeCanceledReservationsList();
+		},
+		
+		makeConfirmedReservationsList : function() {	// 예약 확정 리스트 그리기
 			if(this.dataByCategoryList[1].data.length === 0) {
 				document.getElementById("err_confirmed").classList.remove("hide");
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[1].data, this.defaultTemplates[1], "reservationItem", ["_confirmed"]);
 			}
-			
-			// 이용 완료된 리스트 그리기
+		},
+		
+		makeUsedReservationsList : function() {		// 이용 완료된 리스트 그리기
 			if(this.dataByCategoryList[2].data.length === 0) {
+				document.getElementById("_used").innerHTML += this.defaultTemplates[2];
 				document.getElementById("err_used").classList.remove("hide");
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[2].data, this.defaultTemplates[2], "reservationItem", ["_used"]);
 			}
-			
-			// 취소된 예약 리스트 그리기
+		},
+		
+		makeCanceledReservationsList : function() {		// 취소된 예약 리스트 그리기
 			if(this.dataByCategoryList[3].data.length === 0) {
+				document.getElementById("_cancel").innerHTML += this.defaultTemplates[3];
 				document.getElementById("err_cancel").classList.remove("hide");
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[3].data, this.defaultTemplates[3], "reservationItem", ["_cancel"]);
