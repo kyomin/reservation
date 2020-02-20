@@ -1,8 +1,6 @@
 let product_images = {
 		/* 		Variables	 */
 		productImages : [],
-		templateId : "promotionItem",
-		parentNodeIds : ["product_image_slide"],
 		slideContainer : document.getElementById("product_image_slide"),
 		promotionCount : 0,
 		currentSlide : 0,
@@ -33,7 +31,7 @@ let product_images = {
 			this.slideContainer.style.transition = "1s";
 			
 			// 가져온 데이터 해당 영역에 그리기!
-			drawTemplateToHtml.bind(this)(this.productImages, "");
+			drawTemplateToHtml(this.productImages, "", "promotionItem", ["product_image_slide"]);
 		},
 		
 		rightPromotionSlide : function() {

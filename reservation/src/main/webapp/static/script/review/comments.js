@@ -1,8 +1,6 @@
 let comments = {
 		/* 		Variables	 */
 		comments : [],
-		templateId : "reviewItem",
-		parentNodeIds : ["review_list"],
 		commentsCount : 0,
 		
 		/* 		Functions	 */
@@ -20,7 +18,7 @@ let comments = {
 			document.getElementById("contents_count").innerText = this.commentsCount + "건";
 			
 			// 가져온 데이터 해당 영역에 이미지 없이 그리기!
-			drawTemplateToHtml.bind(this)(this.comments, "");
+			drawTemplateToHtml(this.comments, "", "reviewItem", ["review_list"]);
 			
 			// 이미지를 가지는 것들만 골라서 삽입하기!
 			let reviews = document.querySelectorAll(".review_area");

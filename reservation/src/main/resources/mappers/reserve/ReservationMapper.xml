@@ -32,7 +32,7 @@
 		display_info_id AS displayInfoId,
 		modify_date AS modifyDate,
 		product_id AS productId,
-		date_format(reservation_date, '%Y.%m.%d') AS reservationDate,
+		reservation_date AS reservationDate,
 		reservation_email AS reservationEmail,
 		id AS reservationInfoId,
 		reservation_name AS reservationName,

@@ -12,8 +12,6 @@ let product_prices = {
 			"R" : "R석",
 		},
 		requestPrices : {},
-		templateId : "ticketInfoItem",
-		parentNodeIds : ["_ticket_body"],
 		
 		/* 		Functions	 */
 		setData : function(productPrices) {
@@ -45,7 +43,7 @@ let product_prices = {
 		},
 		
 		handleData : function() {
-			drawTemplateToHtml.bind(this)(this.productPrices, "");
+			drawTemplateToHtml(this.productPrices, "", "ticketInfoItem", ["_ticket_body"]);
 			
 			// 상단 상품정보 부분에 가격정보 그리기
 			this.productPrices.forEach( productPrice => {

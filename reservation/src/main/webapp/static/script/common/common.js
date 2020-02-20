@@ -1,9 +1,9 @@
 /* 		템플릿이 있는 모든 페이지가 공용으로 사용할 수 있는 함수이다. 	 */
-function drawTemplateToHtml(datas, defaultTemplate) {
-	var template = document.getElementById(this.templateId).innerHTML;
+function drawTemplateToHtml(datas, defaultTemplate, templateId, parentNodeIds) {
+	var template = document.getElementById(templateId).innerHTML;
 	var bindTemplate = Handlebars.compile(template);
-	var parentNodeCount = this.parentNodeIds.length;
-	this.parentNodeIds.forEach( (parentNodeId, parentNodeIndex) => {
+	var parentNodeCount = parentNodeIds.length;
+	parentNodeIds.forEach( (parentNodeId, parentNodeIndex) => {
 		var parentNode = document.getElementById(parentNodeId);
 		var parentNodeHTML = parentNode.innerHTML + defaultTemplate;
 		parentNode.innerHTML = datas.filter( (data, dataIndex) => {
@@ -16,8 +16,8 @@ function drawTemplateToHtml(datas, defaultTemplate) {
 	});
 };
 
-function removeInnerHtml() {
-	this.parentNodeIds.forEach( (parentNodeId) => {
+function removeInnerHtml(parentNodeIds) {
+	parentNodeIds.forEach( (parentNodeId) => {
 		var parentNode = document.getElementById(parentNodeId);
 		parentNode.innerHTML = "";
 	});
