@@ -60,7 +60,7 @@
                        		id="resrv_id" 
                        		name="resrv_email" 
                        		aria-invalid="false" 
-                       		placeholder="yjs1466@naver.com" 
+                       		placeholder="kim031504@naver.com" 
                        		title="예매자이메일"
                        	>  
                     </div>

@@ -18,18 +18,26 @@
         <div class="header fade">
             <header class="header_tit">
                 <h1 class="logo">
-                    <a href="./mainpage.html" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="./mainpage.html" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                    <a href="https://m.naver.com/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+                    <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
+                <a onClick="handleLinkToBookingLoginPageAndMyReservationPage();" class="btn_my"> <span title="예약확인">예약확인</span> </a>
             </header>
         </div>
         <div class="ct">
             <div class="ct_wrap">
-                <div class="top_title">
-                    <a href="javascript:history.back();" class="btn_back" title="이전 화면으로 이동"> <i class="fn fn-backward1"></i> </a>
-                    <h2><span class="title"></span></h2>
-                </div>
+            	<header class="header_tit">
+	                <h1 class="logo">
+	                    <a href="/reservation" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+	                    <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+	                </h1>
+	                <a onClick="handleLinkToBookingLoginPageAndMyReservationPage();" class="btn_my" id="_btn_my"> 
+                    	<span class="viewReservation" title="예약확인" id="my_email" style="font-size:15px;">예약확인</span> 
+                    </a>
+                    <a onClick="handleLogout();" class="logout_btn hide" id="_logout_btn">
+	                	<span>로그아웃</span>
+	                </a>
+	            </header>
                 <div class="group_visual">
                     <div class="container_visual" style="width: 414px;">
                         <ul class="visual_img">
@@ -88,7 +96,7 @@
                                     		name="reservationName"
                                     		id="reservationName"
                                     		class="text" 
-                                    		placeholder="truth yoon"
+                                    		placeholder="김교민"
                                     		minlength="2" 
                                     		maxlength="17" 
                                     		required
@@ -126,7 +134,7 @@
                                     		name="reservationEmail"
                                     		id="reservationEmail"
                                     		class="email"                                     
-                                    		placeholder="yjs1466@naver.com" 
+                                    		placeholder="kim031504@naver.com" 
                                     		maxlength="50" 
                                     		required
                                     	> 
@@ -186,7 +194,9 @@
     </div>
     <footer>
         <div class="gototop">
-            <a href="javascript:scroll(0,0)" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
+            <a href="javascript:scroll(0,0)" class="lnk_top"> 
+            	<span class="lnk_top_text">TOP</span> 
+            </a>
         </div>
         <div id="footer" class="footer">
             <p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>

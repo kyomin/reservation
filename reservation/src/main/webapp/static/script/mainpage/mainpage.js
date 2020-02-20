@@ -3,4 +3,5 @@ document.addEventListener("DOMContentLoaded", function() {
 	sendAjaxForPromotion();
 	sendAjaxForProduct();
 	sendAjaxForCategory();
+	drawMyEmail();
 });

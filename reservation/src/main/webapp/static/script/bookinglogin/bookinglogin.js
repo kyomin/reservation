@@ -26,9 +26,9 @@ function handleSubmit() {
 	  if (xhr.status === 200 || xhr.status === 201) {	
 		  // 응답 객체 받고 세션에 셋팅
 		  sessionStorage.setItem("reservationsResponse", xhr.responseText);
-		  
-		  alert("로그인 성공!");
-		  location.href = "/reservation/myreservation";
+		  sessionStorage.setItem("reservationEmail", reservationEmail);
+		  		  
+		  location.href = "myreservation";
 	  } else if(xhr.status === 400){	
 		  location.reload(true);
 		  alert("form 형식 오류!!");

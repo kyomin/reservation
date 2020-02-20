@@ -17,10 +17,15 @@
 		<div class="header">
 			<header class="header_tit">
 				<h1 class="logo">
-					<a href="./mainpage.html" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-					<a href="./mainpage.html" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+					<a href="/reservation" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
+					<a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
 				</h1>
-				<a href="#" class="btn_my"> <span title="내예약" class="viewReservation"></span> </a>
+				<a href="" class="btn_my" id="_btn_my"> 
+					<span title="내예약" class="viewReservation" id="my_email" style="font-size:15px;"></span> 
+				</a>
+				<a onClick="handleLogout();" class="logout_btn hide" id="_logout_btn">
+                	<span>로그아웃</span>
+                </a>
 			</header>
 		</div>
 		<hr>
@@ -31,16 +36,16 @@
 					<ul class="summary_board">
 						<li class="item">
 							<!--[D] 선택 후 .on 추가 link_summary_board -->
-							<a href="#" class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em class="tit">전체</em> <span class="figure">6</span> </a>
+							<a href="" class="link_summary_board on"> <i class="spr_book2 ico_book2"></i> <em class="tit">전체</em> <span class="figure">6</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">이용예정</em> <span class="figure">2</span> </a>
+							<a href="" class="link_summary_board"> <i class="spr_book2 ico_book_ss"></i> <em class="tit">이용예정</em> <span class="figure">2</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span class="figure">2</span> </a>
+							<a href="" class="link_summary_board"> <i class="spr_book2 ico_check"></i> <em class="tit">이용완료</em> <span class="figure">2</span> </a>
 						</li>
 						<li class="item">
-							<a href="#" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span class="figure">2</span> </a>
+							<a href="" class="link_summary_board"> <i class="spr_book2 ico_back"></i> <em class="tit">취소·환불</em> <span class="figure">2</span> </a>
 						</li>
 					</ul>
 				</div>
@@ -561,7 +566,9 @@
 		</div>
 		<footer>
 			<div class="gototop">
-				<a href="#" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
+				<a href="javascript:scroll(0,0)" class="lnk_top"> 
+					<span class="lnk_top_text">TOP</span> 
+				</a>
 			</div>
 			<div id="footer" class="footer">
 				<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>

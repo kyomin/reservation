@@ -12,4 +12,5 @@ let myreservation = {
 
 document.addEventListener("DOMContentLoaded", function() {	
 	myreservation.setData();
+	drawMyEmail();
 });

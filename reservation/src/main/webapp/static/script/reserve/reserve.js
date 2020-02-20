@@ -222,4 +222,5 @@ document.addEventListener("DOMContentLoaded", function() {
 	reserve.setUrlByDisplayInfoId(getParams(document.location.href).id);
 	reserve.makeCurrentDate();
 	sendAjaxForReserve();
+	drawMyEmail();
 });

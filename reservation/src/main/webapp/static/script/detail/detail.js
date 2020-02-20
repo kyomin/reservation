@@ -12,4 +12,5 @@ function linkToBookingPage() {
 document.addEventListener("DOMContentLoaded", function() {
 	product_detail.setUrlByDisplayInfoId(getParams(document.location.href).display_info_id);
 	sendAjaxForProductDetail();
+	drawMyEmail();
 });

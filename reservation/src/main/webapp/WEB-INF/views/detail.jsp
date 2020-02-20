@@ -20,26 +20,20 @@
 
 <body>
 	<div id="container">
-        <div class="header fade">
-            <header class="header_tit">
-                <h1 class="logo">
-                    <a href="/" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                    <a href="/" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
-                </h1>
-                <a href="javascript:scrollUp();" class="btn_my"> <span title="예약확인">예약확인</span> </a>
-            </header>
-        </div>
         <div class="ct main">
             <div>
                 <div class="section_visual">
-                    <header>
+                    <header class="header_tit">
                         <h1 class="logo">
                             <a href="/reservation" class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
-                            <a href="/reservation" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
+                            <a class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
-                        <a href="bookinglogin" class="btn_my"> 
-                        	<span class="viewReservation" title="예약확인">예약확인</span> 
+                        <a onClick="handleLinkToBookingLoginPageAndMyReservationPage();" class="btn_my" id="_btn_my"> 
+                        	<span class="viewReservation" title="예약확인" id="my_email" style="font-size:15px;">예약확인</span> 
                         </a>
+                        <a onClick="handleLogout();" class="logout_btn hide" id="_logout_btn">
+		                	<span>로그아웃</span>
+		                </a>
                     </header>
                     <div class="pagination">
                         <div class="bg_pagination"></div>
@@ -100,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="section_btn"> <button type="button" class="bk_btn" onClick = 'linkToBookingPage();'> <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span> </button> </div>
+                <div class="section_btn"> <button type="button" class="bk_btn" onClick='linkToBookingPage();'> <i class="fn fn-nbooking-calender2"></i> <span>예매하기</span> </button> </div>
                 <div class="section_review_list">
                     <div class="review_box">
                         <h3 class="title_h3">예매자 한줄평</h3>
@@ -117,7 +111,7 @@
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
-                    <a class="btn_review_more" onClick = 'linkToCommentsDetail();'> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
+                    <a class="btn_review_more" onClick='linkToCommentsDetail();'> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </div>
                 <div class="section_info_tab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
@@ -200,7 +194,9 @@
     </div>
     <footer>
         <div class="gototop">
-            <a href="javascript:scroll(0,0)" class="lnk_top"> <span class="lnk_top_text">TOP</span> </a>
+            <a href="javascript:scroll(0,0)" class="lnk_top"> 
+            	<span class="lnk_top_text">TOP</span> 
+            </a>
         </div>
         <div class="footer">
             <p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
