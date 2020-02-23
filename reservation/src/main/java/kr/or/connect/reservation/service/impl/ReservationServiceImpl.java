@@ -34,12 +34,6 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public int getReservationsCount(String reservationEmail) {
-		return reservationDao.selectAllReservationsCountByReservationEmail(reservationEmail);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
 	public List<ReservationInfo> getReservations(String reservationEmail) {
 		List<ReservationInfo> reservations = reservationDao.selectAllReservationsByReservationEmail(reservationEmail);
 		// DB 테이블로부터 아직 매핑하지 못한 displayInfo와 totalPrice 구하기!
@@ -49,5 +43,11 @@ public class ReservationServiceImpl implements ReservationService {
 		});
 		
 		return reservations;
+	}
+
+	@Override
+	@Transactional
+	public void updateCancelFlagByReservationInfoId(Integer reservationInfoId) {
+		reservationDao.updateCancelFlagByReservationInfoId(reservationInfoId);
 	}
 }

@@ -5,9 +5,15 @@
  
 <mapper namespace="kr.or.connect.reservation.dao.detail.ProductPriceDao"> 
     <select id="selectAllProductPrices" resultType="ProductPrice">
-        SELECT create_date AS createDate, discount_rate AS discountRate, 
-        modify_date AS modifyDate, price, price_type_name AS priceTypeName, 
-        product_id AS productId, id AS productPriceId 
-        FROM product_price WHERE product_id = #{productId}
+        SELECT 
+	        create_date AS createDate, 
+	        discount_rate AS discountRate, 
+	        modify_date AS modifyDate, 
+	        price, 
+	        price_type_name AS priceTypeName, 
+	        product_id AS productId, 
+	        id AS productPriceId 
+        FROM product_price 
+        WHERE product_id = #{productId}
     </select>
 </mapper>

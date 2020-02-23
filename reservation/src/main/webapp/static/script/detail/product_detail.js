@@ -1,10 +1,20 @@
 let product_detail = {
 		/* 		Variables	 */
-		method : "GET",
-		url : '',
+		getUrl : '',
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			//	상세 페이지를 이루는 각 데이터 셋팅!
 			average_score.setData(jsonResponse.averageScore);
 			comments.setData(jsonResponse.comments);
@@ -20,10 +30,7 @@ let product_detail = {
 			display_info.handleData();
 		},
 		
-		setUrlByDisplayInfoId : function(displayInfoId) {
-			this.url = `api/products/${displayInfoId}`;
+		setGetUrlByDisplayInfoId : function(displayInfoId) {
+			this.getUrl = `api/products/${displayInfoId}`;
 		}
 };
-
-//	make ajax function for this data
-const sendAjaxForProductDetail = ajax.bind(product_detail);

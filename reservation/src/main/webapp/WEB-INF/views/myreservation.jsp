@@ -172,7 +172,7 @@
 								</em>
 							</div>
 													
-							<div class="booking_cancel">
+							<div class="booking_cancel" onClick="javascript:clickCancelBtn({{reservationInfoId}})">
 								<button class="btn"><span>취소</span></button>
 							</div>
 						</div>
@@ -187,6 +187,36 @@
 			</a>
 			<a class="fn fn-share1 naver-splugin btn_goto_share" title="공유하기"></a>
 		</article>
+	
+		<!-- 취소 팝업 -->
+		<!-- [D] 활성화 display:block, 아니오 버튼 or 닫기 버튼 클릭 시 숨김 display:none; -->
+		<div class="popup_booking_wrapper" style="display:none;" id="cancel_{{reservationInfoId}}">
+			<div class="dimm_dark" style="display:block"></div>
+			<div class="popup_booking refund">
+				<em class="booking_number">No.{{reservationInfoId}}</em>
+				<h1 class="pop_tit">					
+					<span>{{displayInfo.productDescription}}</span>
+					<small class="sm">{{reservationDate}}</small>
+				</h1>
+				<div class="nomember_alert">
+					<p>취소하시겠습니까?</p>
+				</div>
+				<div class="pop_bottom_btnarea">
+					<div class="btn_gray">
+						<a class="btn_bottom" onClick="javascript:exitCancelPopup({{reservationInfoId}})"><span>아니오</span></a>
+					</div>
+					<div class="btn_green">
+						<a class="btn_bottom" onClick="javascript:handleCancel({{reservationInfoId}})"><span>예</span></a>
+					</div>
+				</div>
+				<!-- 닫기 -->
+				<a class="popup_btn_close" title="close">
+					<i class="spr_book2 ico_cls" onClick="javascript:exitCancelPopup({{reservationInfoId}})"></i>
+				</a>
+				<!--// 닫기 -->
+			</div>
+		</div>
+		<!--// 취소 팝업 -->
 	</script>
 	
 	<!-- 템플릿 처리를 위한 자바스크립트 Handlebar Library -->

@@ -5,26 +5,38 @@
  
 <mapper namespace="kr.or.connect.reservation.dao.detail.CommentDao"> 
     <select id="selectAllCommentsByProductIdWithoutCommentImage" resultType="Comment">
-        SELECT comment, reservation_user_comment_by_product_id.id AS commentId, 
-        date_format(reservation_user_comment_by_product_id.create_date, '%Y.%m.%d') AS createDate, 
-        date_format(reservation_user_comment_by_product_id.modify_date, '%Y.%m.%d') AS modifyDate, 
-        reservation_user_comment_by_product_id.product_id AS productId, 
-        date_format(reservation_date, '%Y.%m.%d') AS reservationDate, reservation_email AS reservationEmail, 
-        reservation_info.id AS reservationInfoId, reservation_name AS reservationName, 
-        reservation_tel AS reservationTelephone, score 
+        SELECT 
+	        comment, 
+	        reservation_user_comment_by_product_id.id AS commentId, 
+	        date_format(reservation_user_comment_by_product_id.create_date, '%Y.%m.%d') AS createDate, 
+	        date_format(reservation_user_comment_by_product_id.modify_date, '%Y.%m.%d') AS modifyDate, 
+	        reservation_user_comment_by_product_id.product_id AS productId, 
+	        date_format(reservation_date, '%Y.%m.%d') AS reservationDate, 
+	        reservation_email AS reservationEmail, 
+	        reservation_info.id AS reservationInfoId, 
+	        reservation_name AS reservationName, 
+	        reservation_tel AS reservationTelephone, 
+	        score 
         FROM reservation_info INNER JOIN (SELECT * 
-        FROM reservation_user_comment 
-        WHERE product_id = #{productId}) AS reservation_user_comment_by_product_id 
+        	FROM reservation_user_comment 
+        	WHERE product_id = #{productId}) AS reservation_user_comment_by_product_id 
         ON reservation_info.id = reservation_user_comment_by_product_id.reservation_info_id 
         WHERE reservation_info.product_id = reservation_user_comment_by_product_id.product_id 
         ORDER BY createDate DESC
     </select>
     
     <select id="selectAllCommentImagesByReservationUserCommentId" resultType="CommentImage">
-        SELECT content_type AS contentType, create_date AS createDate, delete_flag AS deleteFlag, 
-        file_id AS fileId, file_name AS fileName, reservation_user_comment_image.id AS imageId, 
-        modify_date AS modifyDate, save_file_name AS saveFileName, reservation_info_id AS reservationInfoId, 
-        reservation_user_comment_id AS reservationUserCommentId 
+        SELECT 
+	        content_type AS contentType, 
+	        create_date AS createDate, 
+	        delete_flag AS deleteFlag, 
+	        file_id AS fileId, 
+	        file_name AS fileName, 
+	        reservation_user_comment_image.id AS imageId, 
+	        modify_date AS modifyDate, 
+	        save_file_name AS saveFileName, 
+	        reservation_info_id AS reservationInfoId, 
+	        reservation_user_comment_id AS reservationUserCommentId 
         FROM reservation_user_comment_image LEFT JOIN file_info 
         ON reservation_user_comment_image.file_id = file_info.id 
         WHERE reservation_user_comment_id = #{reservationUserCommentId}

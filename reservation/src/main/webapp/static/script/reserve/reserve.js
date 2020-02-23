@@ -1,7 +1,7 @@
 let reserve = {
 		/* 		Variables	 */
 		method : "GET",
-		url : '',
+		getUrl : '',
 		requestData : {
 		  "id" : null,
 		  "displayInfoId": parseInt(getParams(document.location.href).id),
@@ -16,7 +16,18 @@ let reserve = {
 		isTermsAgreed : false,		// 약관 동의 여부
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			//	예약 페이지를 이루는 각 데이터 셋팅!
 			display_info.setData(jsonResponse.displayInfo);
 			product_prices.setData(jsonResponse.productPrices);
@@ -26,8 +37,8 @@ let reserve = {
 			product_prices.handleData();
 		},
 		
-		setUrlByDisplayInfoId : function(displayInfoId) {
-			this.url = `api/products/${displayInfoId}`;
+		setGetUrlByDisplayInfoId : function(displayInfoId) {
+			this.getUrl = `api/products/${displayInfoId}`;
 		},
 		
 		// 페이지 내의 현재 날짜가 표시되는 element를 조작한다.
@@ -42,15 +53,12 @@ let reserve = {
 		}
 };
 
-//	make ajax function for this data
-const sendAjaxForReserve = ajax.bind(reserve);
-
 
 /* 		reserve.jsp 페이지 내에서 발생하는 함수 정의! 	 */
 function handleTicketPlus(id) {
 	// 화면에 현재 특정 가격 타입의 총 가격 표시
 	product_prices.pairOfIdAndTotalPrice[id] += product_prices.pairOfIdAndPrice[id];
-	document.getElementById(`total_price_${id}`).innerText = product_prices.pairOfIdAndTotalPrice[id];
+	document.getElementById(`total_price_${id}`).innerText = product_prices.pairOfIdAndTotalPrice[id].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	
 	// +를 시키는 순간 0이 아닌 것은 자명하므로 조건 처리 없이 바로 '-' 버튼 활성화
 	document.getElementById(`minus_btn_${id}`).classList.remove("disabled");
@@ -72,7 +80,7 @@ function handleTicketMinus(id) {
 	
 	// 화면에 현재 특정 가격 타입의 총 가격 표시
 	product_prices.pairOfIdAndTotalPrice[id] -= product_prices.pairOfIdAndPrice[id];
-	document.getElementById(`total_price_${id}`).innerText = product_prices.pairOfIdAndTotalPrice[id];
+	document.getElementById(`total_price_${id}`).innerText = product_prices.pairOfIdAndTotalPrice[id].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	
 	// 해당 타입 가격 수량의 합이 0이 되는 순간 '-' 버튼 비활성화! 
 	if(product_prices.pairOfIdAndTotalPrice[id] === 0) {
@@ -177,8 +185,8 @@ function handleSubmit() {
 	};
 	
 	xhr.open('POST', 'api/reservations');
-	xhr.setRequestHeader('Content-Type', 'application/json'); // 컨텐츠타입을 json으로
-	xhr.send(JSON.stringify(reserve.requestData)); // 데이터를 stringify해서 보냄
+	xhr.setRequestHeader('Content-Type', 'application/json');	// 컨텐츠타입을 json으로
+	xhr.send(JSON.stringify(reserve.requestData));	// 데이터를 stringify해서 보냄
 };
 
 
@@ -219,8 +227,8 @@ document.getElementById("chk3").addEventListener('click', function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {	
-	reserve.setUrlByDisplayInfoId(getParams(document.location.href).id);
+	reserve.setGetUrlByDisplayInfoId(getParams(document.location.href).id);
 	reserve.makeCurrentDate();
-	sendAjaxForReserve();
+	reserve.sendGetAjax();
 	drawMyEmail();
 });

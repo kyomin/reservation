@@ -1,19 +1,27 @@
 let category = {
 		/* 		Variables	 */
-		method : "GET",
-		url : "api/categories",
+		getUrl : "api/categories",
 		prevCategoryId : 0,
 		currentCategoryId : 0,
 		defaultCategoryHTML : "<li class='item' data-category='0'><a class='anchor active' id='category0'> <span>전체리스트</span> </a></li>",
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			drawTemplateToHtml(jsonResponse.categories, this.defaultCategoryHTML, "categoryItem", ["category_tab"]);
 		}
 };
 
-// 		make ajax function for this data
-const sendAjaxForCategory = ajax.bind(category);
 
 // 		카테고리 탭 요소들 클릭 시의 이벤트
 document.getElementById("_section_event_tab").addEventListener("click", function(e) {
@@ -33,6 +41,6 @@ document.getElementById("_section_event_tab").addEventListener("click", function
 		category.prevCategoryId = category.currentCategoryId;
 		
 		product.handleChangedCategory(parseInt(category.currentCategoryId));
-		sendAjaxForProduct();
+		product.sendGetAjax();
 	}
 });

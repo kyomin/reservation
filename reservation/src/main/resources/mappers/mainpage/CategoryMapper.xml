@@ -5,11 +5,16 @@
  
 <mapper namespace="kr.or.connect.reservation.dao.mainpage.CategoryDao"> 
     <select id="selectCategories" resultType="Category">
-        SELECT id, name, count 
-        FROM category LEFT JOIN (SELECT category_id, count(*) AS count 
-        FROM product LEFT JOIN display_info 
-        ON product.id = display_info.product_id 
-        GROUP BY category_id) AS J1 
-        ON category.id = J1.category_id
+        SELECT 
+	        id, 
+	        name, 
+	        count 
+        FROM category LEFT JOIN (SELECT 
+		        category_id, 
+		        count(*) AS count 
+	        FROM product LEFT JOIN display_info 
+	        ON product.id = display_info.product_id 
+	        GROUP BY category_id) AS count_with_category 
+        ON category.id = count_with_category.category_id
     </select>
 </mapper>

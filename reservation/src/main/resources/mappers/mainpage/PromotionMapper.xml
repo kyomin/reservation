@@ -5,11 +5,16 @@
  
 <mapper namespace="kr.or.connect.reservation.dao.mainpage.PromotionDao"> 
     <select id="selectAllPromotions" resultType="Promotion">
-        SELECT id, productId, productImageUrl 
-        FROM promotion LEFT JOIN (SELECT product_id AS productId, file_name AS productImageUrl 
-        FROM product_image LEFT JOIN file_info 
-        ON product_image.file_id = file_info.id 
-        WHERE product_image.type = 'th') AS J1 
-        ON promotion.product_id = J1.productId
+        SELECT 
+        	id, 
+        	productId, 
+        	productImageUrl 
+        FROM promotion LEFT JOIN (SELECT 
+        		product_id AS productId, 
+        		file_name AS productImageUrl 
+        	FROM product_image LEFT JOIN file_info 
+        	ON product_image.file_id = file_info.id 
+        	WHERE product_image.type = 'th') AS product_image_with_type_th 
+        ON promotion.product_id = product_image_with_type_th.productId
     </select>
 </mapper>

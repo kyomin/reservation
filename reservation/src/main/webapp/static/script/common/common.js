@@ -24,20 +24,6 @@ function removeInnerHtml(parentNodeIds) {
 };
 
 
-/* 		object로 관리하는 변수 내에서 ajax 통신을 지원해주는 함수이다. 	 */
-function ajax() {
-	var oReq = new XMLHttpRequest();
-	
-	oReq.addEventListener("load", function() {
-		var jsonResponse = JSON.parse(oReq.responseText);
-		this.handleResponse(jsonResponse);
-	}.bind(this));
-	
-	oReq.open(this.method, this.url);
-	oReq.send();
-};
-
-
 /* 		현재 페이지의 url을 파싱하여 key : value를 얻는다. 	 */
 function getParams(str) {
 	  var params = {};
@@ -95,9 +81,11 @@ function getParams(str) {
 
 /* 		대부분 페이지의 상단에 그려지는 이메일과 로그아웃 버튼을 핸들링한다. 	 */
 function drawMyEmail() {
+	let reservationEmail = sessionStorage.getItem("reservationEmail");
+	
 	// 세션에 이메일 정보가 있다면(로그인이 되어 있다면) 이메일 계졍을 로그아웃 버튼과 함께 화면에 그려준다.
-	if(sessionStorage.getItem("reservationEmail") !== null) {
-		document.getElementById("my_email").innerText = sessionStorage.getItem("reservationEmail");
+	if(reservationEmail !== null) {
+		document.getElementById("my_email").innerText = reservationEmail;
 		document.getElementById("_btn_my").style.right = "70px";
 		document.getElementById("_btn_my").style.paddingRight = "0";
 		document.getElementById("_logout_btn").classList.remove("hide");
@@ -119,10 +107,9 @@ function handleLinkToBookingLoginPageAndMyReservationPage() {
 }
  
 function handleLogout() {
-	// 현재 세션에 저장되어 있는 사용자 계정 정보 및 관련 데이터들 삭제!
-	sessionStorage.removeItem("reservationsResponse");
+	// 현재 세션에 저장되어 있는 사용자 계정 정보 삭제!
 	sessionStorage.removeItem("reservationEmail");
 	
-	// 그 후 예약 서비스 홈으로 이동!
-	location.href = "/reservation";
+	// 그 후에 예약 서비스 홈으로 이동!
+	location.href  = "/reservation";
 }

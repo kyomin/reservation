@@ -8,5 +8,5 @@ import kr.or.connect.reservation.dto.reserve.ReservationInfo;
 public interface ReservationService {
 	void createReservations(Reservation reservation);
 	List<ReservationInfo> getReservations(String reservationEmail);
-	int getReservationsCount(String reservationEmail);
+	void updateCancelFlagByReservationInfoId(Integer reservationInfoId);
 }

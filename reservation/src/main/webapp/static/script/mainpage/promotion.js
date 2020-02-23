@@ -1,13 +1,23 @@
 let promotion = {
 		/* 		Variables	 */
-		method : "GET",
-		url : "api/promotions",
+		getUrl : "api/promotions",
 		promotionCount : 0,
 		slideContainer : document.getElementById("promotions"),
 		currentSlide : 0,
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			drawTemplateToHtml(jsonResponse.promotions, "", "promotionItem", ["promotions"]);
 			
 			this.promotionCount = jsonResponse.promotions.length;
@@ -25,6 +35,3 @@ let promotion = {
 			}, 2000); // 2000 = 2000ms = 2.0sec. 즉, 2초 마다 실행
 		}
 };
-
-//	make ajax function for this data
-const sendAjaxForPromotion = ajax.bind(promotion);

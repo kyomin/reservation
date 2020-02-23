@@ -26,14 +26,24 @@ public class Reservation {
 	@NotNull
 	private Integer productId;
 	
-	@NotEmpty @NotBlank @Email
+	@NotNull
+	@NotEmpty 
+	@NotBlank 
+	@Email
 	private String reservationEmail;					// 예약자 이메일
 	
-	@NotEmpty @NotBlank @Length(min = 2, max = 17)
+	@NotNull
+	@NotEmpty 
+	@NotBlank 
+	@Length(min = 2, max = 17)
 	private String reservationName;						// 예약자 성명
 	
+	@NotNull
+	@NotBlank
 	@Pattern(regexp="01[016789]-[0-9]{3,4}-[0-9]{4}")
 	private String reservationTelephone;				// 예약자 핸드폰 번호
 	
+	@NotNull
+	@NotBlank
 	private String reservationYearMonthDay;
 }

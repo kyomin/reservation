@@ -27,27 +27,22 @@
 	</insert>
 	
 	<select id="selectAllReservationsByReservationEmail" resultType="ReservationInfo">
-        SELECT cancel_flag AS cancelYn,
-		create_date AS createDate,
-		display_info_id AS displayInfoId,
-		modify_date AS modifyDate,
-		product_id AS productId,
-		reservation_date AS reservationDate,
-		reservation_email AS reservationEmail,
-		id AS reservationInfoId,
-		reservation_name AS reservationName,
-		reservation_tel AS reservationTelephone
+        SELECT 
+	        cancel_flag AS cancelYn,
+			create_date AS createDate,
+			display_info_id AS displayInfoId,
+			modify_date AS modifyDate,
+			product_id AS productId,
+			reservation_date AS reservationDate,
+			reservation_email AS reservationEmail,
+			id AS reservationInfoId,
+			reservation_name AS reservationName,
+			reservation_tel AS reservationTelephone
 		FROM reservation_info
 		WHERE reservation_email=#{reservationEmail}
     </select>
 	
-	<select id="selectAllReservationsCountByReservationEmail" resultType="int">
-        SELECT count(*) 
-        FROM reservation_info
-		WHERE reservation_email=#{reservationEmail}
-    </select>
-    
-    <select id="selectTotalPriceByReservationInfoId" resultType="int">
+	 <select id="selectTotalPriceByReservationInfoId" resultType="int">
         SELECT SUM(multyply_result)
 		FROM (
 		SELECT (reservation_info_price.count * product_price.price) AS multyply_result
@@ -56,4 +51,8 @@
 		WHERE reservation_info_id = #{reservationInfoId}
 		) AS multiply_price_by_count
     </select>
+    
+    <update id="updateCancelFlagByReservationInfoId" parameterType="int">
+		UPDATE reservation_info SET CANCEL_FLAG = TRUE WHERE ID = #{reservationInfoId};
+	</update>
 </mapper>

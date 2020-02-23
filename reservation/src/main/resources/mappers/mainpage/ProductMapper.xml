@@ -5,47 +5,77 @@
  
 <mapper namespace="kr.or.connect.reservation.dao.mainpage.ProductDao"> 
     <select id="selectAllProducts" resultType="Product">
-        SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName 
-        FROM (SELECT id AS productId, file_name AS productImageUrl, description AS productDescription, content AS productContent 
-        FROM product LEFT JOIN (SELECT product_id, file_name 
-        FROM product_image LEFT JOIN file_info 
-        ON product_image.file_id = file_info.id 
-        WHERE product_image.type = 'th') 
-        AS J1 ON product.id = J1.product_id) AS product LEFT JOIN display_info 
-        ON product.productId = display_info.product_id 
+        SELECT 
+	        productId, 
+	        productImageUrl, 
+	        productDescription, 
+	        productContent, 
+	        display_info.id AS displayInfoId, 
+	        place_name AS placeName 
+        FROM (SELECT 
+		        id AS productId, 
+		        file_name AS productImageUrl, 
+		        description AS productDescription, 
+		        content AS productContent 
+       		FROM product LEFT JOIN (SELECT 
+		        	product_id, 
+		        	file_name 
+    			FROM product_image LEFT JOIN file_info 
+    			ON product_image.file_id = file_info.id 
+    			WHERE product_image.type = 'th') AS product_image_with_type_th 
+     		ON product.id = product_image_with_type_th.product_id) AS product LEFT JOIN display_info 
+       	ON product.productId = display_info.product_id 
         LIMIT #{start}, #{limit};
     </select>
     
     <select id="selectProductsByCategoryId" resultType="Product">
-    	SELECT productId, productImageUrl, productDescription, productContent, display_info.id AS displayInfoId, place_name AS placeName 
-    	FROM (SELECT id AS productId, file_name AS productImageUrl, description AS productDescription, content AS productContent 
-    	FROM product LEFT JOIN (SELECT product_id, file_name 
-    	FROM product_image LEFT JOIN file_info 
-    	ON product_image.file_id = file_info.id 
-    	WHERE product_image.type = 'th') AS J1 
-    	ON product.id = J1.product_id WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
+    	SELECT 
+	    	productId, 
+	    	productImageUrl, 
+	    	productDescription, 
+	    	productContent, 
+	    	display_info.id AS displayInfoId, 
+	    	place_name AS placeName 
+    	FROM (SELECT 
+		    	id AS productId, 
+		    	file_name AS productImageUrl, 
+		    	description AS productDescription, 
+		    	content AS productContent 
+    		FROM product LEFT JOIN (SELECT 
+    				product_id, 
+    				file_name 
+    			FROM product_image LEFT JOIN file_info 
+    			ON product_image.file_id = file_info.id 
+    			WHERE product_image.type = 'th') AS product_image_with_type_th 
+   			ON product.id = product_image_with_type_th.product_id 
+   			WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
     	ON product.productId = display_info.product_id 
     	LIMIT #{start}, #{limit}
     </select>
     
     <select id="selectAllProductsCount" resultType="int">
     	SELECT count(*)  
-    	FROM (SELECT id AS productId 
-    	FROM product LEFT JOIN (SELECT product_id FROM product_image LEFT JOIN file_info 
-    	ON product_image.file_id = file_info.id 
-    	WHERE product_image.type = 'th') AS J1 
-    	ON product.id = J1.product_id) AS product LEFT JOIN display_info 
-    	ON product.productId = display_info.product_id
+    	FROM (SELECT 
+    			id AS productId 
+    		FROM product LEFT JOIN (SELECT product_id 
+    			FROM product_image LEFT JOIN file_info 
+    			ON product_image.file_id = file_info.id 
+    			WHERE product_image.type = 'th') AS product_image_with_type_th 
+   			ON product.id = product_image_with_type_th.product_id) AS product LEFT JOIN display_info 
+		ON product.productId = display_info.product_id
     </select>
     
     <select id="selectProductsCountByCategoryId" resultType="int">
     	SELECT count(*) 
-    	FROM (SELECT id AS productId 
-    	FROM product LEFT JOIN (SELECT product_id FROM product_image LEFT JOIN file_info 
-    	ON product_image.file_id = file_info.id 
-    	WHERE product_image.type = 'th') AS J1 
-    	ON product.id = J1.product_id 
-    	WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
+    	FROM (SELECT 
+    			id AS productId 
+    		FROM product LEFT JOIN (SELECT 
+    				product_id 
+    			FROM product_image LEFT JOIN file_info 
+    			ON product_image.file_id = file_info.id 
+    			WHERE product_image.type = 'th') AS product_image_with_type_th
+    		ON product.id = product_image_with_type_th.product_id 
+    		WHERE category_id = #{categoryId}) AS product LEFT JOIN display_info 
     	ON product.productId = display_info.product_id
     </select>
 </mapper>

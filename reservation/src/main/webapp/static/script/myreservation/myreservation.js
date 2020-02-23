@@ -1,5 +1,7 @@
 let myreservation = {
 		/* 		Variables	 */
+		getUrl : "",
+		responseData : [],
 		reservations : [],
 		size : 0,
 		prevCategoryId : 0,
@@ -28,10 +30,29 @@ let myreservation = {
 		dataByCategoryList : [],		// 카테고리 별 데이터 object 리스트
 		
 		/* 		Functions	 */
-		setData : function() {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		setGetUrlByReservationEmail : function(reservationEmail) {
+			this.getUrl = `api/reservations?reservationEmail=${reservationEmail}`;
+		},
+		
+		handleGetResponse : function(jsonResponse) {
+			this.setData(jsonResponse);
+		},
+		
+		setData : function(jsonResponse) {
 			// 서버로부터 받아온 데이터 셋팅
-			this.reservations = JSON.parse(sessionStorage.getItem("reservationsResponse")).reservations;
-			this.size = JSON.parse(sessionStorage.getItem("reservationsResponse")).size;
+			this.reservations = jsonResponse.reservations;
+			this.size = jsonResponse.size;
 			
 			// 예약 리스트의 각 총 가격에 대해 천 단위로 콤마 찍어주는 작업 수행
 			this.reservations.forEach( reservation => {
@@ -132,8 +153,68 @@ let myreservation = {
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[3].data, this.defaultTemplates[3], "reservationItem", ["_cancel"]);
 			}
+		},
+		
+		handleChangedCategory : function(currentCategoryId) {
+			// 화면을 깨끗이 지우고
+			this.removeAllReservationsList();
+			
+			// 해당 탭에 대한 부분만 그려준다.
+			switch(currentCategoryId) {
+			case 0:		// 전체
+				this.makeAllReservationsList();
+				break;
+			case 1:		// 이용예정
+				this.makeConfirmedReservationsList();
+				break;
+			case 2:		// 이용완료
+				this.makeUsedReservationsList();
+				break;
+			case 3: 	// 취소·환불
+				this.makeCanceledReservationsList();
+				break;				
+			}
+		},
+		
+		removeAllReservationsList : function() {
+			// 템플릿으로 그려진 부분들을 모두 제거해준다.
+			removeInnerHtml(["_confirmed", "_used", "_cancel"]);
+			
+			// 그 후 예약 리스트가 없음을 표시하는 부분을 모두 지워준다.
+			document.getElementById("err_confirmed").classList.add("hide");
+			document.getElementById("err_used").classList.add("hide");
+			document.getElementById("err_cancel").classList.add("hide");
 		}
 };
+
+/* 		myreservation.jsp 페이지 내에서 발생하는 함수 정의! 	 */
+function clickCancelBtn(id) {
+	// 해당 상품에 대한 취소 팝업 활성화
+	document.getElementById(`cancel_${id}`).style.display = "block";
+}
+
+// 해당 상품에 대한 취소 여부 팝업창 종료
+function exitCancelPopup(id) {
+	document.getElementById(`cancel_${id}`).style.display = "none";
+}
+
+function handleCancel(id) {
+	//send put request
+	var request = new XMLHttpRequest();
+	
+	request.addEventListener("load", () => {
+		if(request.status !== 200){
+			alert("취소되었습니다.");
+			location.reload(true);
+		} else {
+			alert("서버 내부 오류로 취소 작업에 실패했습니다. \n다시 시도해 주십시오.");
+			location.reload(true);
+		}
+	})
+	
+	request.open("PUT", `api/reservations/${id}`);
+	request.send();
+}
 
 
 /* 		myreservation.jsp 페이지 내에서 발생하는 이벤트 정의! 	 */
@@ -149,10 +230,13 @@ document.getElementById("_my_summary").addEventListener("click", function(e) {
 		// 이전 카테고리의 focus를 해제한 후, 다음 작업을 위해 현재 카테고리를 이전 카테고리로 지정한다.
 		document.getElementById(`reserve_category_${myreservation.prevCategoryId}`).classList.remove("on");
 		myreservation.prevCategoryId = myreservation.currentCategoryId;
+		
+		myreservation.handleChangedCategory(parseInt(myreservation.currentCategoryId));
 	}
 });
 
-document.addEventListener("DOMContentLoaded", function() {	
-	myreservation.setData();
+document.addEventListener("DOMContentLoaded", function() {
+	myreservation.setGetUrlByReservationEmail(sessionStorage.getItem("reservationEmail"));
+	myreservation.sendGetAjax();
 	drawMyEmail();
 });
