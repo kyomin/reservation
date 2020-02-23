@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.connect.reservation.dao.reserve.PriceDao"> 
+    <insert id="insertPrices" parameterType="Price">
+		INSERT INTO reservation_info_price
+		(
+			reservation_info_id,
+			product_price_id,
+			count
+		) VALUES
+		<foreach item="price" collection="prices" separator=",">
+			(
+				#{reservationInfoId},
+				#{price.productPriceId},
+				#{price.count}
+			)
+		</foreach>
+	</insert>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.or.connect.reservation.dao.mainpage.PromotionDao"> 
+    <select id="selectAllPromotions" resultType="Promotion">
+        SELECT 
+        	id, 
+        	productId, 
+        	productImageUrl 
+        FROM promotion LEFT JOIN (SELECT 
+        		product_id AS productId, 
+        		file_name AS productImageUrl 
+        	FROM product_image LEFT JOIN file_info 
+        	ON product_image.file_id = file_info.id 
+        	WHERE product_image.type = 'th') AS product_image_with_type_th 
+        ON promotion.product_id = product_image_with_type_th.productId
+    </select>
+</mapper>

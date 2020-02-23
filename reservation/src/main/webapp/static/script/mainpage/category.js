@@ -1,25 +1,30 @@
 let category = {
 		/* 		Variables	 */
-		method : "GET",
-		url : "api/categories",
-		templateId : "categoryItem",
-		parentNodeIds : ["category_tab"],
-		tabMenu : document.getElementById("_section_event_tab"),
+		getUrl : "api/categories",
 		prevCategoryId : 0,
 		currentCategoryId : 0,
 		defaultCategoryHTML : "<li class='item' data-category='0'><a class='anchor active' id='category0'> <span>전체리스트</span> </a></li>",
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
-			drawTemplateToHtml.bind(this)(jsonResponse.categories, this.defaultCategoryHTML);
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
+			drawTemplateToHtml(jsonResponse.categories, this.defaultCategoryHTML, "categoryItem", ["category_tab"]);
 		}
 };
 
-// 		make ajax function for this data
-const sendAjaxForCategory = ajax.bind(category);
 
 // 		카테고리 탭 요소들 클릭 시의 이벤트
-category.tabMenu.addEventListener("click", function(e) {
+document.getElementById("_section_event_tab").addEventListener("click", function(e) {
 	// 클릭된 해당 카테고리의 아이디 가져오기
 	category.currentCategoryId = e.target.closest("li").getAttribute("data-category");
 	
@@ -32,10 +37,10 @@ category.tabMenu.addEventListener("click", function(e) {
 		e.target.closest("a").classList.add("active");
 		
 		// 이전 카테고리의 focus를 해제한 후, 다음 작업을 위해 현재 카테고리를 이전 카테고리로 지정한다.
-		document.getElementById("category" + category.prevCategoryId).classList.remove("active");
+		document.getElementById(`category${category.prevCategoryId}`).classList.remove("active");
 		category.prevCategoryId = category.currentCategoryId;
 		
 		product.handleChangedCategory(parseInt(category.currentCategoryId));
-		sendAjaxForProduct();
+		product.sendGetAjax();
 	}
 });

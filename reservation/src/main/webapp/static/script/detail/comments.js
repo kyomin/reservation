@@ -1,12 +1,11 @@
 let comments = {
 		/* 		Variables	 */
 		comments : [],
-		templateId : "reviewItem",
-		parentNodeIds : ["review_list"],
 		commentsCount : 0,
 		
 		/* 		Functions	 */
-		setComments : function(comments) {
+		setData : function(comments) {
+			this.commentsCount = comments.length;
 			this.comments = comments.slice(0, 3);
 			
 			this.comments.map( (comment) => {
@@ -16,11 +15,10 @@ let comments = {
 		
 		handleData : function() {
 			// 한줄평 개수 등록
-			this.commentsCount = this.comments.length;
 			document.getElementById("contents_count").innerText = this.commentsCount + "건";
 			
 			// 가져온 데이터 해당 영역에 이미지 없이 그리기! (detail 페이지에서의 comment는 3개 까지만 노출)
-			drawTemplateToHtml.bind(this)(this.comments, "");
+			drawTemplateToHtml(this.comments, "", "reviewItem", ["review_list"]);
 			
 			// 이미지를 가지는 것들만 골라서 삽입하기!
 			let reviews = document.querySelectorAll(".review_area");
@@ -40,4 +38,4 @@ let comments = {
 				}
 			});
 		}
-}
+};

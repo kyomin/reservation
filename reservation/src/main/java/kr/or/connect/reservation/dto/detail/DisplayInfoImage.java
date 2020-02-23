@@ -1,8 +1,10 @@
 package kr.or.connect.reservation.dto.detail;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class DisplayInfoImage {
 	private String contentType;			// 파일 확장자
 	private String createDate;			// 생성일

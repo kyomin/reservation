@@ -1,17 +1,27 @@
 let product_detail = {
 		/* 		Variables	 */
-		method : "GET",
-		url : '',
+		getUrl : '',
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			//	상세 페이지를 이루는 각 데이터 셋팅!
-			average_score.setAverageScore(jsonResponse.averageScore);
-			comments.setComments(jsonResponse.comments);
-			display_info.setDisplayInfo(jsonResponse.displayInfo);
-			display_info_image.setDisplayInfoImage(jsonResponse.displayInfoImage);
-			product_images.setProductImages(jsonResponse.productImages);
-			product_prices.setProductPrices(jsonResponse.productPrices);
+			average_score.setData(jsonResponse.averageScore);
+			comments.setData(jsonResponse.comments);
+			display_info.setData(jsonResponse.displayInfo);
+			display_info_image.setData(jsonResponse.displayInfoImage);
+			product_images.setData(jsonResponse.productImages);
+			product_prices.setData(jsonResponse.productPrices);
 			
 			//	셋팅된 데이터를 각각 객체가 처리하도록 위임!
 			product_images.handleData();
@@ -20,10 +30,7 @@ let product_detail = {
 			display_info.handleData();
 		},
 		
-		setUrlByDisplayInfoId : function(displayInfoId) {
-			this.url = `api/products/${displayInfoId}`;
+		setGetUrlByDisplayInfoId : function(displayInfoId) {
+			this.getUrl = `api/products/${displayInfoId}`;
 		}
-}
-
-//	make ajax function for this data
-const sendAjaxForProductDetail = ajax.bind(product_detail);
+};

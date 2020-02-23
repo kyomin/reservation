@@ -1,8 +1,10 @@
 package kr.or.connect.reservation.dto.detail;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class DisplayInfo {
 	private int categoryId;				// 카테고리 id
 	private String categoryName;		// 카테고리 이름

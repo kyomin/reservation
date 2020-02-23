@@ -1,16 +1,25 @@
-var params = getParams(document.location.href);
-
 let reviews = {
 		/* 		Variables	 */
 		method : "GET",
-		url : '',
+		getUrl : '',
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {
 			//	리뷰 상세 페이지를 이루는 각 데이터 셋팅!
-			average_score.setAverageScore(jsonResponse.averageScore);
-			comments.setComments(jsonResponse.comments);
-			display_info.setDisplayInfo(jsonResponse.displayInfo);
+			average_score.setData(jsonResponse.averageScore);
+			comments.setData(jsonResponse.comments);
+			display_info.setData(jsonResponse.displayInfo);
 			
 			//	셋팅된 데이터를 각각 객체가 처리하도록 위임!
 			comments.handleData();
@@ -18,15 +27,12 @@ let reviews = {
 			display_info.handleData();
 		},
 		
-		setUrlByDisplayInfoId : function(displayInfoId) {
-			this.url = `api/products/${displayInfoId}`;
+		setGetUrlByDisplayInfoId : function(displayInfoId) {
+			this.getUrl = `api/products/${displayInfoId}`;
 		}
-}
-
-//	make ajax function for this data
-const sendAjaxForReviewDetail = ajax.bind(reviews);
+};
 
 document.addEventListener("DOMContentLoaded", function() {	
-	reviews.setUrlByDisplayInfoId(params.display_info_id);
-	sendAjaxForReviewDetail();
+	reviews.setGetUrlByDisplayInfoId(getParams(document.location.href).display_info_id);
+	reviews.sendGetAjax();
 });

@@ -3,6 +3,7 @@ package kr.or.connect.reservation.service.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.mainpage.CategoryDao;
 import kr.or.connect.reservation.dto.mainpage.Category;
@@ -17,6 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Category> getCategories() {
 		return categoryDao.selectCategories();
 	}
