@@ -25,20 +25,21 @@ public class ProductApiController {
 	}
 	
 	@GetMapping("/api/products")
-	public Map<String, Object> mapinpage(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) {
-		Map<String, Object> map = new HashMap<>();
+	public Map<String, Object> getProducts(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) {
+		Map<String, Object> resultMap = new HashMap<>();
 		Optional<Integer> judgeCategoryIdNullable = Optional.ofNullable(categoryId);
+		
 		int totalCount = Optional.ofNullable(productService.getProductsCount(judgeCategoryIdNullable)).orElseGet(() -> 0);
 		List<Product> products = productService.getProducts(start, judgeCategoryIdNullable);
 		
-		map.put("products", products);
-		map.put("totalCount", totalCount);
+		resultMap.put("products", products);
+		resultMap.put("totalCount", totalCount);
 		
-		return map;
+		return resultMap;
 	}
 	
 	@GetMapping("/api/products/{displayInfoId}")
-	public ResponseEntity<ProductDetail> detail(@PathVariable("displayInfoId") int displayInfoId) {
+	public ResponseEntity<ProductDetail> getProductDetail(@PathVariable("displayInfoId") int displayInfoId) {
 		return new ResponseEntity<>(productService.getProductDetail(displayInfoId), HttpStatus.OK);
 	}
 }

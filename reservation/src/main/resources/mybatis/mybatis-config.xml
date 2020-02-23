@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+            <typeAlias type="kr.or.connect.reservation.dto.mainpage.Product" alias="Product"/>
+            <typeAlias type="kr.or.connect.reservation.dto.mainpage.Category" alias="Category"/>
+            <typeAlias type="kr.or.connect.reservation.dto.mainpage.Promotion" alias="Promotion"/>
+            
+            <typeAlias type="kr.or.connect.reservation.dto.detail.Comment" alias="Comment"/>
+            <typeAlias type="kr.or.connect.reservation.dto.detail.CommentImage" alias="CommentImage"/>
+            <typeAlias type="kr.or.connect.reservation.dto.detail.DisplayInfo" alias="DisplayInfo"/>
+            <typeAlias type="kr.or.connect.reservation.dto.detail.DisplayInfoImage" alias="DisplayInfoImage"/>
+            <typeAlias type="kr.or.connect.reservation.dto.detail.ProductImage" alias="ProductImage"/>
+            <typeAlias type="kr.or.connect.reservation.dto.detail.ProductPrice" alias="ProductPrice"/>
+            
+            <typeAlias type="kr.or.connect.reservation.dto.reserve.Reservation" alias="Reservation"/>
+            <typeAlias type="kr.or.connect.reservation.dto.reserve.ReservationInfo" alias="ReservationInfo"/>
+            <typeAlias type="kr.or.connect.reservation.dto.reserve.Price" alias="Price"/>
+    </typeAliases>
+</configuration>

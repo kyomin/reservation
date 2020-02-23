@@ -1,9 +1,6 @@
 let product = {
 		/* 		Variables	 */
-		method : "GET",
-		url : "api/products",
-		templateId : "productItem",
-		parentNodeIds : ["left_product", "right_product"],
+		getUrl : "api/products",
 		startIndex : 0,		// 디폴트는 0번 인덱스부터 시작
 		currentCategoryId : 0,		// 디폴트는 (상품)전체보기
 		totalCount : 0,
@@ -12,11 +9,23 @@ let product = {
 		moreBtn : document.getElementById("more_btn"),
 		
 		/* 		Functions	 */
-		handleResponse : function(jsonResponse) {
-			drawTemplateToHtml.bind(this)(jsonResponse.products, "");
+		sendGetAjax : function() {
+			var oReq = new XMLHttpRequest();
+			
+			oReq.addEventListener("load", function() {
+				this.handleGetResponse(JSON.parse(oReq.responseText));
+			}.bind(this));
+			
+			oReq.open("GET", this.getUrl);
+			oReq.send();
+		},
+		
+		handleGetResponse : function(jsonResponse) {			
+			drawTemplateToHtml(jsonResponse.products, "", "productItem", ["left_product", "right_product"]);
+			
 			this.startIndex += jsonResponse.products.length;
 			this.totalCount = jsonResponse.totalCount;
-			this.url = this.currentCategoryId===0 ? (`api/products?start=${this.startIndex}`) : (`api/products?category_id=${this.currentCategoryId}&start=${this.startIndex}`);
+			this.getUrl = this.currentCategoryId===0 ? (`api/products?start=${this.startIndex}`) : (`api/products?category_id=${this.currentCategoryId}&start=${this.startIndex}`);
 			
 			// 해당 탭의 총 상품 개수 처리
 			document.getElementById("products_count").innerHTML = this.totalCount + '개';
@@ -28,15 +37,13 @@ let product = {
 		handleChangedCategory : function(currentCategoryId) {
 			this.startIndex = 0;
 			this.currentCategoryId = currentCategoryId;
-			this.url = currentCategoryId===0 ? ("api/products") : (`api/products?category_id=${currentCategoryId}`);
-			removeInnerHtml.bind(this)();
+			this.getUrl = currentCategoryId===0 ? ("api/products") : (`api/products?category_id=${currentCategoryId}`);
+			removeInnerHtml(["left_product", "right_product"]);
 		}
 };
 
-//	make ajax function for this data
-const sendAjaxForProduct = ajax.bind(product);
 
 //	상품 목록의 '더보기' 버튼 클릭 이벤트 등록
 product.moreBtn.addEventListener("click", function(e) {
-	sendAjaxForProduct();
+	product.sendGetAjax();
 });

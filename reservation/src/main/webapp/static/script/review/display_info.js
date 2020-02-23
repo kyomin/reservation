@@ -4,7 +4,7 @@ let display_info = {
 		descriptionContainerInCommentList : [],
 		
 		/* 		Functions	 */
-		setDisplayInfo : function(displayInfo) {
+		setData : function(displayInfo) {
 			this.displayInfo = displayInfo;
 		},
 		

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.connect.reservation.dao.reserve.ReservationDao"> 
+    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="id" parameterType="Reservation">
+		INSERT INTO reservation_info
+		(
+			product_id,
+			display_info_id,
+			reservation_name,
+			reservation_tel,
+			reservation_email,
+			reservation_date,
+			create_date,
+			modify_date
+		) VALUES
+		(
+			#{reservation.productId},
+			#{reservation.displayInfoId},
+			#{reservation.reservationName},
+			#{reservation.reservationTelephone},
+			#{reservation.reservationEmail},
+			#{reservation.reservationYearMonthDay},
+			NOW(),
+			NOW()
+		)  
+	</insert>
+	
+	<select id="selectAllReservationsByReservationEmail" resultType="ReservationInfo">
+        SELECT 
+	        cancel_flag AS cancelYn,
+			create_date AS createDate,
+			display_info_id AS displayInfoId,
+			modify_date AS modifyDate,
+			product_id AS productId,
+			reservation_date AS reservationDate,
+			reservation_email AS reservationEmail,
+			id AS reservationInfoId,
+			reservation_name AS reservationName,
+			reservation_tel AS reservationTelephone
+		FROM reservation_info
+		WHERE reservation_email=#{reservationEmail}
+    </select>
+	
+	 <select id="selectTotalPriceByReservationInfoId" resultType="int">
+        SELECT SUM(multyply_result)
+		FROM (
+		SELECT (reservation_info_price.count * product_price.price) AS multyply_result
+		FROM reservation_info_price LEFT JOIN product_price
+		ON reservation_info_price.product_price_id = product_price.id
+		WHERE reservation_info_id = #{reservationInfoId}
+		) AS multiply_price_by_count
+    </select>
+    
+    <update id="updateCancelFlagByReservationInfoId" parameterType="int">
+		UPDATE reservation_info SET CANCEL_FLAG = TRUE WHERE ID = #{reservationInfoId};
+	</update>
+</mapper>

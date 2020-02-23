@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.or.connect.reservation.dao.detail.DisplayInfoDao"> 
+    <select id="selectDisplayInfo" resultType="DisplayInfo">
+        SELECT 
+	        categoryId, 
+	        categoryName, 
+	        productContent, 
+	        productDescription, 
+	        productEvent, 
+	        productId, 
+	        display_info.create_date AS createDate, 
+	        display_info.id AS displayInfoId, 
+	        email, 
+	        homepage, 
+	        display_info.modify_date AS modifyDate,
+	        display_info.opening_hours AS openingHours, 
+	        display_info.place_lot AS placeLot, 
+	        display_info.place_name AS placeName, 
+	        display_info.place_street AS placeStreet, 
+	        tel As telephone 
+        FROM display_info LEFT JOIN 
+		        (SELECT 
+			        category.id AS categoryId, 
+			        category.name AS categoryName, 
+			        product.content AS productContent, 
+			        product.description AS productDescription, 
+			        product.event AS productEvent, 
+			        product.id AS productId 
+		        FROM product LEFT JOIN category 
+		        ON product.category_id = category.id 
+		        WHERE product.id = #{productId}) AS product_with_category 
+        ON display_info.product_id = product_with_category.productId 
+        WHERE display_info.id = #{displayInfoId}
+    </select>
+    
+    <select id="selectProductIdWithDisplayInfoId" resultType="int">
+        SELECT product_id AS productId 
+        FROM display_info 
+        WHERE id = #{displayInfoId}
+    </select>
+</mapper>
