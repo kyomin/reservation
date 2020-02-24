@@ -152,13 +152,6 @@
 		<version>2.0.0</version>
 	</dependency>
 
-	<!-- Mybatis log -->
-    <dependency>
-        <groupId>org.bgee.log4jdbc-log4j2</groupId>
-        <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
-        <version>1.16</version>
-    </dependency>
-	
 	<!-- commons-dbcp -->
     <dependency>
         <groupId>commons-dbcp</groupId>
@@ -173,50 +166,23 @@
         <version>${org.aspectj-version}</version>
     </dependency>
     
-    <!-- Logging -->
+    <!-- 로깅 관련 -->
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
-        <version>${org.slf4j-version}</version>
+        <version>1.7.25</version>
     </dependency>
-    
+
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>1.2.3</version>
+    </dependency>
+
     <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>jcl-over-slf4j</artifactId>
-        <version>${org.slf4j-version}</version>
-        <scope>runtime</scope>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-log4j12</artifactId>
-        <version>${org.slf4j-version}</version>
-        <scope>runtime</scope>
-    </dependency>
-    
-    <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.15</version>
-        <exclusions>
-            <exclusion>
-                <groupId>javax.mail</groupId>
-                <artifactId>mail</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>javax.jms</groupId>
-                <artifactId>jms</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>com.sun.jdmk</groupId>
-                <artifactId>jmxtools</artifactId>
-            </exclusion>
-            <exclusion>
-                <groupId>com.sun.jmx</groupId>
-                <artifactId>jmxri</artifactId>
-            </exclusion>
-        </exclusions>
-        <scope>runtime</scope>
+        <version>1.7.25</version>
     </dependency>
     
     <!-- Validator -->
@@ -230,6 +196,19 @@
     	<groupId>org.hibernate</groupId> 
     	<artifactId>hibernate-validator</artifactId> 
     	<version>4.2.0.Final</version> 
+    </dependency>
+    
+    <!-- 파일 업로드 관련 -->
+    <dependency>
+        <groupId>commons-fileupload</groupId>
+        <artifactId>commons-fileupload</artifactId>
+        <version>1.2.1</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.4</version>
     </dependency>
   </dependencies>
   

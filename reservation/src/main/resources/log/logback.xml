@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    
-    <!-- log4jdbc-log4j2 -->
-    <logger name="jdbc.sqlonly"     level="DEBUG" />
-    <logger name="jdbc.sqltiming"     level="INFO" />
-    <logger name="jdbc.audit"         level="WARN" />
-    <logger name="jdbc.resultset"     level="ERROR" />
-    <logger name="jdbc.resultsettable" level="ERROR" />
-    <logger name="jdbc.connection"     level="INFO" />
- 
+
+<configuration scan="true" scanPeriod="30 seconds">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{HH:mm} %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/tmp/access.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/tmp/access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{HH:mm} %-5level %logger{36} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="info"/>
+    <logger name="kr.or.connect" level="debug"/>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
 </configuration>
