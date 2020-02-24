@@ -33,20 +33,8 @@
 				<div class="write_act">
 					<p class="title_star">별점과 이용경험을 남겨주세요.</p>
 					<div class="review_rating rating_point">
-						<div class="rating">
-							<!-- [D] 해당 별점이 선택될 때 그 점수 이하의 input엘리먼트에 checked 클래스 추가 -->
-							<input type="checkbox" name="rating2" value="1" class="rating_rdo" title="1점">
-							<span class="span"></span>
-							<input type="checkbox" name="rating3" value="2" class="rating_rdo" title="2점">
-							<span class="span"></span>
-							<input type="checkbox" name="rating4" value="3" class="rating_rdo" title="3점" >
-							<span class="span"></span>
-							<input type="checkbox" name="rating5" value="4" class="rating_rdo" title="4점">
-							<span class="span"></span>
-							<input type="checkbox" name="rating6" value="5" class="rating_rdo" title="5점">
-							<span class="span"></span>
-							<!-- [D] 0점일 때 gray_star 추기 -->
-							<span class="star_rank gray_star">0</span>
+						<div class="rating" id="_rating">
+							<!-- 리뷰 별점들이 그려진다. -->						
 						</div>
 					</div>
 				</div>
@@ -54,17 +42,12 @@
 
 				<!-- 리뷰 입력 -->
 				<div class="review_contents write">
-					<!-- [D] review_write_info 클릭 시 자신을 숨기고 review_textarea 에 focus를 보낸다. -->
-					<a class="review_write_info">
-						<span class="middot">
-							실 사용자의 리뷰는 상품명의 더 나은 서비스 제공과 다른 사용자들의 선택에 큰 도움이 됩니다.
-						</span><br>
-						<span class="middot">
-							소중한 리뷰에 대한 감사로 네이버페이 포인트 500원을 적립해드립니다.
-						</span>
-						<span class="left_space">(단, 리뷰 포인트는 ID 당 1일 최대 5건까지 지급됩니다.)</span>
-					</a>
-					<textarea cols="30" rows="10" class="review_textarea"></textarea>
+					<textarea 
+						cols="30" 
+						rows="10" 
+						class="review_textarea"
+						placeholder="실 사용자의 리뷰는 상품명의 더 나은 서비스 제공과 다른 사용자들의 선택에 큰 도움이 됩니다.&#13;&#10;&#13;&#10;소중한 리뷰에 대한 감사로 네이버페이 포인트 500원을 적립해드립니다.&#13;&#10;&#13;&#10;(단, 리뷰 포인트는 ID 당 1일 최대 5건까지 지급됩니다.)"
+					></textarea>
 				</div>
 				<!-- //리뷰 입력 -->
 
@@ -119,5 +102,19 @@
 			<span class="copyright">© NAVER Corp.</span>
 		</div>
 	</footer>
+	
+	<!-- 별점 리스트를 위한 템플릿  -->
+    <script type="rv-template" id="ratingItem">
+        <input type="checkbox" class="rating_rdo" id="rating_rdo_{{num}}" title="{{num}}점" onClick="javascript:clickStar({{num}})">
+		<span class="span"></span>
+    </script>
+    
+	<!-- 템플릿 처리를 위한 자바스크립트 Handlebar Library -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>   
+	
+	<!-- js 파일 include -->
+	<script type="text/javascript" src="static/script/common/common.js"></script>
+	
+	<script type="text/javascript" src="static/script/reviewWrite/reviewWrite.js"></script>
 </body>
 </html>
