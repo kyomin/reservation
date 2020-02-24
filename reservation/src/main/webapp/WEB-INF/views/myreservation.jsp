@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div id="container">
+	<div id="container">
 		<div class="header">
 			<header class="header_tit">
 				<h1 class="logo">
@@ -24,93 +24,64 @@
 					<span title="내예약" class="viewReservation" id="my_email" style="font-size:15px;"></span> 
 				</a>
 				<a onClick="handleLogout();" class="logout_btn hide" id="_logout_btn">
-                	<span>로그아웃</span>
-                </a>
+	               	<span>로그아웃</span>
+	               </a>
 			</header>
 		</div>
 		<hr>
-		<div class="ct">
-			<div class="section_my">
-				<!-- 예약 현황 -->
-				<div class="my_summary" id="_my_summary">
-					<ul class="summary_board" id="_summary_board">
-						<!-- 나의 예약 요약 정보가 탭으로 그려지는 부분이다. -->
-					</ul>
-				</div>
-				<!--// 예약 현황 -->
-
-				<!-- 내 예약 리스트 -->
-				<div class="wrap_mylist">
-					<ul class="list_cards" ng-if="bookedLists.length > 0">						
-						<li class="card confirmed" id="_confirmed">
-							<!-- 예약 확정된 리스트가 뿌려지는 부분이다. -->
-						</li>
-						<!-- 예약 리스트 없음 -->
-						<div class="err hide" id="err_confirmed"> <i class="spr_book ico_info_nolist"></i>
-							<h1 class="tit">예약 리스트가 없습니다</h1>
-						</div>
-						<li class="card used" id="_used">
-							<!-- 이용 완료된 리스트가 뿌려지는 부분이다. -->
-						</li>
-						<!-- 예약 리스트 없음 -->
-						<div class="err hide" id="err_used"> <i class="spr_book ico_info_nolist"></i>
-							<h1 class="tit">예약 리스트가 없습니다</h1>
-						</div>
-						<li class="card used cancel" id="_cancel">
-							<!-- 취소된 예약 리스트가 뿌려지는 부분이다. -->														
-						</li>
-						<!-- 예약 리스트 없음 -->
-						<div class="err hide" id="err_cancel"> <i class="spr_book ico_info_nolist"></i>
-							<h1 class="tit">예약 리스트가 없습니다</h1>
-						</div>
+			<div class="ct">
+				<div class="section_my">
+					<!-- 예약 현황 -->
+					<div class="my_summary" id="_my_summary">
+						<ul class="summary_board" id="_summary_board">
+							<!-- 나의 예약 요약 정보가 탭으로 그려지는 부분이다. -->
+						</ul>
+					</div>
+					<!--// 예약 현황 -->
+		
+					<!-- 내 예약 리스트 -->
+					<div class="wrap_mylist">
+						<ul class="list_cards" ng-if="bookedLists.length > 0">						
+							<li class="card confirmed" id="_confirmed">
+								<!-- 예약 확정된 리스트가 뿌려지는 부분이다. -->
+							</li>
+							<!-- 예약 리스트 없음 -->
+							<div class="err hide" id="err_confirmed"> <i class="spr_book ico_info_nolist"></i>
+								<h1 class="tit">예약 리스트가 없습니다</h1>
+							</div>
+							<li class="card used" id="_used">
+								<!-- 이용 완료된 리스트가 뿌려지는 부분이다. -->
+							</li>
+							<!-- 예약 리스트 없음 -->
+							<div class="err hide" id="err_used"> <i class="spr_book ico_info_nolist"></i>
+								<h1 class="tit">예약 리스트가 없습니다</h1>
+							</div>
+							<li class="card used cancel" id="_cancel">
+								<!-- 취소된 예약 리스트가 뿌려지는 부분이다. -->														
+							</li>
+							<!-- 예약 리스트 없음 -->
+							<div class="err hide" id="err_cancel"> <i class="spr_book ico_info_nolist"></i>
+								<h1 class="tit">예약 리스트가 없습니다</h1>
+							</div>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<hr>
+		<hr>
+	</div>
+	
+	<footer>
+		<div class="gototop">
+			<a href="javascript:scroll(0,0)" class="lnk_top"> 
+				<span class="lnk_top_text">TOP</span> 
+			</a>
 		</div>
-		<footer>
-			<div class="gototop">
-				<a href="javascript:scroll(0,0)" class="lnk_top"> 
-					<span class="lnk_top_text">TOP</span> 
-				</a>
-			</div>
-			<div id="footer" class="footer">
-				<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
-				<span class="copyright">© NAVER Corp.</span>
-			</div>
-		</footer>
+		<div id="footer" class="footer">
+			<p class="dsc_footer">네이버(주)는 통신판매의 당사자가 아니며, 상품의정보, 거래조건, 이용 및 환불 등과 관련한 의무와 책임은 각 회원에게 있습니다.</p>
+			<span class="copyright">© NAVER Corp.</span>
+		</div>
+	</footer>
 
-		<!-- 취소 팝업 -->
-		<!-- [D] 활성화 display:block, 아니오 버튼 or 닫기 버튼 클릭 시 숨김 display:none; -->
-		<div class="popup_booking_wrapper" style="display:none;">
-			<div class="dimm_dark" style="display:block"></div>
-			<div class="popup_booking refund">
-				<h1 class="pop_tit">
-					<span>서비스명/상품명</span>
-					<small class="sm">2000.0.00.(월)2000.0.00.(일)</small>
-				</h1>
-				<div class="nomember_alert">
-					<p>취소하시겠습니까?</p>
-				</div>
-				<div class="pop_bottom_btnarea">
-					<div class="btn_gray">
-						<a class="btn_bottom"><span>아니오</span></a>
-					</div>
-					<div class="btn_green">
-						<a class="btn_bottom"><span>예</span></a>
-					</div>
-				</div>
-				<!-- 닫기 -->
-				<a class="popup_btn_close" title="close">
-					<i class="spr_book2 ico_cls"></i>
-				</a>
-				<!--// 닫기 -->
-			</div>
-		</div>
-		<!--// 취소 팝업 -->
-		
-		
 	<!-- 나의 예약 요약정보 카테고리 탭을 위한 템플릿  -->
     <script type="rv-template" id="reserveCategoryItem">
 		<li class="item" data-category="{{id}}">
@@ -172,8 +143,8 @@
 								</em>
 							</div>
 													
-							<div class="booking_cancel" onClick="javascript:clickCancelBtn({{reservationInfoId}})">
-								<button class="btn"><span>취소</span></button>
+							<div class="booking_cancel hide" id="booking_cancel_{{reservationInfoId}}">
+								<button class="btn"><span id="btn_text_{{reservationInfoId}}">취소</span></button>
 							</div>
 						</div>
 					</div>		

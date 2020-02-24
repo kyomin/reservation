@@ -23,7 +23,7 @@ let category = {
 };
 
 
-// 		카테고리 탭 요소들 클릭 시의 이벤트
+//	카테고리 탭 요소들 클릭 시의 이벤트
 document.getElementById("_section_event_tab").addEventListener("click", function(e) {
 	// 클릭된 해당 카테고리의 아이디 가져오기
 	category.currentCategoryId = e.target.closest("li").getAttribute("data-category");

@@ -78,7 +78,7 @@ let myreservation = {
 			this.reservations.forEach( (reservation) => {
 				// 현재 날짜를 얻어서 reservationDate와 비교할 것이다.
 				let today = new Date();
-				today.setDate = today.toMySQLDateFormat();
+				today= today.toMySQLDateFormat();
 				
 				// 취소된 상품이라면
 				if(reservation.cancelYn) {
@@ -131,10 +131,18 @@ let myreservation = {
 		
 		makeConfirmedReservationsList : function() {	// 예약 확정 리스트 그리기
 			if(this.dataByCategoryList[1].data.length === 0) {
+				document.getElementById("_confirmed").innerHTML += this.defaultTemplates[1];
 				document.getElementById("err_confirmed").classList.remove("hide");
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[1].data, this.defaultTemplates[1], "reservationItem", ["_confirmed"]);
 			}
+			
+			// '취소' 버튼을 넣어주는 작업 및 그 기능에 대한 셋팅이다.
+			this.dataByCategoryList[1].data.forEach( (data) => {
+				let cancelBtnElement = document.getElementById(`booking_cancel_${data.reservationInfoId}`);
+				cancelBtnElement.classList.remove("hide");
+				cancelBtnElement.setAttribute("onclick", `javascript:clickCancelBtn(${data.reservationInfoId})`);
+			});
 		},
 		
 		makeUsedReservationsList : function() {		// 이용 완료된 리스트 그리기
@@ -144,6 +152,16 @@ let myreservation = {
 			} else {
 				drawTemplateToHtml(this.dataByCategoryList[2].data, this.defaultTemplates[2], "reservationItem", ["_used"]);
 			}
+			
+			// '예약자 리뷰 남기기' 버튼을 넣어주는 작업 및 그 기능에 대한 셋팅이다.
+			this.dataByCategoryList[2].data.forEach( (data) => {
+				let reviewBtnElement = document.getElementById(`booking_cancel_${data.reservationInfoId}`);
+				reviewBtnElement.classList.remove("hide");	
+				reviewBtnElement.setAttribute("onclick", "javascript:linkToReviewWritePage()");
+				
+				let reviewBtnText = document.getElementById(`btn_text_${data.reservationInfoId}`);
+				reviewBtnText.innerText = "예약자 리뷰 남기기";
+			});
 		},
 		
 		makeCanceledReservationsList : function() {		// 취소된 예약 리스트 그리기
@@ -191,12 +209,12 @@ let myreservation = {
 function clickCancelBtn(id) {
 	// 해당 상품에 대한 취소 팝업 활성화
 	document.getElementById(`cancel_${id}`).style.display = "block";
-}
+};
 
 // 해당 상품에 대한 취소 여부 팝업창 종료
 function exitCancelPopup(id) {
 	document.getElementById(`cancel_${id}`).style.display = "none";
-}
+};
 
 function handleCancel(id) {
 	//send put request
@@ -210,11 +228,15 @@ function handleCancel(id) {
 			alert("서버 내부 오류로 취소 작업에 실패했습니다. \n다시 시도해 주십시오.");
 			location.reload(true);
 		}
-	})
+	});
 	
 	request.open("PUT", `api/reservations/${id}`);
 	request.send();
-}
+};
+
+function linkToReviewWritePage() {
+	location.href = 'reviewWrite';
+};
 
 
 /* 		myreservation.jsp 페이지 내에서 발생하는 이벤트 정의! 	 */
