@@ -29,7 +29,7 @@ public class ProductApiController {
 		Map<String, Object> resultMap = new HashMap<>();
 		Optional<Integer> judgeCategoryIdNullable = Optional.ofNullable(categoryId);
 		
-		int totalCount = Optional.ofNullable(productService.getProductsCount(judgeCategoryIdNullable)).orElseGet(() -> 0);
+		int totalCount = productService.getProductsCount(judgeCategoryIdNullable);
 		List<Product> products = productService.getProducts(start, judgeCategoryIdNullable);
 		
 		resultMap.put("products", products);

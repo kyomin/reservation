@@ -111,7 +111,7 @@ function handleAgreement(id) {
 	}
 };
 
-//예매 갯수가 1개이상, 예매자 입력, 연락처 입력, 이메일 입력, 약관 동의 된 상태라면 모든 값이 유효한상태이다.
+// 예매 갯수가 1개이상, 예매자 입력, 연락처 입력, 이메일 입력, 약관 동의 된 상태라면 모든 값이 유효한상태이다.
 function checkValidation() {
 	// 예매 갯수 검증
 	if(reserve.totalCount === 0) {
@@ -191,11 +191,11 @@ function handleSubmit() {
 
 
 /* 		reserve.jsp 페이지 내에서 발생하는 이벤트 정의! 	 */
-document.getElementById("reservationName").addEventListener('change', function(e) {
+document.getElementById("reservationName").addEventListener('keyup', function(e) {
 	reserve.requestData[e.target.name] = e.target.value;
 });
 
-document.getElementById("reservationTelephone").addEventListener('change', function(e) {
+document.getElementById("reservationTelephone").addEventListener('keyup', function(e) {
 	reserve.requestData[e.target.name] = e.target.value;
 	
 	if(e.target.value.match(/01[01789]-\d{3,4}-\d{4}/) === null) {
@@ -205,7 +205,7 @@ document.getElementById("reservationTelephone").addEventListener('change', funct
 	}
 });
 
-document.getElementById("reservationEmail").addEventListener('change', function(e) {
+document.getElementById("reservationEmail").addEventListener('keyup', function(e) {
 	reserve.requestData[e.target.name] = e.target.value;
 	
 	if(e.target.value.match(/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/) === null) {

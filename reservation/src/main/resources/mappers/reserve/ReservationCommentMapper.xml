@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.connect.reservation.dao.reserve.ReservationCommentDao"> 
+    <insert id="insertReservationComment" parameterType="ReservationComment">
+		INSERT INTO reservation_user_comment
+		(
+			product_id,
+			reservation_info_id,
+			score,
+			create_date,
+			modify_date
+		) VALUES
+		(
+			#{reservationComment.productId},
+			#{reservationComment.reservationInfoId},
+			#{reservationComment.score},
+			#{reservationComment.comment},
+			NOW(),
+			NOW()
+		)  
+	</insert>
+</mapper>

@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.connect.reservation.dto.reserve.ReservationComment;
 import kr.or.connect.reservation.dto.reserve.Reservation;
 import kr.or.connect.reservation.dto.reserve.ReservationInfo;
 import kr.or.connect.reservation.service.ReservationService;
@@ -49,7 +51,7 @@ public class ReservationApiController {
 		resultMap.put("reservations", reservations);
 		resultMap.put("size", reservations.size());
 		
-		return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		return new ResponseEntity<>(resultMap, HttpStatus.OK);
 	}
 	
 	@PutMapping("/{reservationId}")
@@ -57,5 +59,11 @@ public class ReservationApiController {
 		reservationService.updateCancelFlagByReservationInfoId(reservationId);
 	
 		return new ResponseEntity<>("success", HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/{reservationInfoId}/comments")
+	public ResponseEntity<?> createReservationComment(@Valid @ModelAttribute ReservationComment reservationComment) {
+		// reviewService.createReservationComment(commentWrite);
+        return new ResponseEntity<>("success", HttpStatus.CREATED);
 	}
 }

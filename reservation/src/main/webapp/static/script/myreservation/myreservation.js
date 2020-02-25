@@ -157,7 +157,7 @@ let myreservation = {
 			this.dataByCategoryList[2].data.forEach( (data) => {
 				let reviewBtnElement = document.getElementById(`booking_cancel_${data.reservationInfoId}`);
 				reviewBtnElement.classList.remove("hide");	
-				reviewBtnElement.setAttribute("onclick", "javascript:linkToReviewWritePage()");
+				reviewBtnElement.setAttribute("onclick", `javascript:linkToReviewWritePage(${data.productId}, ${data.reservationInfoId}, '${data.displayInfo.productDescription}')`);
 				
 				let reviewBtnText = document.getElementById(`btn_text_${data.reservationInfoId}`);
 				reviewBtnText.innerText = "예약자 리뷰 남기기";
@@ -234,8 +234,8 @@ function handleCancel(id) {
 	request.send();
 };
 
-function linkToReviewWritePage() {
-	location.href = 'reviewWrite';
+function linkToReviewWritePage(productId, reservationInfoId, title) {
+	location.href = `reviewWrite?product_id=${productId}&reservation_info_id=${reservationInfoId}&title=${title}`;
 };
 
 
@@ -258,6 +258,12 @@ document.getElementById("_my_summary").addEventListener("click", function(e) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
+	// 만일 로그인하지 않은 상태로 해당 페이지로 들어왔다면 홈페이지로 이동시킨다.
+	if(sessionStorage.getItem("reservationEmail") === null) {
+		alert("잘못된 접근입니다. \n로그인 하십시오.");
+		location.href="/reservation";
+	}
+	
 	myreservation.setGetUrlByReservationEmail(sessionStorage.getItem("reservationEmail"));
 	myreservation.sendGetAjax();
 	drawMyEmail();

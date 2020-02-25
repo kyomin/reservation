@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.connect.reservation.dao.detail.DisplayInfoDao;
+import kr.or.connect.reservation.dao.reserve.ReservationCommentDao;
 import kr.or.connect.reservation.dao.reserve.PriceDao;
 import kr.or.connect.reservation.dao.reserve.ReservationDao;
+import kr.or.connect.reservation.dto.reserve.ReservationComment;
 import kr.or.connect.reservation.dto.reserve.Reservation;
 import kr.or.connect.reservation.dto.reserve.ReservationInfo;
 import kr.or.connect.reservation.service.ReservationService;
@@ -16,13 +18,15 @@ import kr.or.connect.reservation.service.ReservationService;
 public class ReservationServiceImpl implements ReservationService {
 	private final ReservationDao reservationDao;
 	private final PriceDao priceDao;
+	private final ReservationCommentDao reservationCommentDao;
 	
 	private final DisplayInfoDao displayInfoDao;
 	
-	public ReservationServiceImpl(ReservationDao reservationDao, PriceDao priceDao, DisplayInfoDao displayInfoDao) {
+	public ReservationServiceImpl(ReservationDao reservationDao, PriceDao priceDao, DisplayInfoDao displayInfoDao, ReservationCommentDao reservationCommentDao) {
 		this.reservationDao = reservationDao;
 		this.priceDao = priceDao;
 		this.displayInfoDao = displayInfoDao;
+		this.reservationCommentDao = reservationCommentDao;
 	}
 	
 	@Override
@@ -49,5 +53,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public void updateCancelFlagByReservationInfoId(Integer reservationInfoId) {
 		reservationDao.updateCancelFlagByReservationInfoId(reservationInfoId);
+	}
+	
+	@Override
+	@Transactional
+	public void createReservationComment(ReservationComment reservationComment) {
+		reservationCommentDao.insertReservationComment(reservationComment);
 	}
 }
