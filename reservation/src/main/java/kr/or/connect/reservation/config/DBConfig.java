@@ -10,9 +10,11 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,11 +22,19 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:datasource.properties")
 @MapperScan(basePackages = {"kr.or.connect.reservation.dao"})
 public class DBConfig implements TransactionManagementConfigurer {
-	private String driverClassName = "com.mysql.jdbc.Driver";
-	private String url = "jdbc:mysql://10.113.116.52:13306/intern15?useUnicode=true&characterEncoding=utf8";
+	@Value("${reservation.database.driver-class-name}")
+	private String driverClassName;
+	
+	@Value("${reservation.database.url}")
+	private String url;
+	
+	@Value("${reservation.database.username}")
 	private String username = "intern15";
+	
+	@Value("${reservation.database.password}")
 	private String password = "intern15";
 	
 	@Autowired
