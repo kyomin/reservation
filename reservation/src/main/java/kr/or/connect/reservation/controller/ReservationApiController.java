@@ -34,17 +34,14 @@ public class ReservationApiController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> createReservation(@RequestBody @Valid Reservation reservation, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
-		}
-	
+	public ResponseEntity<?> createReservation(@RequestBody @Valid Reservation reservation, BindingResult bindingResult) throws Exception {
 		reservationService.createReservations(reservation);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+        
+		return new ResponseEntity<>("success", HttpStatus.CREATED);
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getReservations(@RequestParam(name = "reservationEmail", required=false)String reservationEmail) {
+	public ResponseEntity<?> getReservations(@RequestParam(name = "reservationEmail", required=false)String reservationEmail) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		List<ReservationInfo> reservations = reservationService.getReservations(reservationEmail);
 		
@@ -55,15 +52,15 @@ public class ReservationApiController {
 	}
 	
 	@PutMapping("/{reservationId}")
-	public ResponseEntity<?> updateCancelFlagByReservationInfoId(@PathVariable(name = "reservationId")Integer reservationId) {
+	public ResponseEntity<?> updateCancelFlagByReservationInfoId(@PathVariable(name = "reservationId")Integer reservationId) throws Exception {
 		reservationService.updateCancelFlagByReservationInfoId(reservationId);
 	
 		return new ResponseEntity<>("success", HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/{reservationInfoId}/comments")
-	public ResponseEntity<?> createReservationComment(@Valid @ModelAttribute ReservationComment reservationComment) {
-		// reviewService.createReservationComment(commentWrite);
+	public ResponseEntity<?> createReservationComment(@Valid @ModelAttribute ReservationComment reservationComment) throws Exception {
+		// reservationService.createReservationComment(reservationComment);
         return new ResponseEntity<>("success", HttpStatus.CREATED);
 	}
 }

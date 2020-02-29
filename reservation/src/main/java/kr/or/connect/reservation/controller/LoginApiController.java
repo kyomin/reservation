@@ -23,7 +23,7 @@ public class LoginApiController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> login(@RequestBody @Valid Login login, BindingResult bindingResult) {
+	public ResponseEntity<?> login(@RequestBody @Valid Login login, BindingResult bindingResult) throws Exception {
 		// 이메일 형식을 서버에서 한 번 더 검증하여 잘못 되었을 때의 응답이다.
 		if(bindingResult.hasErrors()) {
 			return new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);

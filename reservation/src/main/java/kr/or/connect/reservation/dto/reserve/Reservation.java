@@ -26,21 +26,21 @@ public class Reservation {
 	@NotNull
 	private Integer productId;
 	
-	@NotNull
+	@NotNull(message = "이메일을 입력하세요.")
 	@NotEmpty 
 	@NotBlank 
-	@Email
+	@Email(message = "이메일 형식이 맞지 않습니다.")
 	private String reservationEmail;					// 예약자 이메일
 	
-	@NotNull
+	@NotNull(message = "이름을 입력하세요.")
 	@NotEmpty 
 	@NotBlank 
-	@Length(min = 2, max = 17)
+	@Length(min = 2, max = 17, message = "이름을 2자 이상, 17자 이하로 입력하세요.")
 	private String reservationName;						// 예약자 성명
 	
-	@NotNull
+	@NotNull(message = "핸드폰 번호를 입력하세요.")
 	@NotBlank
-	@Pattern(regexp="01[016789]-[0-9]{3,4}-[0-9]{4}")
+	@Pattern(regexp="01[016789]-[0-9]{3,4}-[0-9]{4}", message = "핸드폰 번호 형식이 맞지 않습니다.")
 	private String reservationTelephone;				// 예약자 핸드폰 번호
 	
 	@NotNull

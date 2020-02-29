@@ -25,7 +25,7 @@ public class ProductApiController {
 	}
 	
 	@GetMapping("/api/products")
-	public Map<String, Object> getProducts(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) {
+	public Map<String, Object> getProducts(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		Optional<Integer> judgeCategoryIdNullable = Optional.ofNullable(categoryId);
 		
@@ -39,7 +39,7 @@ public class ProductApiController {
 	}
 	
 	@GetMapping("/api/products/{displayInfoId}")
-	public ResponseEntity<ProductDetail> getProductDetail(@PathVariable("displayInfoId") int displayInfoId) {
+	public ResponseEntity<ProductDetail> getProductDetail(@PathVariable("displayInfoId") int displayInfoId) throws Exception {
 		return new ResponseEntity<>(productService.getProductDetail(displayInfoId), HttpStatus.OK);
 	}
 }

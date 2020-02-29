@@ -21,7 +21,7 @@ public class PromotionApiController {
 	}
 	
 	@GetMapping
-	public Map<String, Object> getPromotions() {
+	public Map<String, Object> getPromotions() throws Exception {
 		List<Promotion> promotions = promotionService.getPromotions();
 		Map<String, Object> map = new HashMap<>();
 		

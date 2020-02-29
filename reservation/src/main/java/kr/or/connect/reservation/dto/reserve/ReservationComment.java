@@ -20,14 +20,14 @@ public class ReservationComment {
 	@NotNull
 	Integer reservationInfoId;	// 예약 정보 id
 	
-	@NotNull
+	@NotNull(message = "별점을 기입하세요.")
 	Integer score;				// 별점
 	
-	@NotNull
+	@NotNull(message = "예매자 리뷰를 입력하세요.")
 	@NotEmpty 
 	@NotBlank 
-	@Length(min = 5, max = 400)
-	String comment;			// 평
+	@Length(min = 5, max = 400, message = "예매자 리뷰를 5자 이상, 400자 내로 입력하세요.")
+	String comment;				// 평
 	
 	
 	/*		reservation_user_comment_image 및 file_info 테이블 관련	*/
