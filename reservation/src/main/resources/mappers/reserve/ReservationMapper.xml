@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.connect.reservation.dao.reserve.ReservationDao"> 
-    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="id" parameterType="Reservation">
+    <insert id="insertReservation" useGeneratedKeys="true" keyProperty="reservation.id" parameterType="Reservation">
 		INSERT INTO reservation_info
 		(
 			product_id,

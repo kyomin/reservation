@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.connect.reservation.dao.file.ImageFileDao">
+	<select id="selectSaveFileNameById" resultType="ImageFile">
+		SELECT 
+			file_name AS 'fileName', 
+			save_file_name AS 'saveFileName', 
+			content_type AS 'contentType' 
+		FROM file_info 
+		WHERE id=#{id} AND delete_flag=FALSE;
+	</select>
+</mapper>

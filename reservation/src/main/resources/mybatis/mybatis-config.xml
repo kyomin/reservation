@@ -17,5 +17,7 @@
             <typeAlias type="kr.or.connect.reservation.dto.reserve.ReservationInfo" alias="ReservationInfo"/>
             <typeAlias type="kr.or.connect.reservation.dto.reserve.ReservationComment" alias="ReservationComment"/>
             <typeAlias type="kr.or.connect.reservation.dto.reserve.Price" alias="Price"/>
+            
+            <typeAlias type="kr.or.connect.reservation.dto.file.ImageFile" alias="ImageFile"/>
     </typeAliases>
 </configuration>

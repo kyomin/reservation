@@ -19,9 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.connect.reservation.dto.reserve.ReservationComment;
 import kr.or.connect.reservation.dto.reserve.Reservation;
+import kr.or.connect.reservation.dto.reserve.ReservationComment;
 import kr.or.connect.reservation.dto.reserve.ReservationInfo;
+import kr.or.connect.reservation.enums.ResponseMessage;
 import kr.or.connect.reservation.service.ReservationService;
 
 @RestController
@@ -43,7 +44,7 @@ public class ReservationApiController {
 	@GetMapping
 	public ResponseEntity<?> getReservations(@RequestParam(name = "reservationEmail", required=false)String reservationEmail) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
-		List<ReservationInfo> reservations = reservationService.getReservations(reservationEmail);
+		List<ReservationInfo> reservations = reservationService.getMyReservationInfoByEmail(reservationEmail);
 		
 		resultMap.put("reservations", reservations);
 		resultMap.put("size", reservations.size());
@@ -55,12 +56,12 @@ public class ReservationApiController {
 	public ResponseEntity<?> updateCancelFlagByReservationInfoId(@PathVariable(name = "reservationId")Integer reservationId) throws Exception {
 		reservationService.updateCancelFlagByReservationInfoId(reservationId);
 	
-		return new ResponseEntity<>("success", HttpStatus.CREATED);
+		return new ResponseEntity<>(ResponseMessage.SUCCESS, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/{reservationInfoId}/comments")
 	public ResponseEntity<?> createReservationComment(@Valid @ModelAttribute ReservationComment reservationComment) throws Exception {
-		// reservationService.createReservationComment(reservationComment);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+		reservationService.createReservationComment(reservationComment);
+        return new ResponseEntity<>(ResponseMessage.SUCCESS, HttpStatus.CREATED);
 	}
 }

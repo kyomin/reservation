@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.connect.reservation.dao.reserve.ReservationCommentDao"> 
-    <insert id="insertReservationComment" parameterType="ReservationComment">
+    <insert id="insertReservationComment" useGeneratedKeys="true" keyProperty="reservationComment.reservationUserCommentId" parameterType="ReservationComment">
 		INSERT INTO reservation_user_comment
 		(
 			product_id,
@@ -19,5 +19,39 @@
 			NOW(),
 			NOW()
 		)  
+	</insert>
+	
+	<insert id="insertReservationCommentFile" useGeneratedKeys="true" keyProperty="reservationComment.fileId" parameterType="ReservationComment">
+		INSERT INTO file_info
+		(
+			file_name, 
+			save_file_name, 
+			content_type, 
+			delete_flag, 
+			create_date, 
+			modify_date
+		) VALUES 
+		(
+			#{reservationComment.commentImage.originalFilename},
+			#{reservationComment.saveFileName},
+			#{reservationComment.commentImage.contentType},
+			false,
+			now(),
+			now()
+		)
+	</insert>
+	
+	<insert id="insertReservationCommentImage" useGeneratedKeys="true" keyProperty="reservationComment.reservationUserCommentImageId" parameterType="ReservationComment">
+			INSERT INTO reservation_user_comment_image
+			(
+				reservation_info_id, 
+				reservation_user_comment_id, 
+				file_id
+			) VALUES 
+			(
+				#{reservationComment.reservationInfoId},
+				#{reservationComment.reservationUserCommentId},
+				#{reservationComment.fileId}
+			)
 	</insert>
 </mapper>

@@ -19,7 +19,7 @@ public class PromotionServiceImpl implements PromotionService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Promotion> getPromotions() {
+	public List<Promotion> getPromotions() throws Exception {
 		return promotionDao.selectAllPromotions();
 	}
 }

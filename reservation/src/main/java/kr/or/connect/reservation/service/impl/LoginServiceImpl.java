@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int getLoginInfoCount(String reservationEmail) {
+	public int getLoginInfoCount(String reservationEmail) throws Exception {
 		return loginDao.selectAllReservationsCountByReservationEmail(reservationEmail);
 	}
 }

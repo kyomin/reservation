@@ -47,15 +47,18 @@ public class ExceptionAdvisor {
 	public ResponseEntity<?> handleMethodValidException(MethodArgumentNotValidException methodArgumentNotValidException) {
 		logger.error("[{}] : {}", ExceptionLevelLog.NOT_VALID_EXCEPTION.getLevel(), ResponseMessage.BAD_REQUEST.getMessage());
 		logger.trace("stack trace : {}", methodArgumentNotValidException);
+		
+		// DTO에 어노테이션으로 설정한 message가 담긴다.
 		String validResponseMessage = methodArgumentNotValidException.getBindingResult().getAllErrors().get(0).getDefaultMessage();
+		
 		return new ResponseEntity<>(validResponseMessage, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<?> handleMethodException(Exception exception) {
-		logger.error("[{}] : {}", ExceptionLevelLog.ETC_EXCEPTION.getLevel(),
-			ResponseMessage.INTERNAL_SERVER_ERROR.getMessage());
+		logger.error("[{}] : {}", ExceptionLevelLog.ETC_EXCEPTION.getLevel(), ResponseMessage.INTERNAL_SERVER_ERROR.getMessage());
 		logger.error("stack trace : {}", exception);
+		
 		return new ResponseEntity<>(ResponseMessage.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

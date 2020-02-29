@@ -8,7 +8,7 @@ public enum ResponseMessage {
 	NO_SUCH_ELEMENT("요청하신 조건에 맞는 데이터가 없습니다."),
 	IO_EXCEPTION("파일 upload 또는 download 중 문제가 발생했습니다."),
 	SUCCESS("성공적으로 요청이 완료됐습니다.");
-
+	
 	private String message;
 
 	private ResponseMessage(String message) {

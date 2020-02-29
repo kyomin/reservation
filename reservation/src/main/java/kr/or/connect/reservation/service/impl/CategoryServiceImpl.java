@@ -19,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Category> getCategories() {
+	public List<Category> getCategories() throws Exception {
 		return categoryDao.selectCategories();
 	}
 }

@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) {
+	public List<Product> getProducts(Integer start, Optional<Integer> categoryId) throws Exception {
 		return categoryId.map( id -> 
 			productDao.selectProductsByCategoryId(start, ProductService.LIMIT, id)
 		).orElse( 
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public ProductDetail getProductDetail(Integer displayInfoId) {
+	public ProductDetail getProductDetail(Integer displayInfoId) throws Exception {
 		ProductDetail productDetail = new ProductDetail();
 		
 		//	displayInfoId로부터 해당하는 productId 추출!
@@ -74,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	@Transactional(readOnly = true)
-	public int getProductsCount(Optional<Integer> categoryId) {
+	public int getProductsCount(Optional<Integer> categoryId) throws Exception {
 		return categoryId.map( id -> productDao.selectProductsCountByCategoryId(id)
 		).orElse( 
 			productDao.selectAllProductsCount()

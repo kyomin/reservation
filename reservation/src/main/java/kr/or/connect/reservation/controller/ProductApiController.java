@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.connect.reservation.dto.detail.ProductDetail;
 import kr.or.connect.reservation.dto.mainpage.Product;
 import kr.or.connect.reservation.service.ProductService;
 
@@ -25,7 +24,7 @@ public class ProductApiController {
 	}
 	
 	@GetMapping("/api/products")
-	public Map<String, Object> getProducts(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) throws Exception {
+	public ResponseEntity<?> getProducts(@RequestParam(name = "start", required=false, defaultValue="0")Integer start, @RequestParam(name = "category_id", required=false)Integer categoryId) throws Exception {
 		Map<String, Object> resultMap = new HashMap<>();
 		Optional<Integer> judgeCategoryIdNullable = Optional.ofNullable(categoryId);
 		
@@ -35,11 +34,11 @@ public class ProductApiController {
 		resultMap.put("products", products);
 		resultMap.put("totalCount", totalCount);
 		
-		return resultMap;
+		return new ResponseEntity<>(resultMap, HttpStatus.OK);
 	}
 	
 	@GetMapping("/api/products/{displayInfoId}")
-	public ResponseEntity<ProductDetail> getProductDetail(@PathVariable("displayInfoId") int displayInfoId) throws Exception {
+	public ResponseEntity<?> getProductDetail(@PathVariable("displayInfoId") int displayInfoId) throws Exception {
 		return new ResponseEntity<>(productService.getProductDetail(displayInfoId), HttpStatus.OK);
 	}
 }
